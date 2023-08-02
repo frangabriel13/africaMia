@@ -6,10 +6,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,5 +22,5 @@ module.exports = (sequelize) => {
     phone: {
       type: DataTypes.STRING,
     }
-  }, { timestamps: false })
+  })
 }
