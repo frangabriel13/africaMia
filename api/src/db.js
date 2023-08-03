@@ -35,10 +35,13 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { User, Product, Variation, Category } = sequelize.models;
 
 Product.hasMany(Variation, { as: 'variations', foreignKey: 'productId' } );
-Variation.belongsTo(Product, { as: 'product' } );
+Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId' } );
 
 Product.belongsTo(Category, { as: 'category', foreignKey: 'categoryId' });
 Category.hasMany(Product, { as: 'products', foreignKey: 'productId' });
+
+Category.belongsTo(Category, { as: 'parent', foreignKey: 'parentId' });
+Category.hasMany(Category, { as: 'subcategories', foreignKey: 'parentId' });
 
 
 module.exports = {
