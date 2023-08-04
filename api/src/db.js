@@ -32,7 +32,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Product, Variation, Category } = sequelize.models;
+const { Product, Variation, Category } = sequelize.models;
 
 Product.hasMany(Variation, { as: 'variations', foreignKey: 'productId' } );
 Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId' } );
