@@ -15,7 +15,7 @@ router.get('/products', async (req, res) => {
 })
 
 router.post('/products', async (req, res) => {
-  const { name, description, price, images, stock, availability, isVariable, category, variations  } = req.body;
+  const { name, description, price, images, stock, availability, isVariable, categoryId, variations  } = req.body;
 
   try {
     const uploadedImages = await Promise.all(images.map((image) => cloudinary.uploader.upload(image)));
@@ -29,7 +29,7 @@ router.post('/products', async (req, res) => {
       stock,
       availability,
       isVariable,
-      category
+      categoryId
     });
 
     if (isVariable && variations && variations.length > 0) {
@@ -38,6 +38,7 @@ router.post('/products', async (req, res) => {
 
     res.status(201).json(productCreated);
   } catch(error) {
+    console.log(error);
     res.status(500).json({ message: 'Error al crear el producto' });
   }
 })
