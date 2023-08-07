@@ -9,6 +9,9 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       defaultValue: null,
-    }
+    },
+    imgMain: {
+      type: DataTypes.STRING,
+    },
   })
 }
