@@ -34,25 +34,22 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Product, Variation, Category, Image, Attribute } = sequelize.models;
 
-Product.hasMany(Variation, { as: 'variations', foreignKey: 'productId' } );
+Product.hasMany(Variation, { as: 'variations' });
 Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId' } );
 
 Product.belongsTo(Category, { as: 'category', foreignKey: 'categoryId' });
-Category.hasMany(Product, { as: 'products', foreignKey: 'productId' });
+Category.hasMany(Product, { as: 'products' });
 
 Category.belongsTo(Category, { as: 'parent', foreignKey: 'parentId' });
-Category.hasMany(Category, { as: 'subcategories', foreignKey: 'parentId' });
+Category.hasMany(Category, { as: 'subcategories' });
 
-Product.belongsToMany(Image, { through: 'Product_image', as: 'images', foreignKey: 'productId' });
-Image.belongsToMany(Product, { through: 'Product_image', as: 'products', foreignKey: 'imageId' });
+Product.belongsToMany(Image, { through: 'product_image', as: 'images', foreignKey: 'productId' });
+Image.belongsToMany(Product, { through: 'product_image', as: 'products', foreignKey: 'imageId' });
 
-Variation.belongsToMany(Image, { through: 'variation_image', as: 'images', foreignKey: 'variationId' });
-Image.belongsToMany(Variation, { through: 'variation_image', as: 'variations', foreignKey: 'imageId' });
-
-Product.hasOne(Attribute, { as: 'attributes', foreignKey: 'productId' });
+Product.hasOne(Attribute, { as: 'attributes' });
 Attribute.belongsTo(Product, { as: 'product', foreignKey: 'productId' });
 
-Variation.hasOne(Attribute, { as: 'attributes', foreignKey: 'variationId' });
+Variation.hasOne(Attribute, { as: 'attributes' });
 Attribute.belongsTo(Product, { as: 'variation', foreignKey: 'variationId' });
 
 

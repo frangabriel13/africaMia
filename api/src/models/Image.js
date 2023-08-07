@@ -5,6 +5,9 @@ module.exports = (sequelize) => {
     url: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    color: {
+      type: DataTypes.Stri
     }
   })
 }
