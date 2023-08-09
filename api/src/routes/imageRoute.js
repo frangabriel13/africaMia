@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { Image } = require('../db');
 const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
 
 
 const router = Router();
@@ -27,13 +28,26 @@ router.get('/images/:id', async (req, res) => {
   }
 })
 
-router.post('/images', async (req, res) => {
-  const { url } = req.body;
+router.post('/images', upload.array('images'), async (req, res) => {
+  // const { images, color } = req.body;
+  const imagePaths = req.files.map((file) => file.path);
+
+  // const uploadedImages = await Promise.all(images.map((image) => cloudinary.uploader.upload(image)));
+  // const imageUrls = uploadedImages.map((image) => image.secure_url);
 
   try {
-    const image = await Image.create({ url });
-    res.status(200).json(image);
+    const uploadedImages = await Promise.all(imagePaths.map((path) => cloudinary.uploader.upload(path)));
+    const imageUrls = uploadedImages.map((image) => image.secure_url);
+
+    const createdImages = await Promise.all(imageUrls.map(async (imageUrl) => {
+      const image = await Image.create({
+        url: imageUrl,
+      });
+      return image;
+    }));
+    res.status(200).json(createdImages);
   } catch(error) {
+    console.log(error);
     res.status(500).json({ message: 'Error al crear la imagen' });
   }  
 });
