@@ -6,8 +6,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // color: {
-    //   type: DataTypes.STRING
-    // },
+    color: {
+      type: DataTypes.STRING
+    },
   })
 }
