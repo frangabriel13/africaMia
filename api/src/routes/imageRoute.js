@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { Image } = require('../db');
 const cloudinary = require('../utils/cloudinary');
 const upload = require('../utils/multer');
-
+const fs = require('fs');
 
 const router = Router();
 
@@ -45,6 +45,12 @@ router.post('/images', upload.array('images'), async (req, res) => {
       });
       return image;
     }));
+
+    // Eliminar los archivos temporales
+    imagePaths.forEach((path) => {
+      fs.unlinkSync(path);
+    });
+
     res.status(200).json(createdImages);
   } catch(error) {
     console.log(error);
