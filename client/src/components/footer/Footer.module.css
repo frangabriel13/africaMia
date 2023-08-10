@@ -1,0 +1,52 @@
+/* Footer.css */
+
+.footerContainer {
+  margin-top: 10rem;
+  background-color: #f9457f;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.socialMedia {
+  margin-bottom: 15px;
+}
+
+.socialMedia a {
+  color: #fff;
+  font-size: 34px;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.links {
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 20px;
+}
+
+.copyRight {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+/* Media query para ajustar el estilo en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .links a {
+    margin: 5px 0;
+  }
+}
