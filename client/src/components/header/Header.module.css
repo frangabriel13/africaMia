@@ -1,0 +1,142 @@
+/* CSS Global */
+body {
+  font-family: sans-serif; /* Aplicar la fuente "PT Sans Narrow" y fallback a fuentes sans-serif */
+}
+
+.containerGlobal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9457f;
+  padding: .2rem 5%;
+}
+
+/* CSS Contenedor principal */
+.container {
+  padding-right: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; /* Envolver los elementos si no caben en una línea */
+}
+
+/* CSS Contenedor del campo de búsqueda */
+.searchContainer {
+ 
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  background-color: #f9457f;
+  
+}
+
+.searchContainer input::placeholder {
+  color: #ffffff; /* Cambia "your-desired-color" por el color que desees */
+  padding-left: 1rem;
+}
+/* Ventana emergente de resultados */
+.searchResults {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 250px;
+  background-color: #f9457f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 2;
+  margin-top: 10px;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.resultItem img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.seeMore {
+  color: #007bff;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* CSS Iconos de login y carrito */
+.loginCart {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 2.2rem;
+  color: white;
+  cursor: pointer;
+  margin-left: 2.2rem;
+}
+
+/* CSS Logotipo */
+.logo {
+  margin-top: 2rem;
+  width: 24rem;
+  
+}
+
+/* CSS Barra de navegación */
+.nav {
+  
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+ margin-bottom: 1rem;
+}
+
+.nav a {
+  margin-right: 2rem;
+  color: white;
+  font-size: 1.4rem;
+}
+
+/* CSS Menú Hamburguesa */
+.burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  /* Mostrar el menú desplegable cuando el usuario hace clic en el ícono de hamburguesa */
+  .menu-open .nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 1;
+  }
+}
