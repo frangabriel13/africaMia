@@ -89,9 +89,11 @@ router.post('/products', async (req, res) => {
 
     if(isVariable) {
       await Promise.all(variations.map(async (variation) => {
-        const { size, stock, price } = variation;
+        const { sizeId, colorId, availability, stock, price } = variation;
         await Variation.create({
-          size,
+          sizeId,
+          colorId,
+          availability,
           stock,
           price,
           productId: product.id,
@@ -109,6 +111,68 @@ router.post('/products', async (req, res) => {
   } catch(error) {
     console.log(error);
     res.status(500).json({ message: 'Error al crear el producto' });
+  }
+});
+
+router.put('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, description, availability, isVariable, price, stock, categoryId, variations, images } = req.body;
+
+  try {
+    const product = await Product.findByPk(id);
+    if(!product) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    await product.update({
+      name,
+      description,
+      availability,
+      isVariable,
+      price,
+      stock,
+      categoryId,
+    });
+
+    if(isVariable) {
+      await Promise.all(variations.map(async (variation) => {
+        const { sizeId, colorId, stock, price, availability } = variation;
+        await Variation.create({
+          sizeId,
+          colorId,
+          stock,
+          price,
+          availability,
+          productId: product.id,
+        });
+      }));
+    }
+
+    if(images) {
+      await Promise.all(images.map(async (image) => {
+        await product.addImage(image.id);
+      }));
+    }
+
+    res.status(200).json(product);
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al actualizar el producto' });
+  }
+});
+
+router.delete('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findByPk(id);
+    if(!product) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+    await product.destroy();
+    res.status(200).json(product);
+  } catch(error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al eliminar el producto' });
   }
 });
 
