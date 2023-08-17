@@ -1,0 +1,22 @@
+.gallery {
+  padding: 1rem;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: .5rem;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: .5rem;
+  cursor: pointer; 
+  object-fit: cover;
+  transition: .3s ease-in-out;
+}
+
+.image img:hover {
+  opacity: 0.8;
+}
