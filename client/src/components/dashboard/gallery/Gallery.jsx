@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import s from './Gallery.module.css';
 import { getImages } from '../../../redux/actions/imageActions';
 import { useDispatch, useSelector } from 'react-redux';
+import ImageForm from './imageForm/ImageForm';
 
 function Gallery() {
   const dispatch = useDispatch(); 
@@ -25,6 +26,7 @@ function Gallery() {
           ))
         }
       </div>
+      <ImageForm />
     </div>
   );
 }

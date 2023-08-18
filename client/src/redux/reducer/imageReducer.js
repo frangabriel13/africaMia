@@ -11,6 +11,15 @@ function imageReducer(state = initialState, action) {
         images: action.payload,
         allImages: action.payload,
       }
+    case 'GET_IMAGE':
+      return {
+        ...state,
+        images: action.payload,
+      }
+    case 'CREATE_IMAGE':
+      return {
+        ...state,
+      };
     default:
       return state;
   }
