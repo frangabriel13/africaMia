@@ -9,6 +9,8 @@ function Gallery() {
   const images = useSelector(state => state.gallery.images);
   const allImages = useSelector(state => state.gallery.allImages);
 
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
@@ -16,7 +18,10 @@ function Gallery() {
   return (
     <div className={s.gallery}>
       <h2 className={s.title}>Galería de imágenes</h2>
-      <button className={s.btn}>Agregar</button>
+      <button className={s.btn} onClick={() => setShowForm(true)} >Agregar</button>
+      {
+        showForm && <ImageForm setShowForm={setShowForm} />
+      }
       <div className={s.images}>
         {
           images && images.map((image, i) => (
@@ -26,7 +31,6 @@ function Gallery() {
           ))
         }
       </div>
-      <ImageForm />
     </div>
   );
 }
