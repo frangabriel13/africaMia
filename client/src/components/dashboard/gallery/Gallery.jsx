@@ -14,8 +14,8 @@ function Gallery() {
 
   return (
     <div className={s.gallery}>
-      <h2>Galería de imágenes</h2>
-      <button>Agregar</button>
+      <h2 className={s.title}>Galería de imágenes</h2>
+      <button className={s.btn}>Agregar</button>
       <div className={s.images}>
         {
           images && images.map((image, i) => (
