@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import s from './ImageForm.module.css';
+import { useDispatch } from 'react-redux';
 import { createImage } from '../../../../redux/actions/imageActions';
 
 function ImageForm({ setShowForm }) {
   const [selectedImages, setSelectedImages] = useState([]);
+
+  const dispatch = useDispatch(); 
   
   const handleImages = (e) => {
     const files = e.target.files;
@@ -21,7 +24,8 @@ function ImageForm({ setShowForm }) {
     for (let i = 0; i < selectedImages.length; i++) {
       formData.append('images', selectedImages[i]);
     }
-    createImage(formData);
+
+    dispatch(createImage(formData));
     setShowForm(false);
   };
 
