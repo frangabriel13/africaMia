@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import s from './Gallery.module.css';
-import { getImages } from '../../../redux/actions/imageActions';
+import { getImages, deleteImage } from '../../../redux/actions/imageActions';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageForm from './imageForm/ImageForm';
 
@@ -15,6 +15,10 @@ function Gallery() {
     dispatch(getImages());
   }, [dispatch]);
 
+  const handleDelete = (id) => {
+    dispatch(deleteImage(id));
+  };
+
   return (
     <div className={s.gallery}>
       <h2 className={s.title}>Galería de imágenes</h2>
@@ -27,6 +31,10 @@ function Gallery() {
           images && images.map((image, i) => (
             <div key={i} className={s.image}>
               <img src={image.url} alt={image.name} />
+              <i className="bi bi-three-dots-vertical" 
+                onClick={() => handleDelete(image.id)}
+              ></i>
+              <i className="bi bi-check-lg"></i>
             </div>
           ))
         }
