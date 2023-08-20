@@ -36,6 +36,18 @@ export const createImage = (image) => async (dispatch) => {
   }
 };
 
+export const updateImage = (id, image) => async (dispatch) => {
+  try {
+    const response = await instance.put(`/images/${id}`, image);
+    dispatch({
+      type: 'UPDATE_IMAGE',
+      payload: response.data,
+    });
+  } catch(error) {
+    console.log(error);
+  }
+};
+
 export const deleteImage = (id) => async (dispatch) => {
   try {
     await instance.delete(`/images/${id}`);

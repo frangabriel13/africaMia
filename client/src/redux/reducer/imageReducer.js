@@ -20,6 +20,14 @@ function imageReducer(state = initialState, action) {
       return {
         ...state,
       };
+    case 'UPDATE_IMAGE':
+      const updatedImage = action.payload;
+      return {
+        ...state,
+        images: state.images.map((image) => {
+          image.id === updatedImage.id ? updatedImage : image;
+        }),
+      };
     case 'DELETE_IMAGE':
       return {
         ...state,
