@@ -96,6 +96,11 @@ router.delete('/images/:id', async (req, res) => {
     if(!image) {
       return res.status(404).json({ message: 'Imagen no encontrada' });
     }
+
+    // Eliminar la imagen de cloudinary
+    const publicId = image.url.split('/').slice(-1)[0].split('.')[0];
+    await cloudinary.uploader.destroy(publicId);
+
     await image.destroy();
     res.status(200).json({ message: 'Imagen eliminada correctamente' });
   } catch(error) {

@@ -35,3 +35,15 @@ export const createImage = (image) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deleteImage = (id) => async (dispatch) => {
+  try {
+    await instance.delete(`/images/${id}`);
+    dispatch({
+      type: 'DELETE_IMAGE',
+      payload: id,
+    });
+  } catch(error) {
+    console.log(error);
+  }
+};
