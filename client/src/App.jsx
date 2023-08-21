@@ -7,14 +7,14 @@ import Dashboard from './components/dashboard/dashboard';
 function App() {
   const location = useLocation();
 
-  const isDashboard = location.pathname === '/dashboard';
+  const isDashboard = location.pathname.includes('dashboard');
 
   return (
     <>
       {!isDashboard && <Header />}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard/*' element={<Dashboard />} />
       </Routes>
     </>
   )
