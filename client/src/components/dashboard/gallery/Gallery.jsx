@@ -30,6 +30,7 @@ function Gallery() {
         {
           images && images.map((image, i) => (
             <div key={i} className={s.image}>
+              <h3>{image.id}</h3>
               <img src={image.url} alt={image.name} />
               <i className="bi bi-three-dots-vertical" 
                 onClick={() => handleDelete(image.id)}
