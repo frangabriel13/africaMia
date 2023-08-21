@@ -4,25 +4,25 @@
   margin-top: 10rem;
   background-color: #f9457f;
   color: #fff;
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .socialMedia {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .socialMedia a {
   color: #fff;
-  font-size: 34px;
-  margin: 0 10px;
+  font-size: 3.4rem;
+  margin: 0 1rem;
   text-decoration: none;
 }
 
 .links {
-  font-size: 14px;
+  font-size: 1.4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -31,12 +31,12 @@
 .links a {
   color: #fff;
   text-decoration: none;
-  margin: 5px 20px;
+  margin: 0.5rem 2rem;
 }
 
 .copyRight {
-  margin-top: 15px;
-  font-size: 12px;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
 }
 
 /* Media query para ajustar el estilo en pantallas más pequeñas */
@@ -47,6 +47,6 @@
   }
   
   .links a {
-    margin: 5px 0;
+    margin: 0.5rem 0;
   }
 }
