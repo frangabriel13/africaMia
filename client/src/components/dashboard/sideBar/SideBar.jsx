@@ -29,10 +29,10 @@ function SideBar() {
           <span>Categorias</span>
         </div>
       </Link>
-      <Link to="/dashboard/variations" className={s.link}>
+      <Link to="/dashboard/configuracion" className={s.link}>
         <div className={s.item}>
           <i className="bi bi-palette"></i>
-          <span>Variaciones</span>
+          <span>Configuración</span>
         </div>
       </Link>
       <Link to="/dashboard/promociones" className={s.link}>
