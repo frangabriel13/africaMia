@@ -11,6 +11,12 @@ function categoryReducer(state = initialState, action) {
         categories: action.payload,
         allCategories: action.payload,
       }
+    case 'ADD_CATEGORY':
+      return {
+        ...state,
+        // categories: [...state.categories, action.payload],
+        // allCategories: [...state.allCategories, action.payload],
+      }
     default:
       return state;
   }

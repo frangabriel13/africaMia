@@ -11,3 +11,15 @@ export const getCategories = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addCategory = (category) => async (dispatch) => {
+  try {
+    const response = await instance.post("/categories", category);
+    dispatch({
+      type: "ADD_CATEGORY",
+      payload: response.data,
+    });
+  } catch(error) {
+    console.log(error);
+  }
+};
