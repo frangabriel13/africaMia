@@ -38,8 +38,8 @@ function Categories() {
           </ul>
           {
             selectedTab === "categories" && (
-              <div>
-                <table>
+              <div className={s.listCategories}>
+                <table className={s.table}>
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -71,6 +71,28 @@ function Categories() {
                     ))
                   }
                 </select>
+                <table className={s.table}>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      categories.map((category) => (
+                        <tr key={category.id}>
+                          <td>{category.id}</td>
+                          <td>{category.name}</td>
+                          <td>
+                            <button>Editar</button>
+                            <button>Eliminar</button>
+                          </td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
               </div>
             )
           }
