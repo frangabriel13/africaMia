@@ -24,7 +24,6 @@ function Categories() {
   };
 
   const handleAddCategory = async () => {
-    console.log(categoryName)
     const categoryExists = categories.find((category) => category.name.toLowerCase() === categoryName.toLowerCase().trim());
 
     if(categoryName.trim() === "") {
