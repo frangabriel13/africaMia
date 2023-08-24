@@ -12,6 +12,8 @@ function Categories() {
   const [error, setError] = useState("");
   const [parentCategory, setParentCategory] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [category, setCategory] = useState({});
+  const [parentSelect, setParentSelect] = useState('');
 
   useEffect(() => {
     dispatch(getCategories());
@@ -22,9 +24,10 @@ function Categories() {
   };
 
   const handleAddCategory = async () => {
+    console.log(categoryName)
     const categoryExists = categories.find((category) => category.name.toLowerCase() === categoryName.toLowerCase().trim());
 
-    if(category.trim() === "") {
+    if(categoryName.trim() === "") {
       setError("El nombre de la categoría no puede estar vacío");
     } else if(categoryExists) {
       setError("La categoría ya existe");
@@ -44,7 +47,7 @@ function Categories() {
 
   return (
     <div className={s.container}>
-      <h2>Administrar categorías</h2>
+      <h3>Administrar categorías</h3>
       <div className={s.divCategory}>
         <div className={s.divTable}>
           <ul className={s.categories}>
@@ -130,13 +133,13 @@ function Categories() {
                 <div className={s.nameForm}>
                   <label>
                     Nombre:
-                    <input type="text" name="name" />
+                    <input type="text" name="name" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
                   </label>
                 </div>
                 <div className={s.parentForm}>
                   <label>
                     Categoría padre:
-                    <select>
+                    <select value={parentCategory} onChange={(e) => setParentCategory(e.target.value)}>
                       <option value="">Ninguna</option>
                       {
                         allCategories.filter((category) => category.parentId === null).map((category) => (
@@ -172,7 +175,7 @@ function Categories() {
                     </select>
                   </label>
                 </div>
-                <input type="button" value="Agregar" onClick={handleAddCategory} />
+                <input type="button" value="Agregar" onClick={() => handleAddCategory()} />
               </form>
               {
                 error && (
