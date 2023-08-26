@@ -1,8 +1,9 @@
 .banner {
   position: relative;
   width: 100%;
-  height: 65rem;
+  height: 100%;
   overflow: hidden;
+  /* padding-top: 10px; */
 }
 
 .slider {
