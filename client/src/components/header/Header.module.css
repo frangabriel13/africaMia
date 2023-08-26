@@ -10,10 +10,12 @@ body {
   align-items: center;
   background-color: #f9457f;
   padding: .2rem 5%;
+  
 }
 
 /* CSS Contenedor principal */
 .container {
+  margin-top: 1rem;
   padding-right: 10rem;
   display: flex;
   justify-content: space-between;
@@ -85,14 +87,13 @@ body {
   color: white;
   cursor: pointer;
   margin-left: 2.2rem;
+  
 }
 
 /* CSS Logotipo */
 .logo {
-  margin-top: 2rem;
-  width: 24rem;
-  
-}
+   width: 16rem;
+  }
 
 /* CSS Barra de navegación */
 .nav {
@@ -101,7 +102,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
- margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .nav a {
