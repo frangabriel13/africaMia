@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import s from "./Categories.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, addCategory, filterCategories } from "../../../../redux/actions/categoryActions";
+import { 
+  getCategories, 
+  addCategory, 
+  filterCategories, 
+  deleteCategory, 
+  updateCategory } from "../../../../redux/actions/categoryActions";
+import { formatName } from "../../../../utils/helpers";
 
 function Categories() {
   const dispatch = useDispatch();
@@ -21,10 +27,17 @@ function Categories() {
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
+    if(tab === 'subcategories') {
+      const firstCategory = allCategories.find((el) => el.parentId === null);
+      if(firstCategory) {
+        setParentCategory(firstCategory.id);
+        dispatch(filterCategories(firstCategory.id));
+      }
+    }
   };
 
   const handleAddCategory = async () => {
-    const categoryExists = categories.find((category) => category.name.toLowerCase() === categoryName.toLowerCase().trim());
+    const categoryExists = categories.find((el) => el.name.toLowerCase() === categoryName.toLowerCase().trim());
 
     if(categoryName.trim() === "") {
       setError("El nombre de la categoría no puede estar vacío");
@@ -33,10 +46,11 @@ function Categories() {
     } else {
       await dispatch(addCategory({ name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory }));
       setCategoryName("");
+      setParentCategory("");
       setError("");
       await dispatch(getCategories());
       if(selectedTab === "subcategories") {
-        const firstCategory = allCategories.find((category) => category.parentId === null);
+        const firstCategory = allCategories.find((el) => el.parentId === null);
         if(firstCategory) {
           setParentCategory(firstCategory.id);
           dispatch(filterCategories(firstCategory.id));
@@ -48,6 +62,60 @@ function Categories() {
   const handleFilterCategories = (id) => {
     setParentSelect(id);
     dispatch(filterCategories(id));
+  };
+
+  const handleDeleteCategory = async (id) => {
+    await dispatch(deleteCategory(id));
+    await dispatch(getCategories());
+    if(selectedTab === "subcategories") {
+      const firstCategory = allCategories.find((el) => el.parentId === null);
+      if(firstCategory) {
+        setParentCategory(firstCategory.id);
+        dispatch(filterCategories(firstCategory.id));
+      }
+    }
+  };
+
+  const handleEditCategory = (id) => {
+    const categoryToEdit = allCategories.find((el) => el.id === id);
+    if(categoryToEdit) {
+      setCategory(categoryToEdit);
+      setCategoryName(categoryToEdit.name);
+      setParentCategory(categoryToEdit.parentId || '');
+      setEditMode(true);
+    }
+  };
+
+  const handleUpdateCategory = async () => {
+    const categoryExists = allCategories.find((el) => el.name.toLowerCase() === categoryName.toLowerCase().trim() && el.id !== category.id);
+
+    if(categoryName.trim() === "") {
+      setError("El nombre de la categoría no puede estar vacío");
+    } else if(categoryExists && categoryExists.name.toLowerCase() !== category.name.toLowerCase()) {
+      setError("La categoría ya existe");
+    } else {
+      await dispatch(updateCategory({ id: category.id, name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory }));
+      setCategoryName("");
+      setParentCategory("");
+      setError("");
+      setEditMode(false);
+      await dispatch(getCategories());
+      if(selectedTab === 'subcategories') {
+        const firstCategory = allCategories.find((el) => el.parentId === null);
+        if(firstCategory) {
+          setParentSelect(firstCategory.id);
+          // setParentCategory(firstCategory.id);
+          dispatch(filterCategories(firstCategory.id));
+        }
+      }
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setCategoryName("");
+    setParentCategory("");
+    setError("");
+    setEditMode(false);
   };
 
   return (
@@ -85,7 +153,7 @@ function Categories() {
                         category.parentId === null && (
                           <tr key={category.id}>
                             <td>{category.id}</td>
-                            <td>{category.name}</td>
+                            <td>{formatName(category.name)}</td>
                             <td>
                               <button>Editar</button>
                               <button>Eliminar</button>
