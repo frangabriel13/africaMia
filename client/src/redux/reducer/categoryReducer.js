@@ -15,6 +15,21 @@ function categoryReducer(state = initialState, action) {
       return {
         ...state,
       }
+    case 'DELETE_CATEGORY':
+      return {
+        ...state,
+      }
+    case 'FILTER_CATEGORIES':
+      const allCategories = state.allCategories;
+      const categoryFiltered = allCategories.filter((el) => el.parentId === parseInt(action.payload));
+      return {
+        ...state,
+        categories: categoryFiltered,
+      }
+    case 'UPDATE_CATEGORY':
+      return {
+        ...state,
+      }
     default:
       return state;
   }

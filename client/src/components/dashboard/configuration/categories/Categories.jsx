@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import s from "./Categories.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, addCategory } from "../../../../redux/actions/categoryActions";
+import { getCategories, addCategory, filterCategories } from "../../../../redux/actions/categoryActions";
 
 function Categories() {
   const dispatch = useDispatch();
@@ -39,9 +39,15 @@ function Categories() {
         const firstCategory = allCategories.find((category) => category.parentId === null);
         if(firstCategory) {
           setParentCategory(firstCategory.id);
+          dispatch(filterCategories(firstCategory.id));
         }
       }
     }
+  };
+
+  const handleFilterCategories = (id) => {
+    setParentSelect(id);
+    dispatch(filterCategories(id));
   };
 
   return (
@@ -76,14 +82,16 @@ function Categories() {
                   <tbody>
                     {
                       categories.map((category) => (
-                        <tr key={category.id}>
-                          <td>{category.id}</td>
-                          <td>{category.name}</td>
-                          <td>
-                            <button>Editar</button>
-                            <button>Eliminar</button>
-                          </td>
-                        </tr>
+                        category.parentId === null && (
+                          <tr key={category.id}>
+                            <td>{category.id}</td>
+                            <td>{category.name}</td>
+                            <td>
+                              <button>Editar</button>
+                              <button>Eliminar</button>
+                            </td>
+                          </tr>
+                        )
                       ))
                     }
                   </tbody>
@@ -91,7 +99,7 @@ function Categories() {
               </div>
             ) || selectedTab === "subcategories" && (
               <div>
-                <select>
+                <select onChange={(e) => handleFilterCategories(e.target.value)}>
                   {
                     allCategories.filter((category) => category.parentId === null).map((category) => (
                       <option key={category.id} value={category.id}>{category.name}</option>
