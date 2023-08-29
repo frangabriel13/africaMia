@@ -155,8 +155,8 @@ function Categories() {
                             <td>{category.id}</td>
                             <td>{formatName(category.name)}</td>
                             <td>
-                              <button>Editar</button>
-                              <button>Eliminar</button>
+                              <button onClick={() => handleEditCategory(category.id)}>Editar</button>
+                              <button onClick={() => handleDeleteCategory(category.id)}>Eliminar</button>
                             </td>
                           </tr>
                         )
@@ -188,8 +188,8 @@ function Categories() {
                           <td>{category.id}</td>
                           <td>{category.name}</td>
                           <td>
-                            <button>Editar</button>
-                            <button>Eliminar</button>
+                            <button onClick={() => handleEditCategory(category.id)}>Editar</button>
+                            <button onClick={() => handleDeleteCategory(category.id)}>Eliminar</button>
                           </td>
                         </tr>
                       ))
@@ -210,6 +210,7 @@ function Categories() {
                     Nombre:
                     <input type="text" name="name" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
                   </label>
+                  { error && <div className={s.error}>{error}</div> }
                 </div>
                 <div className={s.parentForm}>
                   <label>
@@ -224,7 +225,10 @@ function Categories() {
                     </select>
                   </label>
                 </div>
-                <input type="submit" value="Enviar" />
+                <div className={s.buttonsForm}>
+                  <input type="button" value="Cancelar" onClick={() => handleCancelEdit()} />
+                  <input type="button" value="Actualizar" onClick={() => handleUpdateCategory()} />
+                </div>
               </form>
             </div>
           ) : (
@@ -236,6 +240,7 @@ function Categories() {
                     Nombre:
                     <input type="text" name="name" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
                   </label>
+                  { error && <div className={s.error}>{error}</div> }
                 </div>  
                 <div className={s.selectForm}>
                   <label>
@@ -252,13 +257,6 @@ function Categories() {
                 </div>
                 <input type="button" value="Agregar" onClick={() => handleAddCategory()} />
               </form>
-              {
-                error && (
-                  <div className={s.error}>
-                    {error}
-                  </div>
-                )
-              }
             </div>
           )
         }
