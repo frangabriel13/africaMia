@@ -46,9 +46,16 @@ const Variations = () => {
               </table>
               {
                 editMode ? (
-                  <div>Editar</div>
+                  <div>
+                    <input type="text" placeholder="Talle" />
+                    <button>Cancelar</button>
+                    <button>Guardar</button>
+                  </div>
                 ) : (
-                  <div>Crear</div>
+                  <div>
+                    <input type="text" placeholder="Talle" />
+                    <button>Agregar</button>
+                  </div>
                 )
               }
             </div>
@@ -74,9 +81,18 @@ const Variations = () => {
               </table>
               {
                 editMode ? (
-                  <div>Editar</div>
+                  <div>
+                    <input type="text" placeholder="Color" />
+                    <input type="color" placeholder="Código" />
+                    <button>Cancelar</button>
+                    <button>Guardar</button>
+                  </div>
                 ) : (
-                  <div>Crear</div>
+                  <div>
+                    <input type="text" placeholder="Color" />
+                    <input type="color" placeholder="Código" />
+                    <button>Agregar</button>
+                  </div>
                 )
               }
             </div>
