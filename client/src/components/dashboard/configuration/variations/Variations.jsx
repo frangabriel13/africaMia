@@ -18,12 +18,12 @@ const Variations = () => {
         <ul>
           <li
             className={selectedTab === 0 ? s.selected : ""}
-            onClick={() => handleTabClick(0)}
-          >Size</li>
+            onClick={() => handleTabClick(0)}>Size
+          </li>
           <li
             className={selectedTab === 1 ? s.selected : ""}
-            onClick={() => handleTabClick(1)}
-          >Color</li>
+            onClick={() => handleTabClick(1)}>Color
+          </li>
         </ul>
         {
           selectedTab === 0 && (
