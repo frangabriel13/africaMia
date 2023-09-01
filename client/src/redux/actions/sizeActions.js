@@ -38,6 +38,7 @@ export const deleteSize = (id) => async (dispatch) => {
 
 export const updateSize = (payload) => async (dispatch) => {
   try {
+    console.log(payload)
     const response = await instance.put(`/sizes/${payload.id}`, payload);
     dispatch({
       type: "UPDATE_SIZE",
