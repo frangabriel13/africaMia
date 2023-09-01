@@ -27,3 +27,6 @@ function colorReducer(state = initialState, action) {
       return state;
   }
 }
+
+
+export default colorReducer;
