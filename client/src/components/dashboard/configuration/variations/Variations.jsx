@@ -1,14 +1,67 @@
 import React, { useEffect, useState } from "react";
 import s from "./Variations.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { getSizes, addSize, deleteSize, updateSize } from "../../../../redux/actions/sizeActions";
 
 const Variations = () => {
   const dispatch = useDispatch();
+  const sizes = useSelector((state) => state.size.sizes);
+  const allSizes = useSelector((state) => state.size.allSizes);
   const [selectedTab, setSelectedTab] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [size, setSize] = useState({
+    name: "",
+  });
+
+  useEffect(() => {
+    dispatch(getSizes());
+  }, []);
 
   const handleTabClick = (index) => {
     setSelectedTab(index);
+  };
+
+  const handleAddSize = (e) => {
+    e.preventDefault();
+    dispatch(addSize(size));
+    setSize({
+      id: "",
+      name: "",
+    });
+  };
+
+  const handleEditSize = (id) => {
+    const sizeToUpdate = allSizes.find((el) => el.id === id);
+    if(sizeToUpdate) {
+      setEditMode(true);
+      setSize({
+        id: sizeToUpdate.id,
+        name: sizeToUpdate.name,
+      });
+    }
+  };
+
+  const handleUpdateSize = async (e) => {
+    e.preventDefault();
+    const sizeToUpdate = allSizes.find((el) => el.id === size.id);
+    if(sizeToUpdate) {
+      await dispatch(updateSize({ id: size.id, name: size.name }));
+      setEditMode(false);
+      setSize({
+        name: "",
+      });
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setSize({
+      name: "",
+    });
+  };
+
+  const handleDeleteSize = (id) => {
+    dispatch(deleteSize(id));
   };
 
   return (
@@ -36,25 +89,46 @@ const Variations = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>XS</td>
-                    <button>Editar</button>
-                    <button>Eliminar</button>
-                  </tr>
+                  {
+                    sizes.map((el) => (
+                      <tr key={el.id}>
+                        <td>{el.id}</td>
+                        <td>{el.name}</td>
+                        <td>
+                          <button onClick={() => handleEditSize(el.id)}>Editar</button>
+                          <button onClick={() => handleDeleteSize(el.id)}>Eliminar</button>
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
               {
                 editMode ? (
                   <div>
-                    <input type="text" placeholder="Talle" />
-                    <button>Cancelar</button>
-                    <button>Guardar</button>
+                    <input type="text" placeholder="Talle"
+                      value={size.name}
+                      onChange={(e) => setSize({ ...size, name: e.target.value })}
+                     />
+                    <button onClick={() => handleCancelEdit()}>Cancelar</button>
+                    <button onClick={(e) => handleUpdateSize(e)}
+                    >Guardar</button>
                   </div>
                 ) : (
                   <div>
-                    <input type="text" placeholder="Talle" />
-                    <button>Agregar</button>
+                    <h3>Agregar talle</h3>
+                    <div>
+                      <div>
+                        <label>Talle:</label>
+                        <input type="text" name="size" placeholder="Talle"
+                          value={size.name}
+                          onChange={(e) => setSize({ ...size, name: e.target.value })}
+                        />
+                      </div>
+                      <button
+                        onClick={(e) => handleAddSize(e)}
+                      >Agregar</button>
+                    </div>
                   </div>
                 )
               }
