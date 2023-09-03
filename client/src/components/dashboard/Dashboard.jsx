@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import SideBar from "./sideBar/SideBar";
 import Gallery from "./gallery/Gallery";
 import Configuration from "./configuration/Configuration";
+import ProductManagement from "./productManagement/ProductManagement";
 
 function Dashboard() {
   return (
@@ -14,7 +15,7 @@ function Dashboard() {
       <div className={s.content}>
         <Routes>
           <Route path="/" element={<Gallery />} />
-          <Route path="/products" element={<Gallery />} />
+          <Route path="/products" element={<ProductManagement />} />
           <Route path="/users" element={<Gallery />} />
           <Route path="/categories" element={<Gallery />} />
           <Route path="/configuracion" element={<Configuration />} />
