@@ -62,7 +62,7 @@ router.get('/variations/:id', async (req, res) => {
 });
 
 router.post('/variations', async (req, res) => {
-  const { colorId, sizeId, productId, stock, price } = req.body;
+  const { colorId, sizeId, productId, stock, price, availability } = req.body;
 
   try {
     const variation = await Variation.create({
@@ -71,6 +71,7 @@ router.post('/variations', async (req, res) => {
       productId,
       stock,
       price,
+      availability,
     });
     res.status(201).json(variation);
   } catch(error) {
@@ -80,7 +81,7 @@ router.post('/variations', async (req, res) => {
 
 router.put('/variations/:id', async (req, res) => {
   const { id } = req.params;
-  const { colorId, sizeId, productId, stock, price } = req.body;
+  const { colorId, sizeId, productId, stock, price, availability } = req.body;
 
   try {
     const variation = await Variation.findByPk(id);
@@ -93,6 +94,7 @@ router.put('/variations/:id', async (req, res) => {
       productId,
       stock,
       price,
+      availability,
     });
     res.status(200).json(variation);
   } catch(error) {

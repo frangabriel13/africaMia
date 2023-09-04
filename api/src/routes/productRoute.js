@@ -48,7 +48,7 @@ router.get('/products/:id', async (req, res) => {
         {
           model: Variation,
           as: 'variations',
-          attributes: ['id', 'sizeId', 'stock', 'price'],
+          attributes: ['id', 'sizeId', 'colorId', 'stock', 'price'],
         },
         {
           model: Category,
