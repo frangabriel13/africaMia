@@ -2,18 +2,24 @@ import React, { useEffect, useState } from "react";
 import s from "./ProductManagement.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
+import { getVariations, addVariation, deleteVariation, updateVariation } from "../../../redux/actions/variationActions";
 
 function ProductManagement() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const allProducts = useSelector((state) => state.product.allProducts);
+  const variations = useSelector((state) => state.variation.variations);
+  const allVariations = useSelector((state) => state.variation.allVariations);
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedVariation, setSelectedVariation] = useState(null);
-
+  
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+
+  useEffect(() => {
+    dispatch(getVariations());
+  }, [products]);
 
   return (
     <div className={s.container}>
@@ -78,14 +84,16 @@ function ProductManagement() {
                         <tr>
                           <th>ID</th>
                           <th>Talle</th>
+                          <th>Color</th>
                         </tr>
                       </thead>
                       <tbody>
                         {
-                          products.map((el) => (
+                          allVariations.map((el) => (
                             <tr key={el.id}>
                               <td>{el.id}</td>
-                              <td>{el.name}</td>
+                              <td>{el.size.name}</td>
+                              <td>{el.color.name}</td>
                               <td>
                                 <button>Editar</button>
                                 <button>Eliminar</button>
@@ -115,7 +123,6 @@ function ProductManagement() {
           </div>
         </div>
       </div>
-      {/* form */}
     </div>
   );
 }
