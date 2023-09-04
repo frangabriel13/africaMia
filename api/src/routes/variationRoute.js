@@ -61,22 +61,58 @@ router.get('/variations/:id', async (req, res) => {
   }
 });
 
-// router.post('/variations', async (req, res) => {
-//   const { colorId, sizeId, productId, stock, price } = req.body;
+router.post('/variations', async (req, res) => {
+  const { colorId, sizeId, productId, stock, price } = req.body;
 
-//   try {
-//     const variation = await Variation.create({
-//       colorId,
-//       sizeId,
-//       productId,
-//       stock,
-//       price,
-//     });
-//     res.status(201).json(variation);
-//   } catch(error) {
-//     res.status(500).json({ message: 'Error al crear la variación' });
-//   }
-// });
+  try {
+    const variation = await Variation.create({
+      colorId,
+      sizeId,
+      productId,
+      stock,
+      price,
+    });
+    res.status(201).json(variation);
+  } catch(error) {
+    res.status(500).json({ message: 'Error al crear la variación' });
+  }
+});
+
+router.put('/variations/:id', async (req, res) => {
+  const { id } = req.params;
+  const { colorId, sizeId, productId, stock, price } = req.body;
+
+  try {
+    const variation = await Variation.findByPk(id);
+    if(!variation) {
+      return res.status(404).json({ message: 'Variación no encontrada' });
+    }
+    await variation.update({
+      colorId,
+      sizeId,
+      productId,
+      stock,
+      price,
+    });
+    res.status(200).json(variation);
+  } catch(error) {
+    res.status(500).json({ message: 'Error al actualizar la variación' });
+  }
+});
+
+router.delete('/variations/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const variation = await Variation.findByPk(id);
+    if(!variation) {
+      return res.status(404).json({ message: 'Variación no encontrada' });
+    }
+    await variation.destroy();
+    res.status(200).json({ message: 'Variación eliminada' });
+  } catch(error) {
+    res.status(500).json({ message: 'Error al eliminar la variación' });
+  }
+});
 
 
 module.exports = router;
