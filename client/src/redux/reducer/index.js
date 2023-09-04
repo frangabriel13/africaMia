@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   category: categoryReducer,
   size: sizeReducer,
   color: colorReducer,
+  product: productReducer,
 })
 
 
