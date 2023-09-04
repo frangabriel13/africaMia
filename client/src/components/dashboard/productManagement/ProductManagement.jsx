@@ -8,6 +8,8 @@ function ProductManagement() {
   const products = useSelector((state) => state.product.products);
   const allProducts = useSelector((state) => state.product.allProducts);
   const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedVariation, setSelectedVariation] = useState(null);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -24,62 +26,96 @@ function ProductManagement() {
               <li className={selectedTab === 0 ? s.selected : ""} onClick={() => setSelectedTab(0)}>Productos</li>
               <li className={selectedTab === 1 ? s.selected : ""} onClick={() => setSelectedTab(1)}>Variaciones</li>
             </ul>
-            {
-              selectedTab === 0 ? (
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Imágen</th>
-                      <th>Variable</th>
-                      <th>Categoría</th>
-                      <th>Precio</th>
-                      <th>Stock</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      products.map((el) => (
-                        <tr key={el.id}>
-                          <td>{el.id}</td>
-                          <td>{el.name}</td>
-                          <td>{el.imgMain}</td>
-                          <td>{el.isVariable}</td>
-                          <td>{el.categoryId}</td>
-                          <td>{el.price}</td>
-                          <td>{el.stock}</td>
-                          <td>
-                            <button>Editar</button>
-                            <button>Eliminar</button>
-                          </td>
+            <div className={s.tableContainer}>
+              {
+                selectedTab === 0 ? (
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Imágen</th>
+                        <th>Variable</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        products.map((el) => (
+                          <tr key={el.id}>
+                            <td>{el.id}</td>
+                            <td>{el.name}</td>
+                            <td>{el.imgMain}</td>
+                            <td>{el.isVariable}</td>
+                            <td>{el.category.name}</td>
+                            <td>{el.price}</td>
+                            <td>{el.stock}</td>
+                            <td>
+                              <button onClick={() => {setSelectedProduct(el.id)}}>Ver</button>
+                            </td>
+                            <td>
+                              <button>Editar</button>
+                              <button>Eliminar</button>
+                            </td>
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className={s.list}>
+                    <select>
+                      {
+                        allProducts.filter((el) => el.isVariable).map((el) => (
+                          <option key={el.id} value={el.id}>{el.name}</option>
+                        ))
+                      }
+                    </select>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Talle</th>
                         </tr>
-                      ))
-                    }
-                  </tbody>
-                </table>
-              ) : (
-                <div className={s.productList}>
-                  <div className={s.productItem}>
-                    <div className={s.productInfo}>
-                      <h4>Nombre</h4>
-                      <p>Descripción</p>
-                    </div>
-                    <div className={s.productActions}>
-                      <button>Editar</button>
-                      <button>Deletear</button>
-                    </div>
+                      </thead>
+                      <tbody>
+                        {
+                          products.map((el) => (
+                            <tr key={el.id}>
+                              <td>{el.id}</td>
+                              <td>{el.name}</td>
+                              <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                              </td>
+                            </tr>
+                          ))
+                        }
+                      </tbody>
+                    </table>
                   </div>
-                </div>
-              )
-            }
-          </div>
-          <div className={s.preview}>
-            <h3>Vista previa</h3>
-            <p>Imagen del producto</p>
+                )
+              }
+              <div className={s.preview}>
+                <h3>Vista previa</h3>
+                {
+                  allProducts.filter((el) => el.id === selectedProduct).map((el) => (
+                    <div key={el.id}>
+                      <h4>{el.name}</h4>
+                      <p>{el.description}</p>
+                      <p>{el.price}</p>
+                      <p>{el.stock}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      {/* form */}
     </div>
   );
 }
