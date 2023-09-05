@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import s from "./ProductManagement.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductById, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
-import { getVariations, addVariation, deleteVariation, updateVariation } from "../../../redux/actions/variationActions";
+import { getVariations, addVariation, deleteVariation, updateVariation, filterVariations } from "../../../redux/actions/variationActions";
 
 function ProductManagement() {
   const dispatch = useDispatch();
@@ -20,6 +20,11 @@ function ProductManagement() {
   useEffect(() => {
     dispatch(getVariations());
   }, [products]);
+
+  const handleFilterVariations = (id) => {
+    setSelectedProduct(id);
+    dispatch(filterVariations(id));
+  };
 
   return (
     <div className={s.container}>
@@ -72,8 +77,8 @@ function ProductManagement() {
                   </table>
                 ) : (
                   <div className={s.list}>
-                    <select 
-                      name="product"
+                    <select
+                      onChange={(e) => handleFilterVariations(e.target.value)}
                     >
                       {
                         allProducts.filter((el) => el.isVariable).map((el) => (
@@ -91,7 +96,7 @@ function ProductManagement() {
                       </thead>
                       <tbody>
                         {
-                          allVariations.map((el) => (
+                          variations.map((el) => (
                             <tr key={el.id}>
                               <td>{el.id}</td>
                               <td>{el.size.name}</td>
