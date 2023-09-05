@@ -12,6 +12,18 @@ export const getProducts = () => async (dispatch) => {
   }
 };
 
+export const getProductById = (id) => async (dispatch) => {
+  try {
+    const response = await instance.get(`/products/${id}`);
+    dispatch({
+      type: 'GET_PRODUCT_BY_ID',
+      payload: response.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addProduct = (product) => async (dispatch) => {
   try {
     const response = await instance.post('/products', product);
@@ -46,4 +58,11 @@ export const updateProduct = (payload) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const filterProducts = (product) => {
+  return {
+    type: 'FILTER_PRODUCTS',
+    payload: product
+  };
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import s from "./ProductManagement.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
+import { getProducts, getProductById, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
 import { getVariations, addVariation, deleteVariation, updateVariation } from "../../../redux/actions/variationActions";
 
 function ProductManagement() {
@@ -72,7 +72,9 @@ function ProductManagement() {
                   </table>
                 ) : (
                   <div className={s.list}>
-                    <select>
+                    <select 
+                      name="product"
+                    >
                       {
                         allProducts.filter((el) => el.isVariable).map((el) => (
                           <option key={el.id} value={el.id}>{el.name}</option>
