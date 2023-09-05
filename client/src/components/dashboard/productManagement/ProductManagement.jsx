@@ -12,6 +12,7 @@ function ProductManagement() {
   const allVariations = useSelector((state) => state.variation.allVariations);
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [previewProduct, setPreviewProduct] = useState(null);
   
   useEffect(() => {
     dispatch(getProducts());
@@ -21,8 +22,14 @@ function ProductManagement() {
     dispatch(getVariations());
   }, [products]);
 
+  useEffect(() => {
+    // Actualiza la vista previa cuando se selecciona un producto
+    const selected = allProducts.find((el) => el.id === selectedProduct);
+    setPreviewProduct(selected);
+  }, [selectedProduct]);
+
   const handleFilterVariations = (id) => {
-    setSelectedProduct(id);
+    setSelectedProduct(parseInt(id));
     dispatch(filterVariations(id));
   };
 
@@ -78,6 +85,7 @@ function ProductManagement() {
                 ) : (
                   <div className={s.list}>
                     <select
+                      // value={selectedProduct || ""}
                       onChange={(e) => handleFilterVariations(e.target.value)}
                     >
                       {
@@ -116,14 +124,14 @@ function ProductManagement() {
               <div className={s.preview}>
                 <h3>Vista previa</h3>
                 {
-                  allProducts.filter((el) => el.id === selectedProduct).map((el) => (
-                    <div key={el.id}>
-                      <h4>{el.name}</h4>
-                      <p>{el.description}</p>
-                      <p>{el.price}</p>
-                      <p>{el.stock}</p>
+                  previewProduct && (
+                    <div key={previewProduct.id}>
+                      <h4>{previewProduct.name}</h4>
+                      <p>{previewProduct.description}</p>
+                      <p>{previewProduct.price}</p>
+                      <p>{previewProduct.stock}</p>
                     </div>
-                  ))
+                  )
                 }
               </div>
             </div>
