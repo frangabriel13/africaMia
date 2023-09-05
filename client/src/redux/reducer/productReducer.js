@@ -1,6 +1,7 @@
 const initialState = {
   products: [],
   allProducts: [],
+  product: {},
 };
 
 function productReducer(state = initialState, action) {
@@ -10,6 +11,11 @@ function productReducer(state = initialState, action) {
         ...state,
         products: action.payload,
         allProducts: action.payload,
+      }
+    case 'GET_PRODUCT_BY_ID':
+      return {
+        ...state,
+        product: action.payload,
       }
     case 'ADD_PRODUCT':
       return {
@@ -22,6 +28,13 @@ function productReducer(state = initialState, action) {
     case 'UPDATE_PRODUCT':
       return {
         ...state,
+      }
+    case 'FILTER_PRODUCTS':
+      const allProducts = state.allProducts;
+      const productFiltered = allProducts.filter((el) => el.categoryId === parseInt(action.payload));
+      return {
+        ...state,
+        products: productFiltered,
       }
     default:
       return state;
