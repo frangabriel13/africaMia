@@ -13,7 +13,7 @@ function ProductForm() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    image: {},
+    images: [],
     price: 0,
     stock: 0,
     categoryId: "",
@@ -21,6 +21,8 @@ function ProductForm() {
     isVariable: false,
     availability: true,
   });
+  const [imagesData, setImagesData] = useState([]);
+  const [openGallery, setOpenGallery] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -86,7 +88,17 @@ function ProductForm() {
         </div>
         <div>
           <label htmlFor="image">Imágenes:</label>
-          <Images />
+          <button type="button" onClick={() => setOpenGallery(true)}>Añadir imágenes</button>
+          {
+            openGallery && (
+              <Images 
+                images={images}
+                setOpenGallery={setOpenGallery}
+                setImagesData={setImagesData}
+                setFormData={setFormData}
+              />
+            )
+          }
         </div>
         <div>
           <button>Añadir</button>
