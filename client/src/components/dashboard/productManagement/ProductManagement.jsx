@@ -3,6 +3,7 @@ import s from "./ProductManagement.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductById, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
 import { getVariations, addVariation, deleteVariation, updateVariation, filterVariations } from "../../../redux/actions/variationActions";
+import ProductForm from "./ProductForm";
 
 function ProductManagement() {
   const dispatch = useDispatch();
@@ -138,6 +139,7 @@ function ProductManagement() {
           </div>
         </div>
       </div>
+      <ProductForm />
     </div>
   );
 }
