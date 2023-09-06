@@ -32,10 +32,15 @@ function ProductForm() {
     dispatch(getImages());
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(formData));
+  };
+
   return (
     <div className={s.container}>
       <h2>Crear Producto</h2>
-      <form>
+      <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label htmlFor="name">Nombre:</label>
           <input 
@@ -101,7 +106,7 @@ function ProductForm() {
           }
         </div>
         <div>
-          <button>Añadir</button>
+          <button type="submit">Añadir</button>
         </div>
       </form>
     </div>
