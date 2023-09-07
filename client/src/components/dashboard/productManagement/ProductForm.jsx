@@ -28,7 +28,7 @@ function ProductForm() {
   const [imagesData, setImagesData] = useState([]);
   const [openGallery, setOpenGallery] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
-  console.log(selectedSizes)
+  const [selectedColors, setSelectedColors] = useState([]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -52,16 +52,22 @@ function ProductForm() {
   };
 
   const handleSelectSize = (e) => {
-    console.log(e.target)
     const sizeId = e.target.value;
-    // const sizeName = e.target.name;
     const sizeName = e.target.options[e.target.selectedIndex].getAttribute("name");
   
-    const isSizeSelected = selectedSizes.some((size) => size.id === sizeId);
-  
-    if (!isSizeSelected) {
+    if (sizeId && !selectedSizes.some((size) => size.id === sizeId)) {
       const size = { id: sizeId, name: sizeName };
       setSelectedSizes([...selectedSizes, size]);
+    }
+  };
+
+  const handleSelectColor = (e) => {
+    const colorId = e.target.value;
+    const colorName = e.target.options[e.target.selectedIndex].getAttribute("name");
+  
+    if (colorId && !selectedColors.some((color) => color.id === colorId)) {
+      const color = { id: colorId, name: colorName };
+      setSelectedColors([...selectedColors, color]);
     }
   };
 
@@ -177,6 +183,35 @@ function ProductForm() {
                     <ul>
                       {
                         selectedSizes.map((el) => (
+                          <li key={el.id}>{el.name}</li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="color">Color:</label>
+                  <select
+                    name="color"
+                    value={selectedColors.id}
+                    onChange={(e) => handleSelectColor(e)}
+                  >
+                    <option value="">Seleccionar</option>
+                    {
+                      colors.map((el) => (
+                        <option
+                          key={el.id}
+                          value={el.id}
+                          name={el.name}
+                        >{el.name}</option>
+                      ))
+                    }
+                  </select>
+                  <div>
+                    <h5>Colores seleccionados:</h5>
+                    <ul>
+                      {
+                        selectedColors.map((el) => (
                           <li key={el.id}>{el.name}</li>
                         ))
                       }
