@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../redux/actions/productActions";
 import { getCategories } from "../../../redux/actions/categoryActions";
 import { getImages } from "../../../redux/actions/imageActions";
+import { getColors } from "../../../redux/actions/colorActions";
+import { getSizes } from "../../../redux/actions/sizeActions";
 import Images from "./Images";
 
 function ProductForm() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
+  const colors = useSelector((state) => state.color.colors);
+  const sizes = useSelector((state) => state.size.sizes);
   const images = useSelector((state) => state.gallery.images);
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +27,8 @@ function ProductForm() {
   });
   const [imagesData, setImagesData] = useState([]);
   const [openGallery, setOpenGallery] = useState(false);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  console.log(selectedSizes)
 
   useEffect(() => {
     dispatch(getCategories());
@@ -32,9 +38,24 @@ function ProductForm() {
     dispatch(getImages());
   }, []);
 
+  useEffect(() => {
+    dispatch(getColors());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getSizes());
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addProduct(formData));
+  };
+
+  const handleSelectSize = (e) => {
+    const sizeId = e.target.value;
+    if (!selectedSizes.includes(sizeId)) {
+      setSelectedSizes([...selectedSizes, sizeId]);
+    }
   };
 
   return (
@@ -105,6 +126,53 @@ function ProductForm() {
             )
           }
         </div>
+        <div>
+          <h3>Añadir variaciones:</h3>
+          <label htmlFor="variable">Variable:</label>
+          <input 
+            type="checkbox" 
+            name="variable" 
+            checked={formData.isVariable} 
+            onChange={(e) => setFormData({ ...formData, isVariable: e.target.checked })}
+          />
+          {
+            formData.isVariable && (
+              <div>
+                <div>
+                  <label htmlFor="availability">Disponibilidad:</label>
+                  <input 
+                    type="checkbox" 
+                    name="availability" 
+                    checked={formData.availability} 
+                    onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="size">Talle:</label>
+                  <select
+                    name="size"
+                    onChange={(e) => handleSelectSize(e)}
+                  >
+                    <option value="">Seleccionar</option>
+                    {
+                      sizes.map((el) => (
+                        <option key={el.id} value={el.id}>{el.name}</option>
+                      ))
+                    }
+                  </select>
+                  <div>
+                    <h5>Talles seleccionados:</h5>
+                    {
+                      selectedSizes.map((el) => (
+                        <p key={el}>{el}</p>
+                      ))
+                    }
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>     
         <div>
           <button type="submit">Añadir</button>
         </div>
