@@ -52,9 +52,16 @@ function ProductForm() {
   };
 
   const handleSelectSize = (e) => {
+    console.log(e.target)
     const sizeId = e.target.value;
-    if (!selectedSizes.includes(sizeId)) {
-      setSelectedSizes([...selectedSizes, sizeId]);
+    // const sizeName = e.target.name;
+    const sizeName = e.target.options[e.target.selectedIndex].getAttribute("name");
+  
+    const isSizeSelected = selectedSizes.some((size) => size.id === sizeId);
+  
+    if (!isSizeSelected) {
+      const size = { id: sizeId, name: sizeName };
+      setSelectedSizes([...selectedSizes, size]);
     }
   };
 
@@ -151,22 +158,29 @@ function ProductForm() {
                   <label htmlFor="size">Talle:</label>
                   <select
                     name="size"
+                    value={selectedSizes.id}
                     onChange={(e) => handleSelectSize(e)}
                   >
                     <option value="">Seleccionar</option>
                     {
                       sizes.map((el) => (
-                        <option key={el.id} value={el.id}>{el.name}</option>
+                        <option
+                          key={el.id}
+                          value={el.id}
+                          name={el.name}
+                        >{el.name}</option>
                       ))
                     }
                   </select>
                   <div>
                     <h5>Talles seleccionados:</h5>
-                    {
-                      selectedSizes.map((el) => (
-                        <p key={el}>{el}</p>
-                      ))
-                    }
+                    <ul>
+                      {
+                        selectedSizes.map((el) => (
+                          <li key={el.id}>{el.name}</li>
+                        ))
+                      }
+                    </ul>
                   </div>
                 </div>
               </div>
