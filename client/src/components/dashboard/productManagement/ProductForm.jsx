@@ -7,6 +7,7 @@ import { getImages } from "../../../redux/actions/imageActions";
 import { getColors } from "../../../redux/actions/colorActions";
 import { getSizes } from "../../../redux/actions/sizeActions";
 import Images from "./Images";
+import CombinedVariation from "./CombinedVariation";
 
 function ProductForm() {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ function ProductForm() {
   const [openGallery, setOpenGallery] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
+  const [combinedVariation, setCombinedVariation] = useState([{}]);
+  const [combinedActive, setCombinedActive] = useState(false);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -218,6 +221,21 @@ function ProductForm() {
                     </ul>
                   </div>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setCombinedActive(true)}
+                >Generar variaciones</button>
+                {
+                  combinedActive && (
+                    <CombinedVariation 
+                      selectedSizes={selectedSizes}
+                      selectedColors={selectedColors}
+                      combinedVariation={combinedVariation}
+                      setCombinedVariation={setCombinedVariation}
+                      setFormData={setFormData}
+                    />
+                  )
+                }
               </div>
             )
           }
