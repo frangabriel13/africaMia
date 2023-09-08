@@ -13,18 +13,18 @@ function CombinedVariation({
     setFormData
   }
 ) {
+  // console.log(combinedVariation)
   
-  //formData = {name: "Camiseta", price: '10', stock: 10, categoryId: 1, imgMain: "https://www.google.com", isVariable: true, availability: true}
-
-  const [variationData, setVariationData] = useState({
-    size: "",
-    color: "",
-    price: formData.price,
-  });
-
-  //selectedSizes = [{id: 1, name: "S"}, {id: 2, name: "M"}]
-  //selectedColors = [{id: 1, name: "Red"}, {id: 2, name: "Blue"}]
-  //combinedVariation = [{size: "S", color: "Red"}, {size: "S", color: "Blue"}, {size: null, color:"Blue"}, {size: S, color: null ]
+  //puede que no haga falta, solo usar el combinedVariation
+  // const [variationData, setVariationData] = useState({
+  //   size: "",
+  //   color: "",
+  //   price: formData.price,
+  //   stock: formData.stock,
+  //   availability: formData.availability
+  // });
+ const [price, setPrice] = useState(formData.price);
+ const [stock, setStock] = useState(formData.stock)
 
   function createCombinedVariation() {
     let newCombinedVariation = [];
@@ -34,8 +34,11 @@ function CombinedVariation({
       selectedSizes.forEach((size) => {
         selectedColors.forEach((color) => {
           newCombinedVariation.push({ 
-            size: size.name, 
-            color: color.name
+            size: {id: size.id, name: size.name},  
+            color: {id: color.id, name: color.name},
+            price: formData.price,
+            stock: formData.stock,
+            availability: formData.availability
           });
         });
       });
@@ -43,8 +46,11 @@ function CombinedVariation({
       // Si solo hay tamaños seleccionados
       selectedSizes.forEach((size) => {
         newCombinedVariation.push({ 
-          size: size.name, 
-          color: null
+          size: {id: size.id, name: size.name},
+          color: null,
+          price: formData.price,
+          stock: formData.stock,
+          availability: formData.availability
         });
       });
     } else if (selectedColors.length > 0) {
@@ -52,17 +58,23 @@ function CombinedVariation({
       selectedColors.forEach((color) => {
         newCombinedVariation.push({ 
           size: null, 
-          color: color.name
+          color: {id: color.id, name: color.name},
+          price: formData.price,
+          stock: formData.stock,
+          availability: formData.availability
         });
       });
     } else {
       // Si no se ha seleccionado ni tamaño ni color
       newCombinedVariation.push({ 
         size: null, 
-        color: null
+        color: null,
+        price: formData.price,
+        stock: formData.stock,
+        availability: formData.availability
       });
     }
-  
+    
     setCombinedVariation(newCombinedVariation);
   }
 
@@ -78,19 +90,34 @@ function CombinedVariation({
           combinedVariation.map((variation, index) => {
             return(
               <div key={index} className={s.variation}>
-                <h3>{variation.size} - {variation.color}</h3>
+                <h3>{variation.size ? variation.size.name : ''} - {variation.color ? variation.color.name : ''}</h3>
                 <input 
                   type="number" 
                   name="price"
                   placeholder="Precio"
-                  // value={variationData.price}
-                  defaultValue={variationData.price}
+                  // value={combinedVariation.price}
+                  defaultValue={variation.price}
+                />
+                <input 
+                  type="number"
+                  name="stock"
+                  placeholder="Stock"
+                  defaultValue={variation.stock}
+                />
+                <input 
+                  type="text"
+                  name="availability"
+                  placeholder="Habilitado"
+                  defaultValue={combinedVariation.availability}
                 />
               </div>
             )
           })
         }
       </div>
+      <button
+        onClick={(e) => handleAddVariations(e)}
+      >Añadir variaciones</button>
     </div>
   )
 }
