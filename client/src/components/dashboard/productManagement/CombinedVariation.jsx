@@ -13,6 +13,14 @@ function CombinedVariation({
     setFormData
   }
 ) {
+  
+  //formData = {name: "Camiseta", price: '10', stock: 10, categoryId: 1, imgMain: "https://www.google.com", isVariable: true, availability: true}
+
+  const [variationData, setVariationData] = useState({
+    size: "",
+    color: "",
+    price: formData.price,
+  });
 
   //selectedSizes = [{id: 1, name: "S"}, {id: 2, name: "M"}]
   //selectedColors = [{id: 1, name: "Red"}, {id: 2, name: "Blue"}]
@@ -27,8 +35,7 @@ function CombinedVariation({
         selectedColors.forEach((color) => {
           newCombinedVariation.push({ 
             size: size.name, 
-            color: color.name,
-            price: formData.price,
+            color: color.name
           });
         });
       });
@@ -37,8 +44,7 @@ function CombinedVariation({
       selectedSizes.forEach((size) => {
         newCombinedVariation.push({ 
           size: size.name, 
-          color: null,
-          price: formData.price, 
+          color: null
         });
       });
     } else if (selectedColors.length > 0) {
@@ -46,16 +52,14 @@ function CombinedVariation({
       selectedColors.forEach((color) => {
         newCombinedVariation.push({ 
           size: null, 
-          color: color.name, 
-          price: formData.price,
+          color: color.name
         });
       });
     } else {
       // Si no se ha seleccionado ni tamaño ni color
       newCombinedVariation.push({ 
         size: null, 
-        color: null, 
-        price: formData.price,
+        color: null
       });
     }
   
@@ -79,7 +83,8 @@ function CombinedVariation({
                   type="number" 
                   name="price"
                   placeholder="Precio"
-                  value={variation.price}
+                  // value={variationData.price}
+                  defaultValue={variationData.price}
                 />
               </div>
             )
