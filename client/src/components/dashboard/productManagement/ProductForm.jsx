@@ -33,6 +33,9 @@ function ProductForm() {
   const [combinedVariation, setCombinedVariation] = useState([{}]);
   const [combinedActive, setCombinedActive] = useState(false);
 
+  const [selectedSizeId, setSelectedSizeId] = useState("");
+  const [selectedColorId, setSelectedColorId] = useState("");
+
   useEffect(() => {
     dispatch(getCategories());
   }, []);
@@ -167,8 +170,11 @@ function ProductForm() {
                   <label htmlFor="size">Talle:</label>
                   <select
                     name="size"
-                    value={selectedSizes.id}
-                    onChange={(e) => handleSelectSize(e)}
+                    value={selectedSizeId}
+                    onChange={(e) => {
+                      setSelectedSizeId(e.target.value);
+                      handleSelectSize(e);
+                    }}
                   >
                     <option value="">Seleccionar</option>
                     {
@@ -196,8 +202,11 @@ function ProductForm() {
                   <label htmlFor="color">Color:</label>
                   <select
                     name="color"
-                    value={selectedColors.id}
-                    onChange={(e) => handleSelectColor(e)}
+                    value={selectedColorId}
+                    onChange={(e) => {
+                      setSelectedColorId(e.target.value);
+                      handleSelectColor(e);
+                    }}
                   >
                     <option value="">Seleccionar</option>
                     {
