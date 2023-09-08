@@ -13,18 +13,7 @@ function CombinedVariation({
     setFormData
   }
 ) {
-  // console.log(combinedVariation)
-  
-  //puede que no haga falta, solo usar el combinedVariation
-  // const [variationData, setVariationData] = useState({
-  //   size: "",
-  //   color: "",
-  //   price: formData.price,
-  //   stock: formData.stock,
-  //   availability: formData.availability
-  // });
- const [price, setPrice] = useState(formData.price);
- const [stock, setStock] = useState(formData.stock)
+  console.log(combinedVariation)
 
   function createCombinedVariation() {
     let newCombinedVariation = [];
@@ -82,6 +71,32 @@ function CombinedVariation({
     createCombinedVariation();
   }, [selectedSizes, selectedColors])
 
+  // Manejar cambios en el input de precio y stock
+  const handlePriceChange = (e, index) => {
+    const newCombinedVariation = [...combinedVariation];
+    newCombinedVariation[index].price = parseFloat(e.target.value);
+    setCombinedVariation(newCombinedVariation);
+  };
+
+  const handleStockChange = (e, index) => {
+    const newCombinedVariation = [...combinedVariation];
+    newCombinedVariation[index].stock = parseInt(e.target.value, 10);
+    setCombinedVariation(newCombinedVariation);
+  };
+
+  // Use useEffect para actualizar precio y stock cuando cambia combinedVariation
+  useEffect(() => {
+    // Actualizar precio y stock del formData basado en la primera variación (si existe)
+    if (combinedVariation.length > 0) {
+      const firstVariation = combinedVariation[0];
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        price: firstVariation.price,
+        stock: firstVariation.stock,
+      }));
+    }
+  }, [combinedVariation, setFormData]);
+
   return(
     <div>
       <h2>Todas las variaciones</h2>
@@ -95,20 +110,26 @@ function CombinedVariation({
                   type="number" 
                   name="price"
                   placeholder="Precio"
-                  // value={combinedVariation.price}
-                  defaultValue={variation.price}
+                  value={variation.price || 0}
+                  onChange={(e) => handlePriceChange(e, index)}
                 />
                 <input 
                   type="number"
                   name="stock"
                   placeholder="Stock"
-                  defaultValue={variation.stock}
+                  value={variation.stock || 0}
+                  onChange={(e) => handleStockChange(e, index)}
                 />
                 <input 
                   type="text"
                   name="availability"
                   placeholder="Habilitado"
-                  defaultValue={combinedVariation.availability}
+                  value={variation.availability || ""}
+                  onChange={(e) => {
+                    const newCombinedVariation = [...combinedVariation];
+                    newCombinedVariation[index].availability = e.target.value;
+                    setCombinedVariation(newCombinedVariation);
+                  }}
                 />
               </div>
             )
@@ -116,7 +137,6 @@ function CombinedVariation({
         }
       </div>
       <button
-        onClick={(e) => handleAddVariations(e)}
       >Añadir variaciones</button>
     </div>
   )
