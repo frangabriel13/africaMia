@@ -232,6 +232,7 @@ function ProductForm() {
                       selectedColors={selectedColors}
                       combinedVariation={combinedVariation}
                       setCombinedVariation={setCombinedVariation}
+                      formData={formData}
                       setFormData={setFormData}
                     />
                   )
