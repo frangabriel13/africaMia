@@ -84,19 +84,6 @@ function CombinedVariation({
     setCombinedVariation(newCombinedVariation);
   };
 
-  // Use useEffect para actualizar precio y stock cuando cambia combinedVariation
-  useEffect(() => {
-    // Actualizar precio y stock del formData basado en la primera variación (si existe)
-    if (combinedVariation.length > 0) {
-      const firstVariation = combinedVariation[0];
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        price: firstVariation.price,
-        stock: firstVariation.stock,
-      }));
-    }
-  }, [combinedVariation, setFormData]);
-
   return(
     <div>
       <h2>Todas las variaciones</h2>
