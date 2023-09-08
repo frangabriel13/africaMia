@@ -8,21 +8,57 @@ function CombinedVariation({
     combinedActive, 
     setCombinedActive, 
     selectedSizes, 
-    selectedColors 
+    selectedColors,
+    formData,
+    setFormData
   }
 ) {
 
   //selectedSizes = [{id: 1, name: "S"}, {id: 2, name: "M"}]
   //selectedColors = [{id: 1, name: "Red"}, {id: 2, name: "Blue"}]
-  //combinedVariation = [{size: "S", color: "Red"}, {size: "S", color: "Blue"}, {size: "M", color: "Red"}, {size: "M", color: "Blue"}]
+  //combinedVariation = [{size: "S", color: "Red"}, {size: "S", color: "Blue"}, {size: null, color:"Blue"}, {size: S, color: null ]
 
   function createCombinedVariation() {
     let newCombinedVariation = [];
-    selectedSizes.forEach((size) => {
+  
+    if (selectedSizes.length > 0 && selectedColors.length > 0) {
+      // Si hay tamaños y colores seleccionados
+      selectedSizes.forEach((size) => {
+        selectedColors.forEach((color) => {
+          newCombinedVariation.push({ 
+            size: size.name, 
+            color: color.name,
+            price: formData.price,
+          });
+        });
+      });
+    } else if (selectedSizes.length > 0) {
+      // Si solo hay tamaños seleccionados
+      selectedSizes.forEach((size) => {
+        newCombinedVariation.push({ 
+          size: size.name, 
+          color: null,
+          price: formData.price, 
+        });
+      });
+    } else if (selectedColors.length > 0) {
+      // Si solo hay colores seleccionados
       selectedColors.forEach((color) => {
-        newCombinedVariation.push({size: size.name, color: color.name, stock: 0});
-      })
-    })
+        newCombinedVariation.push({ 
+          size: null, 
+          color: color.name, 
+          price: formData.price,
+        });
+      });
+    } else {
+      // Si no se ha seleccionado ni tamaño ni color
+      newCombinedVariation.push({ 
+        size: null, 
+        color: null, 
+        price: formData.price,
+      });
+    }
+  
     setCombinedVariation(newCombinedVariation);
   }
 
@@ -39,6 +75,12 @@ function CombinedVariation({
             return(
               <div key={index} className={s.variation}>
                 <h3>{variation.size} - {variation.color}</h3>
+                <input 
+                  type="number" 
+                  name="price"
+                  placeholder="Precio"
+                  value={variation.price}
+                />
               </div>
             )
           })
@@ -50,63 +92,3 @@ function CombinedVariation({
 
 
 export default CombinedVariation;
-
-
-// function createCombinedVariation() {
-//   let newCombinedVariation = {};
-//   selectedSizes.forEach((size) => {
-//     newCombinedVariation[size.name] = {};
-//     selectedColors.forEach((color) => {
-//       newCombinedVariation[size.name][color.name] = 0;
-//     })
-//   })
-//   setCombinedVariation(newCombinedVariation);
-// }
-
-// useEffect(() => {
-//   createCombinedVariation();
-// }, [selectedSizes, selectedColors])
-
-{/* <div className={s.container}>
-        {
-          selectedSizes.map((size) => {
-            return(
-              <div>
-                <h3>{size.name}</h3>
-                {
-                  selectedColors.map((color) => {
-                    return(
-                      <div>
-                        <h4>{color.name}</h4>
-                        <input 
-                          type="number" 
-                          placeholder="Stock"
-                          onChange={(e) => {
-                            let newCombinedVariation = combinedVariation;
-                            newCombinedVariation[size.name][color.name] = e.target.value;
-                            setCombinedVariation(newCombinedVariation);
-                          }}
-                        />
-                      </div>
-                    )
-                  })
-                }
-              </div>
-            )
-          })
-        }
-      </div> */}
-
-                {/* <input 
-                  type="number" 
-                  placeholder="Stock"
-                  onChange={(e) => {
-                    let newCombinedVariation = combinedVariation;
-                    newCombinedVariation.forEach((item) => {
-                      if(item.size === variation.size && item.color === variation.color) {
-                        item.stock = e.target.value;
-                      }
-                    })
-                    setCombinedVariation(newCombinedVariation);
-                  }}
-                /> */}
