@@ -28,7 +28,9 @@
 }
 
 .overlay {
-
+  font-size: 2.5rem;
+  padding-top: 2rem;
+  color: #000 !important;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -36,7 +38,7 @@
   background-color: rgba(255, 255, 255, 0.76); /* Fondo semi-transparente */
   opacity: 0; /* Inicialmente oculto */
   transition: opacity 0.3s;
-  height: 5rem;
+  height: 8rem;
 }
 
 .img:hover .overlay {
@@ -45,6 +47,7 @@
 
 .detail {
   background-color: transparent; /* Cambiamos el color de fondo a transparente */
+  
   color: #000000;
   padding: 1rem 2rem;
   border: none;
@@ -52,6 +55,9 @@
   font-weight: 700;
   transition: background-color 0.3s, transform 0.3s;
   opacity: 0; /* Ocultamos el botón */
+}
+:visited .detail {
+  color: black !important;
 }
 
 

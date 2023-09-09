@@ -22,10 +22,10 @@ const Card = ({ name, price, id, images, onSelectProduct, productId }) => {
          </div>
       <div onClick={handleCardClick} className={s.content}>
         <h3 className={s.name}>{name}</h3>
-        <p className={s.price}>{price}</p>
+        <p className={s.price}>$ {price}</p>
       </div>
     </div>
-         <Link to={`/products/${id}`} className={s.detail}>
+         <Link to={`/products/${id}`} className= {s.detail }>
             <span>Ver más</span>
          </Link>
      

@@ -1,23 +1,35 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import s from "./Header.module.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logoAlargadoAfricaMia.png";
-
+import { getProducts, searchProductsHeader } from '../../redux/actions/productActions';
 
 
 function Header() {
   const dispatch = useDispatch();
-  const [showResults, setShowResults] = useState(false);
+ 
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const inputRef = useRef(null); // Referencia al input search para posicionar la ventana emergente
+  const searchResultsRef = useRef(null); // Referencia a la ventana emergente
 
+  const [showResults, setShowResults] = useState(false);
+  const navbarSearchResults = useSelector((state) => state.product.navbarSearchResults); 
+  console.log(navbarSearchResults);
+
+  
+  
 
   useEffect(() => {
-    // dispatch(getProducts());
+     dispatch(getProducts());
     const handleDocumentClick = (e) => {
       // Si el clic ocurre fuera de la ventana emergente, cerrarla
       if (searchResultsRef.current && !searchResultsRef.current.contains(e.target)) {
@@ -33,17 +45,16 @@ function Header() {
 
   const handleSearchInputChange = (e) => {
     const term = e.target.value;
-    setSearchTerm(term);
-
+    console.log(term);
     dispatch(searchProductsHeader(term));
     setShowResults(true);
   };
 
-  const handleSearchInputKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch(searchTerm);
-    }
-  };
+  // const handleSearchInputKeyPress = (e) => {
+  //   if (e.key === 'Enter') {
+  //     handleSearch(searchTerm);
+  //   }
+  // };
 
   const handleSearchResultClick = (productId) => {
     navigate(`/products/${productId}`);
@@ -61,11 +72,12 @@ function Header() {
         <div className={s.searchContainer}>
           <i className={`bi bi-search ${s.icon}`}></i>
           <input
+            ref={inputRef}
             onClick={() => {setShowResults(true)}} 
             className={s.searchInput}
             type="text"
             onChange={handleSearchInputChange}
-            onKeyDown={handleSearchInputKeyPress}
+            // onKeyDown={handleSearchInputKeyPress}
             placeholder="Buscar" 
           />
           {
@@ -83,9 +95,9 @@ function Header() {
                       className={s.resultItem}
                       onClick={() => handleSearchResultClick(result.id)}  
                     >
-                    <img src={result.images[0]} alt={result.name} />
-                      <span>{result.name}</span>
-                      <span>${result.price}</span>
+                    <img src={result.images[0].url} alt={result.name} />
+                      <span className={s.nameProduct}>{result.name}</span>
+                      <span className={s.priceProduct}>${result.price}</span>
                     </div>
                   ))
                 }
