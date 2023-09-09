@@ -64,8 +64,17 @@ function CombinedVariation({
     
     setCombinedVariation(newCombinedVariation);
 
+    // const allVariations = {
+    //   variations: newCombinedVariation,
+    // };
     const allVariations = {
-      variations: newCombinedVariation,
+      variations: newCombinedVariation.map((variation) => ({
+        sizeId: variation.size ? parseInt(variation.size.id, 10) : null,
+        colorId: variation.color ? parseInt(variation.color.id, 10) : null,
+        price: variation.price,
+        stock: variation.stock,
+        availability: variation.availability,
+      })),
     };
   
     // Actualiza formData solo si es un producto variable

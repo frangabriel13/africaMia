@@ -108,8 +108,8 @@ function ProductManagement() {
                           variations.map((el) => (
                             <tr key={el.id}>
                               <td>{el.id}</td>
-                              <td>{el.size.name}</td>
-                              <td>{el.color.name}</td>
+                              <td>{el.size ? el.size.name : 'Sin tamaño'}</td>
+                              <td>{el.color ? el.color.name : 'Sin color'}</td>
                               <td>
                                 <button>Editar</button>
                                 <button>Eliminar</button>
