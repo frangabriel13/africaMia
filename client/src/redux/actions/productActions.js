@@ -24,6 +24,19 @@ export const getProductById = (id) => async (dispatch) => {
   }
 };
 
+export const searchProducts = (searchTerm) => ({
+  type: 'SEARCH_PRODUCTS',
+  payload: searchTerm,
+});
+
+// Acción para realizar la búsqueda en el navbar
+export const searchProductsHeader = (searchTerm) => {
+  return {
+    type: 'SEARCH_PRODUCTS_NAVBAR',
+    payload: searchTerm,
+  };
+};
+
 export const addProduct = (product) => async (dispatch) => {
   try {
     const response = await instance.post('/products', product);

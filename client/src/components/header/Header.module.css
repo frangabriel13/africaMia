@@ -1,6 +1,17 @@
 /* CSS Global */
-body {
-  font-family: sans-serif; /* Aplicar la fuente "PT Sans Narrow" y fallback a fuentes sans-serif */
+
+.nameProduct {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #000000;
+  margin-left: 1rem;
+}
+
+.priceProduct {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #000000;
+  margin-left: 1rem;
 }
 
 .containerGlobal {
@@ -32,6 +43,8 @@ body {
 }
 
 .searchInput {
+  font-size: large;
+  color: #ffffff;
   background-color: #f9457f;
   
 }
@@ -43,10 +56,10 @@ body {
 /* Ventana emergente de resultados */
 .searchResults {
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: 6rem;
+  right: 80%;
   width: 250px;
-  background-color: #f9457f;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   display: flex;
@@ -54,6 +67,20 @@ body {
   gap: 0.5rem;
   z-index: 2;
   margin-top: 10px;
+}
+
+/* Ajusta el valor para tabletas */
+@media screen and (max-width: 1024px) {
+  .searchResults {
+    right: 65%; /* Cambia el valor para tabletas según tus necesidades */
+  }
+}
+
+/* Ajusta el valor para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .searchResults {
+    right: 10%; /* Cambia el valor para dispositivos móviles según tus necesidades */
+  }
 }
 
 .resultItem {
@@ -107,7 +134,7 @@ body {
 
 .nav a {
   margin-right: 2rem;
-  color: white;
+  color: white !important;; 
   font-size: 1.4rem;
 }
 

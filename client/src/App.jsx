@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Dashboard from './components/dashboard/dashboard';
+import Detail from './components/details/detail';
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/dashboard/*' element={<Dashboard />} />
+         <Route path='/products/:id' element={<Detail />} /> 
       </Routes>
     </>
   )

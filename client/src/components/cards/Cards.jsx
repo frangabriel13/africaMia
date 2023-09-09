@@ -22,20 +22,6 @@ export default function Cards() {
     
   }, [dispatch]);
 
-    //  const products = [
-    //     {
-    //       name: 'Producto 1',
-    //       price: 100,
-    //       id: 1,
-    //       image: `${img1}`,
-    //     },
-    //     {
-    //       name: 'Producto 1',
-    //       price: 100,
-    //       id: 1,
-    //       image: `${img1}`,
-    //     },
-    // ];
 
 
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -54,7 +40,7 @@ export default function Cards() {
             id={c.id}
             images={c.images[0].url}
             key={c.id}
-            // productId={c.id}
+            productId={c.id}
             onSelectProduct={handleProductSelect} // Pasar la función handleProductSelect como prop
           />
         ))} 
