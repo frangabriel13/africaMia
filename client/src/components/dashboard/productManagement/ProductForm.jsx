@@ -25,6 +25,7 @@ function ProductForm() {
     imgMain: "",
     isVariable: false,
     availability: true,
+    variations: [],
   });
   const [imagesData, setImagesData] = useState([]);
   const [openGallery, setOpenGallery] = useState(false);
