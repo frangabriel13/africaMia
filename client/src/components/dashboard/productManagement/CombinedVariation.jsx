@@ -13,8 +13,6 @@ function CombinedVariation({
     setFormData
   }
 ) {
-  console.log(combinedVariation)
-
   function createCombinedVariation() {
     let newCombinedVariation = [];
   
