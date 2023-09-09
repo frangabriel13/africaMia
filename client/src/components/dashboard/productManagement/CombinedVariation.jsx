@@ -63,6 +63,27 @@ function CombinedVariation({
     }
     
     setCombinedVariation(newCombinedVariation);
+
+    const allVariations = {
+      variations: newCombinedVariation,
+    };
+  
+    // Actualiza formData solo si es un producto variable
+    if (formData.isVariable) {
+      const updatedFormData = {
+        ...formData,
+        ...allVariations, // Agrega las variaciones al formData
+      };
+      setFormData(updatedFormData);
+    } else {
+      // Si no es un producto variable, asegúrate de eliminar las variaciones del formData
+      const updatedFormData = {
+        ...formData,
+        ...allVariations,
+        variations: [], // Limpia las variaciones en caso de que haya quedado alguna
+      };
+      setFormData(updatedFormData);
+    }
   }
 
   useEffect(() => {
@@ -74,12 +95,24 @@ function CombinedVariation({
     const newCombinedVariation = [...combinedVariation];
     newCombinedVariation[index].price = parseFloat(e.target.value);
     setCombinedVariation(newCombinedVariation);
+    // Actualiza formData con las variaciones
+    const updatedFormData = {
+      ...formData,
+      variations: newCombinedVariation,
+    };
+    setFormData(updatedFormData);
   };
 
   const handleStockChange = (e, index) => {
     const newCombinedVariation = [...combinedVariation];
     newCombinedVariation[index].stock = parseInt(e.target.value, 10);
     setCombinedVariation(newCombinedVariation);
+    // Actualiza formData con las variaciones
+    const updatedFormData = {
+      ...formData,
+      variations: newCombinedVariation,
+    };
+    setFormData(updatedFormData);
   };
 
   return(
@@ -121,11 +154,12 @@ function CombinedVariation({
           })
         }
       </div>
-      <button
-      >Añadir variaciones</button>
     </div>
   )
 }
 
 
 export default CombinedVariation;
+
+
+// El combinedVariation esatría siendo innecesario, debería utilizar solamente formData para simplificar el código
