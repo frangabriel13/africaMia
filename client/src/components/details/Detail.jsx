@@ -2,6 +2,7 @@ import React from "react";
 import s from './Detail.module.css';
 import ProductDetail from "../productDetail/ProductDetail";
 import { useLocation } from 'react-router-dom';
+import CardFour from "../cardsFour/CardFour";
 
 function Detail() {
   const location = useLocation();
@@ -12,6 +13,7 @@ function Detail() {
   return (
     <div className={s.container}>
       <ProductDetail productId={id} />
+      <CardFour />
     </div>
   )
 }

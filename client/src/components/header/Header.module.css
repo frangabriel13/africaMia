@@ -26,6 +26,7 @@
 
 /* CSS Contenedor principal */
 .container {
+  background-color: #f9457f;
   margin-top: 1rem;
   padding-right: 10rem;
   display: flex;
@@ -43,6 +44,7 @@
 }
 
 .searchInput {
+  border: none !important; /* Elimina el borde */
   font-size: large;
   color: #ffffff;
   background-color: #f9457f;
