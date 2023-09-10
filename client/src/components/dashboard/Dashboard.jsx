@@ -15,11 +15,11 @@ function Dashboard() {
       <div className={s.content}>
         <Routes>
           <Route path="/" element={<Gallery />} />
-          <Route path="/products" element={<ProductManagement />} />
-          <Route path="/users" element={<Gallery />} />
-          <Route path="/categories" element={<Gallery />} />
+          <Route path="/productos" element={<ProductManagement />} />
+          {/* <Route path="/users" element={<Gallery />} /> */}
+          {/* <Route path="/categories" element={<Gallery />} /> */}
           <Route path="/configuracion" element={<Configuration />} />
-          <Route path="/promociones" element={<Gallery />} />
+          <Route path="/galeria" element={<Gallery />} />
           <Route path="/otros" element={<Gallery />} />
         </Routes>
       </div>

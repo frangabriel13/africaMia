@@ -29,12 +29,17 @@
   transition: all 0.3s ease-in-out;
 }
 
+.item:hover {
+  /* background-color: #1e3355; */
+  transform: scale(1.05); /* Escala ligeramente el elemento en hover */
+}
+
 .item i {
-  font-size: 24px;
-  margin-bottom: 10px; 
+  font-size: 3.5rem;
+  /* margin-bottom: 1rem;  */
 }
 
 .item span {
-  font-size: 18px;
+  font-size: 1.6rem;
   text-align: center; 
 }
