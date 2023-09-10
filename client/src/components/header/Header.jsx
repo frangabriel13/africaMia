@@ -120,8 +120,9 @@ function Header() {
           </nav>
         </div>
         <div className={s.loginCart}>
+          <Link to="/cart"><i className={`bi bi-cart3 ${s.icon}`}></i></Link>
           <i className={`bi bi-person ${s.icon}`}></i>
-          <i className={`bi bi-cart3 ${s.icon}`}></i>
+          
         </div>
       </div> 
 

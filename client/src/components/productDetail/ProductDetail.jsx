@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductById } from '../../redux/actions/productActions';
+import { getProductById, addToCart } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
 
 const ProductDetail = ({ productId }) => {
@@ -11,6 +11,12 @@ const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);
   const imagesRef = useRef(null);
+  const [quantity, setQuantity] = useState(1); // Inicialmente, la cantidad es 1
+
+  const handleQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value, 10); // Asegurarse de que sea un número entero
+    setQuantity(newQuantity);
+  };
 
   useEffect(() => {
     dispatch(getProductById(productId))
@@ -18,6 +24,10 @@ const ProductDetail = ({ productId }) => {
   }, [dispatch, productId]);
 
   if (loading) return <p>Cargando...</p>
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
   
   return (
     <div className={s.divUni}>
@@ -87,7 +97,25 @@ const ProductDetail = ({ productId }) => {
             This product has variations
           </p>
         )} 
-        <button className={s.buttonCart}>Agregar al Carrito</button>
+
+        {/* Agregar el select para la cantidad */}
+      <label htmlFor="quantity">Cantidad:</label>
+      <select
+        id="quantity"
+        name="quantity"
+        value={quantity}
+        onChange={handleQuantityChange}
+      >
+        {/* Puedes generar opciones dinámicas según la disponibilidad de stock */}
+        {Array.from({ length: product.stock }, (_, index) => (
+          <option key={index} value={index + 1}>
+            {index + 1}
+          </option>
+        ))}
+      </select>
+
+       
+        <button  className={s.buttonCart} onClick={handleAddToCart(product, quantity)}>Agregar al carrito</button>
         <br/>
         <button className={s.buttonWP}>Comprar por Whatsapp</button>
       </div>

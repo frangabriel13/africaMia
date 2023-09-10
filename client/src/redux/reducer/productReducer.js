@@ -6,6 +6,8 @@ const initialState = {
   navbarSearchResults: [],
   sortOrder: 'relevance',
   productById: {},
+  cartItems: [], 
+  total: 0, 
 };
 
 // Constants
@@ -47,6 +49,26 @@ export function searchProductsHeader(products, searchTerm) {
 
   return filteredProducts;
 }
+
+// Función para agregar un producto al carrito
+const addToCart = (product) => {
+  // Realiza la lógica para agregar el producto al carrito (por ejemplo, actualiza el estado)
+  const updatedCart = [...cartItems, product];
+  setCartItems(updatedCart);
+
+  // Almacena el carrito actualizado en el localStorage
+  localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+};
+
+// Función para eliminar un producto del carrito
+const removeFromCart = (productId) => {
+  // Realiza la lógica para eliminar el producto del carrito (por ejemplo, actualiza el estado)
+  const updatedCart = cartItems.filter((item) => item.id !== productId);
+  setCartItems(updatedCart);
+
+  // Almacena el carrito actualizado en el localStorage
+  localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+};
 
 
 
@@ -123,7 +145,25 @@ function productReducer(state = initialState, action) {
                 return {
                   ...state,
                   navbarSearchResults: []
-                }                   
+                }  
+                case 'ADD_TO_CART':
+  // Lógica para agregar un producto al carrito
+  const updatedCartAdd = [...state.cartItems, action.payload];
+  localStorage.setItem('cartItems', JSON.stringify(updatedCartAdd)); // Almacena el carrito actualizado en el localStorage
+  return {
+    ...state,
+    cartItems: updatedCartAdd,
+    total: state.total + action.payload.price,
+  };
+case 'REMOVE_FROM_CART':
+  // Lógica para eliminar un producto del carrito
+  const updatedCartRemove = state.cartItems.filter((item) => item.id !== action.payload);
+  localStorage.setItem('cartItems', JSON.stringify(updatedCartRemove)); // Almacena el carrito actualizado en el localStorage
+  return {
+    ...state,
+    cartItems: updatedCartRemove,
+    total: state.total - /* Precio del producto eliminado */ action.payload.price,
+  };                
     default:
       return state;
   }
