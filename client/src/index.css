@@ -1,21 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'PT Sans Narrow', sans-serif;
+  
   border: none;
   outline: none;
   scroll-behavior: smooth;
 }
 
 :root {
-  --bg-color: #141C2E;
+  --bg-color: #ffffff;
   --second-bg-color: #08223c;
   --dark-color: #0F1422;
-  --text-color: #ededed;
+  /* --text-color: #ededed; */
+  --text-color: black;
   --main-color: #24a0cc ;
   --second-color: #0085b8;
 }

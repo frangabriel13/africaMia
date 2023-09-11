@@ -1,0 +1,58 @@
+/* Estilos generales del carrito */
+
+
+.cart {
+  margin-top: 20rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 0 auto; /* Esto centrará horizontalmente */
+
+  
+}
+
+.cart h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart ul li {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.cart p {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Estilos del botón de WhatsApp */
+.buttonWP {
+  background-color: #25d366; /* Verde de WhatsApp */
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonWP:hover {
+  background-color: #128c7e; /* Cambio de color al pasar el mouse */
+}
+

@@ -1,0 +1,11 @@
+.dashboard {
+  display: flex;
+}
+
+/* .sidebar {
+  width: 200rem;
+} */
+
+.content {
+  flex-grow: 1;
+}

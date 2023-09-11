@@ -1,0 +1,190 @@
+.divGlobal {
+  display: flex;
+  /* gap: 2rem; */
+  /* padding: 5.5rem 5%; */
+}
+
+.divLocal {
+ 
+  
+  padding: 2.5rem;
+}
+
+.divPhotos {
+  display: flex;
+  
+}
+.divImage .gallery {
+  flex: 1;
+  padding: 2rem;
+}
+
+.divImage {
+  padding-top: 6.8rem;
+  overflow: hidden;
+  width: 60rem;
+}
+
+.productoDetail {
+  padding-top: 2rem;
+  width: 60rem;
+  background-color: #ffffff;
+  padding: 10rem;
+  /* border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  margin-left: auto;
+}
+
+.productoDetailName {
+  font-size: 2.4rem;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.productoDetailDescription {
+  font-size: 1.2rem;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.productoDetailPrice {
+  font-size: 5.6rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.productoDetailDiscount {
+  color: #00a65a;
+  margin-bottom: 10px;
+}
+
+.productoDetailCategory {
+  font-style: italic;
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.productoDetailImages {
+  overflow: scroll; 
+  max-height: 90rem;
+ 
+}
+.productoDetailImages::-webkit-scrollbar {
+  display: none;
+}
+
+.productoDetailImageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 40rem;
+  max-height: 80rem;
+  overflow: hidden;
+}
+
+.productoDetailImage {
+  width: 60rem;
+  height: 90rem;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+
+
+.productoDetailImageZoomOverlay.active {
+  display: flex;
+}
+
+.productoDetailImageZoom {
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+.productoDetailStock {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color:#000000;
+  margin-top: 2rem;
+}
+
+.productoDetailVariations {
+  font-style: italic;
+  color: #666666;
+  margin-top: 2rem;
+}
+.gallery {
+  max-width: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 8rem;
+}
+
+.galleryImage {
+  width: 12rem;
+  height: 20rem;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.selected {
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.buttonCart {
+  width: 100%;
+  height: 4rem;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1.6rem;
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.buttonWP {
+  width: 100%;
+  height: 4rem;
+  background-color: #00a65a;
+  color: #ffffff;
+  font-size: 1.6rem;
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.divDescription {
+  margin-top: 5rem;
+  padding: 2rem;
+  width: 190rem;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+}
+.relacionados {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333; /* Cambia el color a tu preferencia */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+/* Opcional: Agregar una línea decorativa debajo del título */
+.relacionados::after {
+  content: "";
+  display: block;
+  width: 100px; /* Ancho de la línea */
+  height: 4px; /* Grosor de la línea */
+  background-color: #007bff; /* Cambia el color a tu preferencia */
+  margin: 0.5rem auto;
+}

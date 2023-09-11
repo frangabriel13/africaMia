@@ -32,7 +32,28 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User } = sequelize.models;
+const { Product, Variation, Category, Image, Size, Color } = sequelize.models;
+
+Product.hasMany(Variation, { as: 'variations' });
+Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId' } );
+
+Product.belongsTo(Category, { as: 'category', foreignKey: 'categoryId' });
+Category.hasMany(Product, { as: 'products' });
+
+Category.belongsTo(Category, { as: 'parent', foreignKey: 'parentId' });
+Category.hasMany(Category, { as: 'subcategories' });
+
+Product.belongsToMany(Image, { through: 'product_image', as: 'images', foreignKey: 'productId' });
+Image.belongsToMany(Product, { through: 'product_image', as: 'products', foreignKey: 'imageId' });
+
+Variation.belongsTo(Size, { as: 'size', foreignKey: 'sizeId' });
+Size.hasMany(Variation, { as: 'variations' });
+
+Variation.belongsTo(Color, { as: 'color', foreignKey: 'colorId' });
+Color.hasMany(Variation, { as: 'variations' });
+
+Image.belongsTo(Color, { as: 'color', foreignKey: 'colorId' });
+Color.hasMany(Image, { as: 'images' });
 
 
 module.exports = {
