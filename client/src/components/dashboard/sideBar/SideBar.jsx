@@ -37,13 +37,13 @@ function SideBar() {
       </Link> */}
       <Link to="/dashboard/galeria" className={s.link}>
         <div className={s.item}>
-          <i class="bi bi-camera"></i>
+          <i className="bi bi-camera"></i>
           <span>Galería</span>
         </div>
       </Link>
       <Link to="/dashboard/otros" className={s.link}>
         <div className={s.item}>
-          <i class="bi bi-pencil"></i>
+          <i className="bi bi-pencil"></i>
           <span>Personalizar</span>
         </div>
       </Link>
