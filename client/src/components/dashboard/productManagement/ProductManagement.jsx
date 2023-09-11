@@ -86,7 +86,7 @@ function ProductManagement() {
                               <button onClick={() => {setSelectedProduct(el.id)}}>Ver</button>
                             </td>
                             <td>
-                              <button onClick={() => {setEditingProduct(el.id)}}>Editar</button>
+                              <button onClick={() => handleEditProduct(el.id)}>Editar</button>
                               <button>Eliminar</button>
                             </td>
                           </tr>
