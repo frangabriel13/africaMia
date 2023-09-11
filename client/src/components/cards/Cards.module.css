@@ -1,7 +1,13 @@
+.containerGlobal{
+  display: flex; /* Asegúrate de que el contenedor principal tenga "display: flex;" */
+  justify-content: center; /* Esto centrará el contenido horizontalmente */
+}
+
 .container {
+  width: 75%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 1rem; /* Cambiar el valor aquí */
   grid-row-gap: 10rem; 
   margin: 2rem;
   background-color: rgb(255, 255, 255);

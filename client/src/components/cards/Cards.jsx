@@ -35,6 +35,7 @@ export default function Cards() {
   const productsToDisplay = products.slice(startIndex, endIndex);
 
   return (
+   <div className={s.containerGlobal}> 
     <div className={s.container}>
       {productsToDisplay.map((c) => (
         <Card
@@ -57,6 +58,7 @@ export default function Cards() {
         activeClassName={s.activePage}
        />
     </div>
+   </div>
    
   );
 }

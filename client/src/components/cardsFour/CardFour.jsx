@@ -26,6 +26,7 @@ export default function CardFour() {
   const randomProducts = getRandomProducts(4); // Obtén 4 productos al azar
 
   return (
+  <div className={s.containerGlobal}>
     <div className={s.container}>
       {randomProducts.map((c) => (
         <Card
@@ -39,5 +40,6 @@ export default function CardFour() {
         />
       ))}
     </div>
+  </div>
   );
 }

@@ -11,14 +11,14 @@
  
   font-family: 'PT Sans Narrow', sans-serif;
   border-radius: 0.2rem;
-  width: 45rem;
-  height: 70rem;
+  width: 25rem;
+  height: 41rem;
 }
 
 .img {
   position: relative;
-  width: 45rem;
-  height: 69rem;
+  width: 24rem;
+  height: 40rem;
 }
 
 .img img {
@@ -98,7 +98,7 @@ font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 45rem;
+  width: 24rem;
   padding-top: 0rem;
   padding-bottom: 0rem;
   padding-left: 0.5rem;
