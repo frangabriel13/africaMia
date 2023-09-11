@@ -63,6 +63,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
 export const updateProduct = (payload) => async (dispatch) => {
   try {
+    console.log(payload)
     const response = await instance.put(`/products/${payload.id}`, payload);
     dispatch({
       type: 'UPDATE_PRODUCT',

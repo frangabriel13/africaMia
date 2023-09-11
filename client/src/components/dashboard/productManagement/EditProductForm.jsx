@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import s from './EditProductForm.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../redux/actions/categoryActions";
+import { updateProduct } from "../../../redux/actions/productActions";
 
 function EditProductForm({ product, onCancelEdit }) {
   const dispatch = useDispatch()
   const categories = useSelector((state) => state.category.categories);
   const [formData, setFormData] = useState({
+    id: product.id,
     name: product.name,
     description: product.description,
     images: product.images,
@@ -23,9 +25,15 @@ function EditProductForm({ product, onCancelEdit }) {
     dispatch(getCategories());
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onCancelEdit();
+
+    try {
+      await dispatch(updateProduct(formData));
+      onCancelEdit()
+    } catch(error) {
+      console.log('Error al editar el producto:', error)
+    }
   }
 
   return(
