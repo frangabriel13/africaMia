@@ -7,6 +7,7 @@ import { updateProduct } from "../../../redux/actions/productActions";
 function EditProductForm({ product, onCancelEdit }) {
   const dispatch = useDispatch()
   const categories = useSelector((state) => state.category.categories);
+  const variations = useSelector((state) => state.variation.variations);
   const [formData, setFormData] = useState({
     id: product.id,
     name: product.name,
@@ -95,6 +96,24 @@ function EditProductForm({ product, onCancelEdit }) {
                 <img src={image.url} alt={`Imagen ${index + 1}`} />
               </div>
             ))
+          }
+        </div>
+        <div>
+          <label htmlFor="variations">Variaciones:</label>
+          {
+            formData.variations.map(el => {
+              const variation = variations.find((v) => v.id === el.id);
+              console.log(variation)
+              if(variation) {
+                return(
+                  <li key={variation.id}>
+                    <p>ID: {variation.id}</p>
+                    <p>Precio: {variation.price}</p>
+                    <p>Stock: {variation.stock}</p>
+                  </li>
+                )
+              }
+            })
           }
         </div>
         <div>
