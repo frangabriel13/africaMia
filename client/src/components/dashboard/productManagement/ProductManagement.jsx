@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductById, addProduct, deleteProduct, updateProduct } from "../../../redux/actions/productActions";
 import { getVariations, addVariation, deleteVariation, updateVariation, filterVariations } from "../../../redux/actions/variationActions";
 import ProductForm from "./ProductForm";
+import EditProductForm from "./EditProductForm";
 
 function ProductManagement() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ProductManagement() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
+  const [editingProduct, setEditingProduct] = useState(null);
   
   useEffect(() => {
     dispatch(getProducts());
@@ -33,6 +35,15 @@ function ProductManagement() {
     setSelectedProduct(parseInt(id));
     dispatch(filterVariations(id));
   };
+
+  const handleEditProduct = (productId) => {
+    const productToEdit = products.find((product) => product.id === productId);
+    setEditingProduct(productToEdit);
+  }
+
+  const handleCancelEdit = () => {
+    setEditingProduct(null);
+  }
 
   return (
     <div className={s.container}>
@@ -75,7 +86,7 @@ function ProductManagement() {
                               <button onClick={() => {setSelectedProduct(el.id)}}>Ver</button>
                             </td>
                             <td>
-                              <button>Editar</button>
+                              <button onClick={() => handleEditProduct(el.id)}>Editar</button>
                               <button>Eliminar</button>
                             </td>
                           </tr>
@@ -140,6 +151,14 @@ function ProductManagement() {
         </div>
       </div>
       <ProductForm />
+      {
+        editingProduct && (
+          <EditProductForm 
+            product={editingProduct}
+            onCancelEdit={handleCancelEdit}
+          />
+        )
+      }
     </div>
   );
 }
