@@ -115,7 +115,8 @@ const ProductDetail = ({ productId }) => {
       </select>
 
        
-        <button  className={s.buttonCart} onClick={handleAddToCart(product, quantity)}>Agregar al carrito</button>
+      <button className={s.buttonCart} onClick={() => handleAddToCart(product, quantity)}>Agregar al carrito</button>
+
         <br/>
         <button className={s.buttonWP}>Comprar por Whatsapp</button>
       </div>
