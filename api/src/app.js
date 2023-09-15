@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(cors());
 
-app.use("/", routes);
+app.use("/api", routes);
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://85.31.235.118:3001",
+  baseURL: "https://africamia-jeans.online/api",
   headers: {
     "Content-Type": "multipart/form-data",
     "Content-Type": "application/json",
