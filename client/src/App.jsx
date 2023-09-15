@@ -2,8 +2,8 @@ import './App.css';
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import Dashboard from './components/dashboard/dashboard';
-import Detail from './components/details/detail';
+import Dashboard from './components/dashboard/Dashboard';
+import Detail from './components/details/Detail';
 import Cart from './components/cart/Cart';
 
 
