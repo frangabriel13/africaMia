@@ -45,6 +45,10 @@ function ProductManagement() {
     setEditingProduct(null);
   }
 
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <div className={s.container}>
       <h2>Administración de productos</h2>
@@ -87,7 +91,7 @@ function ProductManagement() {
                             </td>
                             <td>
                               <button onClick={() => handleEditProduct(el.id)}>Editar</button>
-                              <button>Eliminar</button>
+                              <button onClick={() => handleDeleteProduct(el.id)}>Eliminar</button>
                             </td>
                           </tr>
                         ))
