@@ -97,13 +97,21 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
       }
-    case 'FILTER_PRODUCTS':
-      const allProducts = state.allProducts;
-      const productFiltered = allProducts.filter((el) => el.categoryId === parseInt(action.payload));
-      return {
-        ...state,
-        products: productFiltered,
-      }
+      case 'FILTER_PRODUCTS':
+        const allProducts = state.allProducts;
+        if (action.payload) {
+          const productFiltered = allProducts.filter((el) => el.categoryId === parseInt(action.payload));
+          return {
+            ...state,
+            products: productFiltered,
+          };
+        } else {
+          // Si categoryId no está definido, devuelve todos los productos
+          return {
+            ...state,
+            products: allProducts,
+          };
+        }
       case 'ORDER_BY_PRICE':
         const sortedProducts = sortProducts(state.products, action.payload);
      
@@ -118,17 +126,7 @@ function productReducer(state = initialState, action) {
                 products: [...searchResult],
               };
  
-  // case 'SET_CATEGORY_FILTER':
-  //       const allProducts = state.allProducts;
   
-  //         const filteredProducts = action.payload === 'All'
-  //          ? allProducts
-  //          : allProducts.filter(product => product.categories.some(category => category.name === action.payload));
- 
-  //           return {
-  //               ...state,
-  //               products: filteredProducts,
-  //           };
             case 'SEARCH_PRODUCTS_NAVBAR':
               const keyword = action.payload.trim().toLowerCase();
               // Llamar a la función searchProductsHeader para obtener los resultados

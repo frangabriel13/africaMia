@@ -6,7 +6,7 @@ import s from './ProductDetail.module.css';
 const ProductDetail = ({ productId }) => {
   const [loading, setLoading] = useState(true);
   const product = useSelector((state) => state.product.productById);
-  console.log(product);
+  
   // const product = useSelector((state) => state.products.productById);
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);

@@ -1,0 +1,33 @@
+/* Categories.module.css */
+
+/* Estilos para el contenedor principal */
+.categoriesContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Estilos para el título de las categorías */
+.categoryTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para la lista de categorías */
+.categoryList {
+  list-style: none;
+  padding: 0;
+}
+
+/* Estilos para cada elemento de categoría */
+.categoryItem {
+  font-size: 16px;
+  margin: 8px 0;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

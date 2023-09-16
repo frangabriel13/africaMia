@@ -42,7 +42,7 @@ export default function Cards() {
           name={c.name}
           price={c.price}
           id={c.id}
-          images={c.images[0].url}
+          images={c.images[0]?.url || ''}
           key={c.id}
           productId={c.id}
           onSelectProduct={handleProductSelect}
