@@ -35,13 +35,14 @@ export default function Cards() {
   const productsToDisplay = products.slice(startIndex, endIndex);
 
   return (
+   <div className={s.containerGlobal}> 
     <div className={s.container}>
       {productsToDisplay.map((c) => (
         <Card
           name={c.name}
           price={c.price}
           id={c.id}
-          images={c.images[0].url}
+          images={c.images[0]?.url || ''}
           key={c.id}
           productId={c.id}
           onSelectProduct={handleProductSelect}
@@ -57,6 +58,7 @@ export default function Cards() {
         activeClassName={s.activePage}
        />
     </div>
+   </div>
    
   );
 }

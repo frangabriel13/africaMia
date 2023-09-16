@@ -74,10 +74,10 @@ export const updateProduct = (payload) => async (dispatch) => {
   }
 };
 
-export const filterProducts = (product) => {
+export const filterProducts = (categoryId) => {
   return {
     type: 'FILTER_PRODUCTS',
-    payload: product
+    payload: categoryId,
   };
 };
 

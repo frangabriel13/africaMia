@@ -6,7 +6,7 @@ import s from './ProductDetail.module.css';
 const ProductDetail = ({ productId }) => {
   const [loading, setLoading] = useState(true);
   const product = useSelector((state) => state.product.productById);
-  console.log(product);
+  
   // const product = useSelector((state) => state.products.productById);
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -115,7 +115,8 @@ const ProductDetail = ({ productId }) => {
       </select>
 
        
-        <button  className={s.buttonCart} onClick={handleAddToCart(product, quantity)}>Agregar al carrito</button>
+      <button className={s.buttonCart} onClick={() => handleAddToCart(product, quantity)}>Agregar al carrito</button>
+
         <br/>
         <button className={s.buttonWP}>Comprar por Whatsapp</button>
       </div>

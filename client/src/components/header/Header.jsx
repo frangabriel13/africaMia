@@ -23,11 +23,7 @@ function Header() {
 
   const [showResults, setShowResults] = useState(false);
   const navbarSearchResults = useSelector((state) => state.product.navbarSearchResults); 
-  console.log(navbarSearchResults);
-
   
-  
-
   useEffect(() => {
      dispatch(getProducts());
     const handleDocumentClick = (e) => {
@@ -45,7 +41,7 @@ function Header() {
 
   const handleSearchInputChange = (e) => {
     const term = e.target.value;
-    console.log(term);
+    
     dispatch(searchProductsHeader(term));
     setShowResults(true);
   };
@@ -95,7 +91,8 @@ function Header() {
                       className={s.resultItem}
                       onClick={() => handleSearchResultClick(result.id)}  
                     >
-                    <img src={result.images[0].url} alt={result.name} />
+                     
+                    <img src={result.images[0]?.url || ''} alt={result.name} />
                       <span className={s.nameProduct}>{result.name}</span>
                       <span className={s.priceProduct}>${result.price}</span>
                     </div>
