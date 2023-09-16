@@ -1,4 +1,4 @@
-import instance from "../../utils/axiosConfig";
+import { instance } from "../../utils/axiosConfig";
 
 export const getVariations = () => async (dispatch) => {
   try {
