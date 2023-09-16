@@ -45,6 +45,7 @@ router.get('/images/:id', async (req, res) => {
 });
 
 router.post('/images', upload.array('images'), async (req, res) => {
+  console.log(req.files)
   const imagePaths = req.files.map((file) => file.path);
   // const { colorId } = req.body;
 

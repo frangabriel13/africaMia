@@ -1,4 +1,4 @@
-import instance from '../../utils/axiosConfig';
+import { instance, imageInstance } from "../../utils/axiosConfig";
 
 export const getImages = () => async (dispatch) => {
   try {
@@ -24,14 +24,29 @@ export const getImage = (id) => async (dispatch) => {
   }
 };
 
-export const createImage = (image) => async (dispatch) => {
+// export const createImage = (image) => async (dispatch) => {
+//   try {
+//     const response = await instance.post('/images', image);
+//     dispatch({
+//       type: 'CREATE_IMAGE',
+//       payload: response.data,
+//     });
+//   } catch(error) {
+//     console.log(error);
+//   }
+// };
+export const createImage = (imageFormData) => async (dispatch) => {
   try {
-    const response = await instance.post('/images', image);
+    const response = await imageInstance.post('/images', imageFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Configura el Content-Type específicamente aquí
+      },
+    });
     dispatch({
       type: 'CREATE_IMAGE',
       payload: response.data,
     });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
   }
 };
