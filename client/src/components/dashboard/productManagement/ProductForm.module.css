@@ -109,3 +109,7 @@ select {
   padding: .5rem 1rem;
   cursor: pointer;
 }
+
+.error {
+  color: #e74c3c;
+}
