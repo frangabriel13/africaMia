@@ -1,0 +1,5 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Esto crea 4 columnas de igual tamaño */
+  gap: 20px; /* Espacio entre las tarjetas de producto */
+}

@@ -5,7 +5,8 @@ import Home from './components/home/Home';
 import Dashboard from './components/dashboard/dashboard';
 import Detail from './components/details/detail';
 import Cart from './components/cart/Cart';
-
+import ProductsByCategory from './components/productsByCategory/ProductByCategory';
+import Categories from './components/categories/categories';
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,9 @@ function App() {
         <Route path='/dashboard/*' element={<Dashboard />} />
         <Route path='/products/:id' element={<Detail />} /> 
         <Route path='/cart' element={<Cart/>} />
+        <Route path='/categories' element={<Categories/>} />
+        <Route path='/categories/:categoryId' element={<ProductsByCategory/>} />
+
       </Routes>
     </>
   )
