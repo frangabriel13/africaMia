@@ -11,9 +11,9 @@ const ProductsByCategory = () => {
   const products = useSelector((state) => state.product.products);
 
   useEffect(() => {
-    // Siempre llama a filterProducts cuando el componente se monta
-    dispatch(filterProducts(categoryId));
-  }, [dispatch, categoryId]);
+  // Siempre llama a filterProducts cuando el componente se monta
+  dispatch(filterProducts(categoryId));
+}, [dispatch, categoryId]);
   
   return (
     <div className={s.productsContainer}>

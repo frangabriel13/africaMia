@@ -12,13 +12,14 @@ function Home() {
     
       <Banner />
       <Info />
-      <Cards />
       <Categories />
+      <Cards />
       <Footer />
-      
-    </div>
+     </div>
   );
 }
 
 
-export default Home;
+export default Home; 
+      
+    
