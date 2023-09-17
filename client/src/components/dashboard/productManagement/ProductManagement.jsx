@@ -16,8 +16,6 @@ function ProductManagement() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
-
-  console.log(previewProduct)
   
   useEffect(() => {
     dispatch(getProducts());
@@ -48,7 +46,12 @@ function ProductManagement() {
   }
 
   const handleDeleteProduct = (id) => {
-    dispatch(deleteProduct(id));
+    // dispatch(deleteProduct(id));
+    dispatch(deleteProduct(id))
+    .then(() => {
+      // Después de la eliminación, obtén la lista de productos actualizada
+      dispatch(getProducts());
+    });
   };
 
   return (
@@ -153,7 +156,7 @@ function ProductManagement() {
           </div>
         </div>
       </div>
-      <ProductForm />
+      <ProductForm getProducts={getProducts} />
       {
         editingProduct && (
           <EditProductForm 
