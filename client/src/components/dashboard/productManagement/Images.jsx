@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import s from "./Images.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { createImage } from "../../../redux/actions/imageActions";
+import ImageForm from "../gallery/imageForm/ImageForm";
+import { getImages } from "../../../redux/actions/imageActions";
 
 function Images({ images, setOpenGallery, setImagesData, setFormData, formData }) {
   const dispatch = useDispatch();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const handleSelect = (id) => {
     const image = images.find((el) => el.id === id);
@@ -24,6 +28,10 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
     setFormData((prev) => ({ ...prev, images: selectedImages }));
   };
 
+  // const handleImagesAdded = (selectedImages) => {
+  //   setSelectedImages(selectedImages); // Actualiza el estado de las imágenes en Images.js
+  // };
+
   return(
     <div>
       <h2>Galería</h2>
@@ -35,6 +43,14 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
               <button type="button" onClick={() => handleSelect(el.id)}>Seleccionar</button>
             </div>
           ))
+        }
+      </div>
+      <div>
+        <button className={s.btn} onClick={() => setShowForm(true)} >Agregar</button>
+        {
+          showForm && (
+            <ImageForm setShowForm={setShowForm} />
+          )
         }
       </div>
       <div>
