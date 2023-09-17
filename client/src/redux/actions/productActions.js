@@ -39,6 +39,7 @@ export const searchProductsHeader = (searchTerm) => {
 
 export const addProduct = (product) => async (dispatch) => {
   try {
+    console.log(product)
     const response = await instance.post('/products', product);
     dispatch({
       type: 'ADD_PRODUCT',

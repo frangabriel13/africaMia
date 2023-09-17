@@ -16,6 +16,8 @@ function ProductManagement() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
+
+  console.log(previewProduct)
   
   useEffect(() => {
     dispatch(getProducts());
