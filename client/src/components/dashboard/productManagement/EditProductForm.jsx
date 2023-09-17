@@ -41,7 +41,7 @@ function EditProductForm({ product, onCancelEdit }) {
     <div className={s.container}>
       <h3>Formulario de edición de producto</h3>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="name">Nombre:</label>
           <input type="text"
             name="name" 
@@ -49,14 +49,14 @@ function EditProductForm({ product, onCancelEdit }) {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
           />
         </div>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="description">Descripción:</label>
           <textarea name="description"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })} 
           />
         </div>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="price">Precio:</label>
           <input 
             type="number" 
@@ -65,7 +65,7 @@ function EditProductForm({ product, onCancelEdit }) {
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
           />
         </div>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="stock">Stock:</label>
           <input 
             type="number" 
@@ -74,7 +74,7 @@ function EditProductForm({ product, onCancelEdit }) {
             onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
           />
         </div>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="category">Categoría:</label>
           <select 
             name="category" 
@@ -88,17 +88,17 @@ function EditProductForm({ product, onCancelEdit }) {
             }
           </select>
         </div>
-        <div>
+        <div className={s.divInputImg}>
           <label htmlFor="image">Imágenes:</label>
           {
             formData.images.map((image, index) => (
-              <div key={index}>
+              <div className={s.imgDiv} key={index}>
                 <img src={image.url} alt={`Imagen ${index + 1}`} />
               </div>
             ))
           }
         </div>
-        <div>
+        <div className={s.divInput}>
           <label htmlFor="variations">Variaciones:</label>
           {
             formData.variations.map(el => {
@@ -116,7 +116,7 @@ function EditProductForm({ product, onCancelEdit }) {
             })
           }
         </div>
-        <div>
+        <div className={s.divButton}>
           <button type="button" onClick={onCancelEdit}>Cancelar</button>
           <button type="submit">Guardar Cambios</button>
         </div>
