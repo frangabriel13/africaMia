@@ -145,6 +145,33 @@ function ProductForm() {
               />
             )
           }
+          <div className={s.imgSelectContainer}>
+            <h4>Imágenes seleccionadas</h4>
+            <div className={s.imgContent}>
+              {
+                formData && formData.images.map(el => (
+                  <div className={s.cardImg}>
+                    <img src={el.url} alt="" />
+                    <div className={s.btnImg}>
+                    <label>
+                      <input
+                        type="radio"
+                        name="imgMain"
+                        value={el.url} // Puedes usar otro identificador único aquí si es necesario
+                        checked={formData.imgMain === el.url} // Marca como seleccionada si es la imagen principal
+                        onChange={(e) =>
+                          setFormData({ ...formData, imgMain: e.target.value })
+                        }
+                      />
+                      Elegir principal
+                    </label>
+                    <button>Eliminar</button>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
         <div className={s.variationCOntainer}>
           <h3>Añadir variaciones:</h3>
