@@ -43,7 +43,7 @@ function ProductForm() {
 
   useEffect(() => {
     dispatch(getImages());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getColors());
@@ -82,7 +82,7 @@ function ProductForm() {
     <div className={s.container}>
       <h2>Crear Producto</h2>
       <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
-        <div>
+        <div className={s.input}>
           <label htmlFor="name">Nombre:</label>
           <input 
             type="text" 
@@ -91,7 +91,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="description">Descripción:</label>
           <textarea 
             name="description" 
@@ -99,7 +99,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, description: e.target.value })} 
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="price">Precio:</label>
           <input 
             type="number" 
@@ -108,7 +108,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="stock">Stock:</label>
           <input 
             type="number" 
@@ -117,7 +117,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="category">Categoría:</label>
           <select 
             name="category" 
@@ -132,7 +132,7 @@ function ProductForm() {
             }
           </select>
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="image">Imágenes:</label>
           <button type="button" onClick={() => setOpenGallery(true)}>Añadir imágenes</button>
           {
@@ -146,19 +146,21 @@ function ProductForm() {
             )
           }
         </div>
-        <div>
+        <div className={s.variationCOntainer}>
           <h3>Añadir variaciones:</h3>
-          <label htmlFor="variable">Variable:</label>
-          <input 
-            type="checkbox" 
-            name="variable" 
-            checked={formData.isVariable} 
-            onChange={(e) => setFormData({ ...formData, isVariable: e.target.checked })}
-          />
+          <div className={s.input}>
+            <label htmlFor="variable">Variable:</label>
+            <input 
+              type="checkbox" 
+              name="variable" 
+              checked={formData.isVariable} 
+              onChange={(e) => setFormData({ ...formData, isVariable: e.target.checked })}
+            />
+          </div>
           {
             formData.isVariable && (
-              <div>
-                <div>
+              <div className={s.formData}>
+                <div className={s.input}>
                   <label htmlFor="availability">Disponibilidad:</label>
                   <input 
                     type="checkbox" 
@@ -167,7 +169,7 @@ function ProductForm() {
                     onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
                   />
                 </div>
-                <div>
+                <div className={s.input}>
                   <label htmlFor="size">Talle:</label>
                   <select
                     name="size"
@@ -188,7 +190,7 @@ function ProductForm() {
                       ))
                     }
                   </select>
-                  <div>
+                  <div className={s.input}>
                     <h5>Talles seleccionados:</h5>
                     <ul>
                       {
@@ -199,7 +201,7 @@ function ProductForm() {
                     </ul>
                   </div>
                 </div>
-                <div>
+                <div className={s.input}>
                   <label htmlFor="color">Color:</label>
                   <select
                     name="color"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import s from './ImageForm.module.css';
 import { useDispatch } from 'react-redux';
-import { createImage } from '../../../../redux/actions/imageActions';
+import { createImage, getImages } from '../../../../redux/actions/imageActions';
 
 function ImageForm({ setShowForm }) {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -17,7 +17,7 @@ function ImageForm({ setShowForm }) {
     setSelectedImages(images);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitImg = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -25,14 +25,17 @@ function ImageForm({ setShowForm }) {
       formData.append('images', selectedImages[i]);
     }
 
-    dispatch(createImage(formData));
-    setShowForm(false);
+    dispatch(createImage(formData))
+      .then(() => {
+        dispatch(getImages()); // Obtiene las imágenes actualizadas
+        setShowForm(false);
+      });
   };
 
   return (
     <div className={s.container}>
       <h3 className={s.title}>Agregar imagen</h3>
-      <form className={s.form} onSubmit={handleSubmit} >
+      <form className={s.form} onSubmit={(e) => { e.preventDefault(); handleSubmitImg(e); }} >
         <input 
           className={s.input} 
           type="file" 
@@ -41,7 +44,7 @@ function ImageForm({ setShowForm }) {
           onChange={handleImages}
         />
         <button type='button' className={s.btn} onClick={() => setShowForm(false)} >Cancelar</button>
-        <button type='submit' className={s.btn}>Subir</button>
+        <button type='button' className={s.btn} onClick={handleSubmitImg}>Subir</button>
       </form>
     </div>
   );
