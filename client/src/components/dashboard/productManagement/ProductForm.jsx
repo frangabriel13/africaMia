@@ -9,7 +9,7 @@ import { getSizes } from "../../../redux/actions/sizeActions";
 import Images from "./Images";
 import CombinedVariation from "./CombinedVariation";
 
-function ProductForm() {
+function ProductForm({getProducts}) {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   const colors = useSelector((state) => state.color.colors);
@@ -55,7 +55,12 @@ function ProductForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(formData));
+    dispatch(addProduct(formData))
+    // dispatch(deleteProduct(id))
+    .then(() => {
+      // Después de la eliminación, obtén la lista de productos actualizada
+      dispatch(getProducts());
+    });
   };
 
   const handleSelectSize = (e) => {
