@@ -4,6 +4,7 @@ import categoryReducer from "./categoryReducer";
 import sizeReducer from "./sizeReducer";
 import colorReducer from "./colorReducer";
 import variationReducer from "./variationReducer";
+import authReducer from "./authReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   color: colorReducer,
   product: productReducer,
   variation: variationReducer,
+  auth: authReducer,
 })
 
 
