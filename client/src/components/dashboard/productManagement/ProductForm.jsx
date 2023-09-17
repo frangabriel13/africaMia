@@ -53,14 +53,28 @@ function ProductForm({getProducts}) {
     dispatch(getSizes());
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addProduct(formData))
-    // dispatch(deleteProduct(id))
-    .then(() => {
-      // Después de la eliminación, obtén la lista de productos actualizada
-      dispatch(getProducts());
+    
+    // Envía el formulario
+    await dispatch(addProduct(formData));
+  
+    // Después de enviar el formulario con éxito, restablece los campos
+    setFormData({
+      name: "",
+      description: "",
+      images: [],
+      price: 0,
+      stock: 0,
+      categoryId: "",
+      imgMain: "",
+      isVariable: false,
+      availability: true,
+      variations: [],
     });
+  
+    // Después de la creación, obtén la lista de productos actualizada
+    dispatch(getProducts());
   };
 
   const handleSelectSize = (e) => {
