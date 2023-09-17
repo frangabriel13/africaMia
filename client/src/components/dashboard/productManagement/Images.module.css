@@ -1,8 +1,11 @@
-/* Images.module.css */
+.container h2 {
+  font-size: 2rem;
+}
+
 .divImages {
   display: grid;
   grid-template-columns: repeat(12, 1fr); /* 4 columnas por fila para mostrar 12 imágenes por fila */
-  gap: 10px; /* Espacio entre las imágenes */
+  gap: 1rem; /* Espacio entre las imágenes */
 }
 
 .images {

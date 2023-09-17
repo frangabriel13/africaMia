@@ -28,24 +28,21 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
     setFormData((prev) => ({ ...prev, images: selectedImages }));
   };
 
-  // const handleImagesAdded = (selectedImages) => {
-  //   setSelectedImages(selectedImages); // Actualiza el estado de las imágenes en Images.js
-  // };
-
   return(
-    <div>
+    <div className={s.container}>
       <h2>Galería</h2>
       <div className={s.divImages}>
         {
           images.map((el) => (
-            <div className={s.images} key={el.id}>
+            <div className={`${s.images}`} key={el.id}
+            style={{ filter: selectedImages.some(img => img.id === el.id) ? 'grayscale(70%)' : 'none' }}>
               <img src={el.url} alt={el.name} />
               <button type="button" onClick={() => handleSelect(el.id)}>Seleccionar</button>
             </div>
           ))
         }
       </div>
-      <div>
+      <div className={s.divForm}>
         <button className={s.btn} onClick={() => setShowForm(true)} >Agregar</button>
         {
           showForm && (
@@ -53,7 +50,7 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
           )
         }
       </div>
-      <div>
+      <div className={s.divBtn}>
         <button onClick={() => handleSetImages()}>Agregar</button>
         <button onClick={() => setOpenGallery(false)}>Cancelar</button>
       </div>
