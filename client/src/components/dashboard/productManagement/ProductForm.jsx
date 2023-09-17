@@ -34,6 +34,9 @@ function ProductForm({getProducts}) {
   const [combinedVariation, setCombinedVariation] = useState([{}]);
   const [combinedActive, setCombinedActive] = useState(false);
 
+  const [errors, setErrors] = useState({});
+  const [formValid, setFormValid] = useState(false);
+
   const [selectedSizeId, setSelectedSizeId] = useState("");
   const [selectedColorId, setSelectedColorId] = useState("");
 
@@ -53,9 +56,36 @@ function ProductForm({getProducts}) {
     dispatch(getSizes());
   }, []);
 
+  const validateForm = () => {
+    // Implementa tus validaciones aquí
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "El nombre es obligatorio";
+    }
+
+    if (!formData.price || formData.price <= 0) {
+      newErrors.price = "El precio debe ser mayor que 0";
+    }
+
+    if (!formData.categoryId) {
+      newErrors.categoryId = "Selecciona una categoría";
+    }
+
+    if (formData.images.length === 0) {
+      newErrors.images = "Debes seleccionar al menos una imagen";
+    }
+
+    // Agrega más validaciones según tus requisitos
+
+    setErrors(newErrors);
+    setFormValid(Object.keys(newErrors).length === 0);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    validateForm();
     // Envía el formulario
     await dispatch(addProduct(formData));
   
@@ -109,6 +139,7 @@ function ProductForm({getProducts}) {
             value={formData.name} 
             onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
           />
+          { errors.name && <p className={s.error}>{errors.name}</p> }
         </div>
         <div className={s.input}>
           <label htmlFor="description">Descripción:</label>
@@ -126,6 +157,7 @@ function ProductForm({getProducts}) {
             value={formData.price} 
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
           />
+          { errors.price && <p className={s.error}>{errors.price}</p> }
         </div>
         <div className={s.input}>
           <label htmlFor="stock">Stock:</label>
@@ -150,10 +182,12 @@ function ProductForm({getProducts}) {
               ))
             }
           </select>
+          { errors.categoryId && <p className={s.error}>{errors.categoryId}</p> }
         </div>
         <div className={s.input}>
           <label htmlFor="image">Imágenes:</label>
           <button type="button" onClick={() => setOpenGallery(true)}>Añadir imágenes</button>
+          {errors.images && <p className={s.error}>{errors.images}</p>}
           {
             openGallery && (
               <Images 
