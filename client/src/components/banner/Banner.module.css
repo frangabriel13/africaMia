@@ -64,10 +64,34 @@
 /* Media query para pantallas más pequeñas */
 @media (max-width: 768px) {
   .banner {
+    max-height: 20rem;
+  }
+  
+  
+  .navigation {
+    
+    bottom: 1rem;
+  }
+  .slider {
+    max-height: 20rem;
+  }
+  .slideImage {
+    width: 100%;
+    max-height: 18rem; /* Ajusta el valor según tus necesidades */
+    object-fit: contain;
+  }
+  /* Media query para pantallas más pequeñas */
+
+  .banner {
     height: 40rem;
   }
   
-  .navigation {
-    bottom: 1rem;
+  .prevButton,
+  .nextButton {
+    top: auto;
+    bottom: 1rem; /* Alinea los botones en la parte inferior en dispositivos pequeños */
+    transform: none; /* Reinicia la transformación vertical */
   }
+
+
 }

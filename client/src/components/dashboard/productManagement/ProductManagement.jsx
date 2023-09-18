@@ -46,16 +46,20 @@ function ProductManagement() {
   }
 
   const handleDeleteProduct = (id) => {
-    dispatch(deleteProduct(id));
+    // dispatch(deleteProduct(id));
+    dispatch(deleteProduct(id))
+    .then(() => {
+      // Después de la eliminación, obtén la lista de productos actualizada
+      dispatch(getProducts());
+    });
   };
 
   return (
     <div className={s.container}>
-      <h2>Administración de productos</h2>
+      <h2>Administrar de productos</h2>
       <div className={s.content}>
         <div className={s.productContainer}>
           <div className={s.list}>
-            <h3>Productos</h3>
             <ul>
               <li className={selectedTab === 0 ? s.selected : ""} onClick={() => setSelectedTab(0)}>Productos</li>
               <li className={selectedTab === 1 ? s.selected : ""} onClick={() => setSelectedTab(1)}>Variaciones</li>
@@ -82,8 +86,8 @@ function ProductManagement() {
                             <td>{el.id}</td>
                             <td>{el.name}</td>
                             <td>{el.imgMain}</td>
-                            <td>{el.isVariable}</td>
-                            <td>{el.category.name}</td>
+                            <td>{el.isVariable ? 'Sí' : 'No'}</td>
+                            <td>{el.category ? el.category.name : 'No'}</td>
                             <td>{el.price}</td>
                             <td>{el.stock}</td>
                             <td>
@@ -137,24 +141,22 @@ function ProductManagement() {
                   </div>
                 )
               }
-              <div className={s.preview}>
-                <h3>Vista previa</h3>
-                {
-                  previewProduct && (
-                    <div key={previewProduct.id}>
-                      <h4>{previewProduct.name}</h4>
-                      <p>{previewProduct.description}</p>
-                      <p>{previewProduct.price}</p>
-                      <p>{previewProduct.stock}</p>
-                    </div>
-                  )
-                }
-              </div>
             </div>
+          </div>
+          <div className={s.preview}>
+            <h3>Vista previa</h3>
+            {
+              previewProduct && (
+                <div key={previewProduct.id}>
+                  <h4>{previewProduct.name}</h4>
+                  <img src={previewProduct.imgMain} alt={previewProduct.name} />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
-      <ProductForm />
+      <ProductForm getProducts={getProducts} />
       {
         editingProduct && (
           <EditProductForm 

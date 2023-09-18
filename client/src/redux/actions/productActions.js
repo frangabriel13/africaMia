@@ -39,6 +39,7 @@ export const searchProductsHeader = (searchTerm) => {
 
 export const addProduct = (product) => async (dispatch) => {
   try {
+    console.log(product)
     const response = await instance.post('/products', product);
     dispatch({
       type: 'ADD_PRODUCT',
@@ -74,17 +75,17 @@ export const updateProduct = (payload) => async (dispatch) => {
   }
 };
 
-export const filterProducts = (product) => {
+export const filterProducts = (categoryId) => {
   return {
     type: 'FILTER_PRODUCTS',
-    payload: product
+    payload: categoryId,
   };
 };
 
-// Acción para agregar un producto al carrito
-export const addToCart = (product) => ({
+// Acción para agregar un producto al carrito y ahora la cantidad ajaj
+export const addToCart = (product, quantity) => ({
   type: 'ADD_TO_CART',
-  payload: product,
+  payload: { product, quantity },
 });
 
 // Acción para eliminar un producto del carrito

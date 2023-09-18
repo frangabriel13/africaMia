@@ -1,6 +1,7 @@
 const initialState = {
   sizes: [],
   allSizes: [],
+  sizeById: [],
 };
 
 function sizeReducer(state = initialState, action) {
@@ -11,6 +12,12 @@ function sizeReducer(state = initialState, action) {
         sizes: action.payload,
         allSizes: action.payload,
       }
+      case 'GET_PRODUCT_BY_ID':
+     return {
+          ...state,
+            sizeById: [...state.sizeById, action.payload], // Agrega el nuevo tamaño al arreglo
+      }
+
     case 'ADD_SIZE':
       return {
         ...state,

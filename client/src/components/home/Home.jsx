@@ -4,6 +4,7 @@ import Cards from "../cards/Cards";
 import Banner from "../banner/Banner";
 import Info from "../info/Info";
 import Footer from "../footer/Footer";
+import Categories from "../categories/categories";
 
 function Home() {
   return (
@@ -11,12 +12,14 @@ function Home() {
     
       <Banner />
       <Info />
+      <Categories />
       <Cards />
       <Footer />
-      
-    </div>
+     </div>
   );
 }
 
 
-export default Home;
+export default Home; 
+      
+    

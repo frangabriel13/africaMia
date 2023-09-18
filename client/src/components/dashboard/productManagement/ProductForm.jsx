@@ -9,7 +9,7 @@ import { getSizes } from "../../../redux/actions/sizeActions";
 import Images from "./Images";
 import CombinedVariation from "./CombinedVariation";
 
-function ProductForm() {
+function ProductForm({getProducts}) {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   const colors = useSelector((state) => state.color.colors);
@@ -34,6 +34,9 @@ function ProductForm() {
   const [combinedVariation, setCombinedVariation] = useState([{}]);
   const [combinedActive, setCombinedActive] = useState(false);
 
+  const [errors, setErrors] = useState({});
+  const [formValid, setFormValid] = useState(false);
+
   const [selectedSizeId, setSelectedSizeId] = useState("");
   const [selectedColorId, setSelectedColorId] = useState("");
 
@@ -43,7 +46,7 @@ function ProductForm() {
 
   useEffect(() => {
     dispatch(getImages());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getColors());
@@ -53,9 +56,56 @@ function ProductForm() {
     dispatch(getSizes());
   }, []);
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    // Implementa tus validaciones aquí
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "El nombre es obligatorio";
+    }
+
+    if (!formData.price || formData.price <= 0) {
+      newErrors.price = "El precio debe ser mayor que 0";
+    }
+
+    if (!formData.categoryId) {
+      newErrors.categoryId = "Selecciona una categoría";
+    }
+
+    if (formData.images.length === 0) {
+      newErrors.images = "Debes seleccionar al menos una imagen";
+    }
+
+    // Agrega más validaciones según tus requisitos
+
+    setErrors(newErrors);
+    setFormValid(Object.keys(newErrors).length === 0);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addProduct(formData));
+    
+    validateForm();
+    // Envía el formulario
+    await dispatch(addProduct(formData));
+  
+    // Después de enviar el formulario con éxito, restablece los campos
+    setFormData({
+      name: "",
+      description: "",
+      images: [],
+      price: 0,
+      stock: 0,
+      categoryId: "",
+      imgMain: "",
+      isVariable: false,
+      availability: true,
+      variations: [],
+    });
+    setSelectedSizes([]);
+    setSelectedColors([]);
+    // Después de la creación, obtén la lista de productos actualizada
+    dispatch(getProducts());
   };
 
   const handleSelectSize = (e) => {
@@ -82,7 +132,7 @@ function ProductForm() {
     <div className={s.container}>
       <h2>Crear Producto</h2>
       <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
-        <div>
+        <div className={s.input}>
           <label htmlFor="name">Nombre:</label>
           <input 
             type="text" 
@@ -90,8 +140,9 @@ function ProductForm() {
             value={formData.name} 
             onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
           />
+          { errors.name && <p className={s.error}>{errors.name}</p> }
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="description">Descripción:</label>
           <textarea 
             name="description" 
@@ -99,7 +150,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, description: e.target.value })} 
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="price">Precio:</label>
           <input 
             type="number" 
@@ -107,8 +158,9 @@ function ProductForm() {
             value={formData.price} 
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
           />
+          { errors.price && <p className={s.error}>{errors.price}</p> }
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="stock">Stock:</label>
           <input 
             type="number" 
@@ -117,7 +169,7 @@ function ProductForm() {
             onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
           />
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="category">Categoría:</label>
           <select 
             name="category" 
@@ -131,10 +183,12 @@ function ProductForm() {
               ))
             }
           </select>
+          { errors.categoryId && <p className={s.error}>{errors.categoryId}</p> }
         </div>
-        <div>
+        <div className={s.input}>
           <label htmlFor="image">Imágenes:</label>
           <button type="button" onClick={() => setOpenGallery(true)}>Añadir imágenes</button>
+          {errors.images && <p className={s.error}>{errors.images}</p>}
           {
             openGallery && (
               <Images 
@@ -145,20 +199,49 @@ function ProductForm() {
               />
             )
           }
+          <div className={s.imgSelectContainer}>
+            <h4>Imágenes seleccionadas</h4>
+            <div className={s.imgContent}>
+              {
+                formData && formData.images.map(el => (
+                  <div className={s.cardImg}>
+                    <img src={el.url} alt="" />
+                    <div className={s.btnImg}>
+                    <label>
+                      <input
+                        type="radio"
+                        name="imgMain"
+                        value={el.url} // Puedes usar otro identificador único aquí si es necesario
+                        checked={formData.imgMain === el.url} // Marca como seleccionada si es la imagen principal
+                        onChange={(e) =>
+                          setFormData({ ...formData, imgMain: e.target.value })
+                        }
+                      />
+                      Elegir principal
+                    </label>
+                    <button>Eliminar</button>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
-        <div>
+        <div className={s.variationCOntainer}>
           <h3>Añadir variaciones:</h3>
-          <label htmlFor="variable">Variable:</label>
-          <input 
-            type="checkbox" 
-            name="variable" 
-            checked={formData.isVariable} 
-            onChange={(e) => setFormData({ ...formData, isVariable: e.target.checked })}
-          />
+          <div className={s.input}>
+            <label htmlFor="variable">Variable:</label>
+            <input 
+              type="checkbox" 
+              name="variable" 
+              checked={formData.isVariable} 
+              onChange={(e) => setFormData({ ...formData, isVariable: e.target.checked })}
+            />
+          </div>
           {
             formData.isVariable && (
-              <div>
-                <div>
+              <div className={s.formData}>
+                <div className={s.input}>
                   <label htmlFor="availability">Disponibilidad:</label>
                   <input 
                     type="checkbox" 
@@ -167,7 +250,7 @@ function ProductForm() {
                     onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
                   />
                 </div>
-                <div>
+                <div className={s.input}>
                   <label htmlFor="size">Talle:</label>
                   <select
                     name="size"
@@ -188,7 +271,7 @@ function ProductForm() {
                       ))
                     }
                   </select>
-                  <div>
+                  <div className={s.input}>
                     <h5>Talles seleccionados:</h5>
                     <ul>
                       {
@@ -199,7 +282,7 @@ function ProductForm() {
                     </ul>
                   </div>
                 </div>
-                <div>
+                <div className={s.input}>
                   <label htmlFor="color">Color:</label>
                   <select
                     name="color"

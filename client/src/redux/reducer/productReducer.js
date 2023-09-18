@@ -97,13 +97,21 @@ function productReducer(state = initialState, action) {
       return {
         ...state,
       }
-    case 'FILTER_PRODUCTS':
-      const allProducts = state.allProducts;
-      const productFiltered = allProducts.filter((el) => el.categoryId === parseInt(action.payload));
-      return {
-        ...state,
-        products: productFiltered,
-      }
+      case 'FILTER_PRODUCTS':
+        const allProducts = state.allProducts;
+        if (action.payload) {
+          const productFiltered = allProducts.filter((el) => el.categoryId === parseInt(action.payload));
+          return {
+            ...state,
+            products: productFiltered,
+          };
+        } else {
+          // Si categoryId no está definido, devuelve todos los productos
+          return {
+            ...state,
+            products: allProducts,
+          };
+        }
       case 'ORDER_BY_PRICE':
         const sortedProducts = sortProducts(state.products, action.payload);
      
@@ -118,17 +126,7 @@ function productReducer(state = initialState, action) {
                 products: [...searchResult],
               };
  
-  // case 'SET_CATEGORY_FILTER':
-  //       const allProducts = state.allProducts;
   
-  //         const filteredProducts = action.payload === 'All'
-  //          ? allProducts
-  //          : allProducts.filter(product => product.categories.some(category => category.name === action.payload));
- 
-  //           return {
-  //               ...state,
-  //               products: filteredProducts,
-  //           };
             case 'SEARCH_PRODUCTS_NAVBAR':
               const keyword = action.payload.trim().toLowerCase();
               // Llamar a la función searchProductsHeader para obtener los resultados
@@ -147,14 +145,34 @@ function productReducer(state = initialState, action) {
                   navbarSearchResults: []
                 }  
                 case 'ADD_TO_CART':
-  // Lógica para agregar un producto al carrito
-  const updatedCartAdd = [...state.cartItems, action.payload];
-  localStorage.setItem('cartItems', JSON.stringify(updatedCartAdd)); // Almacena el carrito actualizado en el localStorage
-  return {
-    ...state,
-    cartItems: updatedCartAdd,
-    total: state.total + action.payload.price,
-  };
+                  const productToAdd = action.payload.product;
+                  const quantityToAdd = action.payload.quantity;
+                
+                  // Verificar si el producto ya está en el carrito
+                  const existingCartItemIndex = state.cartItems.findIndex(item => item.id === productToAdd.id);
+                
+                  if (existingCartItemIndex !== -1) {
+                    // Si el producto ya está en el carrito, actualiza la cantidad
+                    const updatedCart = [...state.cartItems];
+                    const existingCartItem = updatedCart[existingCartItemIndex];
+                    existingCartItem.quantity += quantityToAdd;
+                    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+                    return {
+                      ...state,
+                      cartItems: updatedCart,
+                      total: state.total + (productToAdd.price * quantityToAdd),
+                    };
+                  } else {
+                    // Si el producto no está en el carrito, agrégalo como una nueva entrada
+                    const newCartItem = { ...productToAdd, quantity: quantityToAdd };
+                    const updatedCart = [...state.cartItems, newCartItem];
+                    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+                    return {
+                      ...state,
+                      cartItems: updatedCart,
+                      total: state.total + (productToAdd.price * quantityToAdd),
+                    };
+                  }
 case 'REMOVE_FROM_CART':
   // Lógica para eliminar un producto del carrito
   const updatedCartRemove = state.cartItems.filter((item) => item.id !== action.payload);
