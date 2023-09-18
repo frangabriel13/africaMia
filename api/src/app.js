@@ -19,7 +19,14 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(cors());
+
+// Configura CORS
+const corsOptions = {
+  origin: "http://localhost:5173", // Reemplaza con el origen de tu aplicación React
+  credentials: true, // Habilita el envío de cookies y credenciales
+};
+app.use(cors(corsOptions))
+// app.use(cors());
 
 app.use(
   session({

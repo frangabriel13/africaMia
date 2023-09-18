@@ -42,6 +42,7 @@ export const setUser = () => {
   return async function (dispatch) {
     try {
       const response = await instance.get("me", { withCredentials: true });
+      // console.log(response)
       dispatch({
         type: 'SET_USER',
         payload: response.data,
