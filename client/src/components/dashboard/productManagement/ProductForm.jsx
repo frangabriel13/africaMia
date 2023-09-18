@@ -102,7 +102,8 @@ function ProductForm({getProducts}) {
       availability: true,
       variations: [],
     });
-  
+    setSelectedSizes([]);
+    setSelectedColors([]);
     // Después de la creación, obtén la lista de productos actualizada
     dispatch(getProducts());
   };
