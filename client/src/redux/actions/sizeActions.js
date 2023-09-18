@@ -12,6 +12,18 @@ export const getSizes = () => async (dispatch) => {
   }
 };
 
+export const getSizeById = (id) => async (dispatch) => {
+  try {
+    const response = await instance.get(`/sizes/${id}`);
+    dispatch({
+      type: 'GET_SIZE_BY_ID',
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addSize = (size) => async (dispatch) => {
   try {
     const response = await instance.post("/sizes", size);

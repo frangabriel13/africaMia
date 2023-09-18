@@ -82,10 +82,10 @@ export const filterProducts = (categoryId) => {
   };
 };
 
-// Acción para agregar un producto al carrito
-export const addToCart = (product) => ({
+// Acción para agregar un producto al carrito y ahora la cantidad ajaj
+export const addToCart = (product, quantity) => ({
   type: 'ADD_TO_CART',
-  payload: product,
+  payload: { product, quantity },
 });
 
 // Acción para eliminar un producto del carrito
