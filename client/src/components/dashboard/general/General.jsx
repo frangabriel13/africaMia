@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from "../../../redux/actions/authActions";
+import { setUser, logoutUser, editUser } from "../../../redux/actions/authActions";
 
 function General() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
-  // console.log('user: ', user)
 
   const [editMode, setEditMode] = useState(false);
-  const [editedUser, setEditedUser] = useState({});
+  const [editedUser, setEditedUser] = useState({...user});
 
   useEffect(() => {
-    // console.log('antes de llamar a setUser')
     dispatch(setUser());
   }, [dispatch]);
 
@@ -22,13 +20,11 @@ function General() {
 
   const handleCancelClick = () => {
     setEditMode(false);
+    setEditedUser({ ...user });
   };
 
-  const handleSaveClick = () => {
-    // Aquí puedes enviar los datos editados al servidor y actualizar el usuario en el estado global.
-    // Por ejemplo, podrías dispatch una acción como 'editUser' con los datos editados y enviar una solicitud al servidor.
-
-    // Después de editar y guardar, desactiva el modo de edición.
+  const handleSaveClick = async () => {
+    await dispatch(editUser(editedUser));
     setEditMode(false);
   };
 
@@ -40,6 +36,10 @@ function General() {
     }));
   };
 
+  const handleLogout = () => {
+    dispatch(logoutUser()); // Llama a la acción logoutUser al hacer clic en el botón de cierre de sesión
+  };
+
   return (
     <div>
       <h2>Información General</h2>
@@ -48,6 +48,7 @@ function General() {
           <p>Nombre: {user.name}</p>
           <p>Email: {user.email}</p>
           <button onClick={handleEditClick}>Editar</button>
+          <button onClick={handleLogout}>Cerrar Sesión</button>
         </div>
       )}
       {editMode && (
@@ -64,13 +65,6 @@ function General() {
             type="text"
             name="email"
             value={editedUser.email}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            name="password"
-            value={editedUser.password}
             onChange={handleChange}
           />
           <div>

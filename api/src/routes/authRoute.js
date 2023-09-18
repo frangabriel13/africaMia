@@ -3,6 +3,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const { User } = require('../db')
 const {adminMiddleware} = require('../middlewares/authMiddleware')
+const bcryptjs = require("bcryptjs");
 
 const router = Router();
 
@@ -41,6 +42,33 @@ router.get("/me", adminMiddleware, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "No se encontró el usuario" });
     }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error en el servidor" });
+  }
+});
+
+router.put("/me", adminMiddleware, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const { name, email, password } = req.body;
+
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    if (password) {
+      const salt = await bcryptjs.genSalt(10);
+      const hashPassword = await bcryptjs.hash(password, salt);
+      user.password = hashPassword;
+    }
+
+    await user.save();
+
     res.json(user);
   } catch (error) {
     console.error(error);

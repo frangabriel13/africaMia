@@ -55,3 +55,17 @@ export const setUser = () => {
     }
   };
 };
+
+export const editUser = (userData) => {
+  return async function (dispatch) {
+    try {
+      await instance.put("/me", userData);
+      dispatch({
+        type: 'EDIT_USER',
+        payload: userData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
