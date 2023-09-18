@@ -18,6 +18,11 @@ const authReducer = (state = initialState, action) => {
     //   ...state,
     //   user: undefined,
     // };
+    case 'SET_USER':
+      return {
+        ...state,
+        user: action.payload,
+      };
     case 'EDIT_USER':
       return {
         ...state,

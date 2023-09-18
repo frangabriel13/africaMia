@@ -7,17 +7,18 @@ import SideBar from "./sideBar/SideBar";
 import Gallery from "./gallery/Gallery";
 import Configuration from "./configuration/Configuration";
 import ProductManagement from "./productManagement/ProductManagement";
+import General from "./general/General";
 
 function Dashboard() {
-  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (!token) {
       console.log("Usuario no está autenticado, redirigiendo a /");
       navigate("/login-admin");
     }
-  }, [user, navigate]); // Agrega user y navigate como dependencias del efecto
+  }, [token, navigate]); // Agrega user y navigate como dependencias del efecto
 
   return (
     <div className={s.dashboard}>
@@ -26,7 +27,7 @@ function Dashboard() {
       </div>
       <div className={s.content}>
         <Routes>
-          <Route path="/" element={<Gallery />} />
+          <Route path="/" element={<General />} />
           <Route path="/productos" element={<ProductManagement />} />
           {/* <Route path="/users" element={<Gallery />} /> */}
           {/* <Route path="/categories" element={<Gallery />} /> */}
