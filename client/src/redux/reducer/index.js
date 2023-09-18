@@ -5,6 +5,7 @@ import sizeReducer from "./sizeReducer";
 import colorReducer from "./colorReducer";
 import variationReducer from "./variationReducer";
 import authReducer from "./authReducer";
+import userReducer from "./userRoute";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   variation: variationReducer,
   auth: authReducer,
+  user: userReducer,
 })
 
 
