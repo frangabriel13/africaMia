@@ -8,6 +8,7 @@ import Cart from './components/cart/Cart';
 import ProductsByCategory from './components/productsByCategory/ProductByCategory';
 import Categories from './components/categories/Categories';
 import Login from './components/login/Login';
+import CreateUser from './components/createUser/CreateUser';
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
         <Route path='/categories/:categoryId' element={<ProductsByCategory/>} />
 
         <Route path='/login-admin' element={<Login />} />
+        <Route path='/create-admin' element={<CreateUser />} />
       </Routes>
     </>
   )
