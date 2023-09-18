@@ -11,6 +11,7 @@ passport.use(
     },
     async (email, password, done) => {
       try {
+        console.log("Intento de inicio de sesión para el correo electrónico:", email);
         const user = await User.findOne({ where: { email } });
         if (!user) {
           return done(null, false, {

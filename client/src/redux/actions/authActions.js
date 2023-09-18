@@ -1,9 +1,11 @@
-import instance from "../axiosCfg";
+import { instance } from "../../utils/axiosConfig";
 
 export const loginUser = (userData) => {
   return async function (dispatch) {
+    // console.log(userData)
     const response = await instance.post("login", userData);
     const token = response.data.token;
+    // console.log('token: ', token)
     localStorage.setItem("token", token);
     dispatch({
       type: 'LOGIN_USER',
