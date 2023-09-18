@@ -4,8 +4,6 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Dashboard from './components/dashboard/Dashboard';
 import Detail from './components/details/Detail';
-import Dashboard from './components/dashboard/Dashboard';
-import Detail from './components/details/Detail';
 import Cart from './components/cart/Cart';
 import ProductsByCategory from './components/productsByCategory/ProductByCategory';
 import Categories from './components/categories/categories';
