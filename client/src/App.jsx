@@ -27,7 +27,7 @@ function App() {
         <Route path='/categories/:categoryId' element={<ProductsByCategory/>} />
 
         <Route path='/login-admin' element={<Login />} />
-        <Route path='/create-admin' element={<CreateUser />} />
+        {/* <Route path='/create-admin' element={<CreateUser />} /> */}
       </Routes>
     </>
   )
