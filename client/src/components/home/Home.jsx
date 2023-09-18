@@ -4,7 +4,7 @@ import Cards from "../cards/Cards";
 import Banner from "../banner/Banner";
 import Info from "../info/Info";
 import Footer from "../footer/Footer";
-import Categories from "../categories/categories";
+import Categories from "../categories/Categories";
 
 function Home() {
   return (
