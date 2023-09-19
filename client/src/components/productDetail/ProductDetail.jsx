@@ -8,7 +8,6 @@ const ProductDetail = ({ productId }) => {
   const [loading, setLoading] = useState(true);
   const product = useSelector((state) => state.product.productById);
   const sizes = useSelector((state) => state.size.sizeById); // Cambiado a "sizes" para evitar confusión
-  console.log(sizes[0].variations);
   
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);
