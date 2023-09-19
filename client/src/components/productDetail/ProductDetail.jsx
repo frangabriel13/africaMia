@@ -127,6 +127,9 @@ const ProductDetail = ({ productId }) => {
         )}
 
         {/* Agregar el select para la cantidad */}
+        <div>
+          {/* Acá debes renderizar lista de variantes, la cantidad y un incremento y decremento */}
+        </div>
       <label htmlFor="quantity">Cantidad:</label>
       
       <input

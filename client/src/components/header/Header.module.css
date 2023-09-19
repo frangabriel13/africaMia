@@ -1,4 +1,48 @@
 /* CSS Global */
+.containerGlobal {
+  position: sticky;
+  top: 0;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9457f;
+  padding: .2rem 5%;
+  z-index: 100;
+}
+
+/* CSS Contenedor principal */
+.container {
+  background-color: #f9457f;
+  margin-top: 1rem;
+  
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; 
+  /* Envolver los elementos si no caben en una línea */
+}
+
+.navContainer {
+  width: 100%;
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.searchContainer {
+  /* position: relative; */
+ 
+  border: none !important;
+  font-size: large;
+  color: #ffffff;
+  background-color: #f9457f;
+  
+}
+
 .resultItem {
   display: flex;
   align-items: center;
@@ -72,35 +116,6 @@
   color: #000000;
   margin-left: 1rem;
 }
-.navContainer {
-  width: 100%;
-  display: flex;
-  margin-bottom: 1rem;
-  justify-content: space-between;
-}
-
-.containerGlobal {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9457f;
-  padding: .2rem 5%;
-}
-
-/* CSS Contenedor principal */
-.container {
-  background-color: #f9457f;
-  margin-top: 1rem;
-  
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  flex-wrap: wrap; /* Envolver los elementos si no caben en una línea */
-}
 
 .menuPc {
   background-color: #f9457f;
@@ -108,14 +123,16 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem; /* Ajusta el relleno según sea necesario */
+  padding: 1rem 2rem; 
+  /* Ajusta el relleno según sea necesario */
   /* Agrega otros estilos específicos para el menú en dispositivos más grandes */
 }
 
 .menuPc a {
   color: #ffffff;
   text-decoration: none;
-  margin: 0 1rem; /* Ajusta el margen entre elementos de menú */
+  margin: 0 1rem; 
+  /* Ajusta el margen entre elementos de menú */
   font-size: 1.5rem; /* Tamaño de fuente para elementos de menú */
 }
 
@@ -149,8 +166,10 @@ a {
   
   color: #ffffff;
   font-size: 1.5rem;
-  display: inline-block; /* Muestra los elementos en línea */
-  margin-left: 1rem; /* Ajusta el margen izquierdo para controlar el espacio entre los elementos */
+  display: inline-block; 
+  /* Muestra los elementos en línea */
+  margin-left: 1rem; 
+  /* Ajusta el margen izquierdo para controlar el espacio entre los elementos */
 }
 .burger {
   display: none;
