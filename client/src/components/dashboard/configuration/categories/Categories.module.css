@@ -93,12 +93,12 @@
   flex: 30%;
 }
 
-h3 {
+.container h3 {
   font-size: 1.2rem;
   margin-top: 0;
 }
 
-form {
+.container form {
   display: flex;
   flex-direction: column;
 }
@@ -108,11 +108,11 @@ form {
   margin-bottom: 10px;
 }
 
-label {
+.container label {
   font-weight: bold;
 }
 
-input[type="text"],
+.container input[type="text"],
 select {
   width: 100%;
   padding: 8px;
@@ -126,7 +126,7 @@ select {
   padding: 5px;
 }
 
-button {
+.container button {
   background-color: #007bff;
   border: none;
   color: white;
