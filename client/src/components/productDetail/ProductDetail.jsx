@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductById, addToCart } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
 import { getSizeById } from '../../redux/actions/sizeActions';
+import { getProductVariations } from '../../redux/actions/variationActions';
 
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const product = useSelector((state) => state.product.productById);
+  const variations = useSelector((state) => state.variation.variations);
   // const sizes = useSelector((state) => state.size.sizeById);
   const [selectedImage, setSelectedImage] = useState(null);
   const imagesRef = useRef(null);
@@ -22,6 +24,10 @@ const ProductDetail = ({ productId }) => {
     dispatch(getProductById(productId))
       .then(() => setLoading(false));
   }, [dispatch, productId]);
+
+  useEffect(() => {
+    dispatch(getProductVariations(productId))
+  }, []);
 
   
   useEffect(() => {
@@ -124,6 +130,13 @@ const ProductDetail = ({ productId }) => {
             )
           }
           <div>
+            <ul>
+              {
+                product.variations.map((variation) => (
+                  <li key={variation.id}>SizeId: {variation.sizeId}</li>
+                ))
+              }
+            </ul>
             {/* Acá debes renderizar lista de variantes, la cantidad y un incremento y decremento */}
           </div>
           <label htmlFor="quantity">Cantidad:</label>
