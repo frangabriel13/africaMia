@@ -7,6 +7,7 @@ import variationReducer from "./variationReducer";
 import authReducer from "./authReducer";
 import userReducer from "./userRoute";
 import { combineReducers } from "redux";
+import cartReducer from "./cartReducer";
 
 const rootReducer = combineReducers({
   gallery: imageReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   variation: variationReducer,
   auth: authReducer,
   user: userReducer,
+  cart: cartReducer,
 })
 
 
