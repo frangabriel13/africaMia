@@ -11,6 +11,11 @@ function variationReducer(state = initialState, action) {
         variations: action.payload,
         allVariations: action.payload,
       }
+    case 'GET_PRODUCT_VARIATIONS':
+      return {
+        ...state,
+        variations: action.payload
+      }
     case 'ADD_VARIATION':
       return {
         ...state,
