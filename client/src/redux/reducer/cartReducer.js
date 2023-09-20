@@ -6,14 +6,11 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const { product, variant } = action.payload;
-      // Lógica para agregar el producto o variante al carrito
-      // Puedes mantener un arreglo de items en el carrito y calcular el total aquí
-      // Asegúrate de manejar adecuadamente productos y variantes
+      const { product, variant, quantity } = action.payload;
       return {
         ...state,
-        items: [...state.items, { product, variant, quantity: 1 }],
-        total: state.total + (variant ? variant.price : product.price),
+        items: [...state.items, { product, variant, quantity }],
+        total: state.total + (variant ? variant.price * quantity : product.price * quantity),
       };
     default:
       return state;

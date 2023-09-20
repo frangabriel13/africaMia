@@ -12,8 +12,8 @@ const ProductDetail = ({ productId }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const imagesRef = useRef(null); // !??
 
+  const [quantity, setQuantity] = useState(1)
   const [variationQuantities, setVariationQuantities] = useState({});
-  console.log(variationQuantities);
 
   useEffect(() => {
     dispatch(getProductById(productId))
@@ -51,6 +51,25 @@ const ProductDetail = ({ productId }) => {
         [variationId]: newQuantity,
       });
     }
+  };
+
+  // const handleAddToCart = () => {
+  //   if (Object.keys(variationQuantities).length > 0) {
+  //     // Es un producto con variantes
+  //     for (const variationId in variationQuantities) {
+  //       const quantity = variationQuantities[variationId];
+  //       const selectedVariation = variations.find((variation) => variation.id === variationId);
+  //       if (selectedVariation && quantity > 0) {
+  //         dispatch(addToCart(product, selectedVariation, quantity));
+  //       }
+  //     }
+  //   } else {
+  //     dispatch(addToCart(product, quantity));
+  //   }
+  // };
+  const handleAddToCart = () => {
+    // Agregamos el producto simple al carrito con la cantidad seleccionada
+    dispatch(addToCart(product, null, quantity));
   };
   
   return (
@@ -107,40 +126,36 @@ const ProductDetail = ({ productId }) => {
           <h2 className={s.productoDetailName}>{product && product.name}</h2>
           <p className={s.productoDetailPrice}>${product.price}</p>
           {
-            product.discount && (
-              <p className={s.productoDetailDiscount}>
-                Discount: {product.discount}%
-              </p>
-            )
-          }
-          <p className={s.productoDetailStock}>Stock: {product.stock}</p>
-          {
-            product.sizeId && (
-              <div className={s.productVariations}>
-                <h3>Variaciones del Producto</h3>
-                <p>Tamaño: {getSizeNameById(product.sizeId)}</p>
+            product.isVariable === false ? 
+            <div>
+              <h3>Seleccione la cantidad</h3>
+              <div>
+                <button onClick={() => setQuantity(quantity - 1)}>Decrementar</button>
+                <input type="number" value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value, 10))}/>
+                <button onClick={() => setQuantity(quantity + 1)}>Incrementar</button>
               </div>
-            )
-          }
-          <div>
-            <h3>Seleccione la cantidad por talle:</h3>
-            {
-              variations.map((variation) => (
-                <div key={variation.id}>
-                  <p>Talle: {variation.size.name}</p>
-                  <div>
-                    <button onClick={() => handleDecrement(variation)}>Decrementar</button>
-                    <input type="number" 
-                      value={variationQuantities[variation.id] || 0} 
-                      onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))} 
-                    />
-                    <button onClick={() => handleIncrement(variation)}>Incrementar</button>
+            </div> : 
+            <div>
+              <h3>Seleccione la cantidad por talle:</h3>
+              {
+                variations.map((variation) => (
+                  <div key={variation.id}>
+                    <p>Talle: {variation.size.name}</p>
+                    <div>
+                      <button onClick={() => handleDecrement(variation)}>Decrementar</button>
+                      <input type="number" 
+                        value={variationQuantities[variation.id] || 0} 
+                        onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))} 
+                      />
+                      <button onClick={() => handleIncrement(variation)}>Incrementar</button>
+                    </div>
                   </div>
-                </div>
-              ))
-            }
-          </div>
-          <button className={s.buttonCart} onClick={() => handleAddToCart(product, quantity)}>Agregar al carrito</button>
+                ))
+              }
+            </div>
+          }
+          <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
           <br/>
           <button className={s.buttonWP}>Comprar por Whatsapp</button>
         </div>
