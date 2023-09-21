@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductById, addToCart } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
 import { getProductVariations } from '../../redux/actions/variationActions';
+import { calculateTotal } from '../../utils/helpers';
 
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
@@ -25,6 +26,16 @@ const ProductDetail = ({ productId }) => {
   }, []);
 
   if (loading) return <p>Cargando...</p>
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   const handleDecrement = (variation) => {
     const currentQuantity = variationQuantities[variation.id] || 0;
@@ -51,25 +62,6 @@ const ProductDetail = ({ productId }) => {
         [variationId]: newQuantity,
       });
     }
-  };
-
-  // const handleAddToCart = () => {
-  //   if (Object.keys(variationQuantities).length > 0) {
-  //     // Es un producto con variantes
-  //     for (const variationId in variationQuantities) {
-  //       const quantity = variationQuantities[variationId];
-  //       const selectedVariation = variations.find((variation) => variation.id === variationId);
-  //       if (selectedVariation && quantity > 0) {
-  //         dispatch(addToCart(product, selectedVariation, quantity));
-  //       }
-  //     }
-  //   } else {
-  //     dispatch(addToCart(product, quantity));
-  //   }
-  // };
-  const handleAddToCart = () => {
-    // Agregamos el producto simple al carrito con la cantidad seleccionada
-    dispatch(addToCart(product, null, quantity));
   };
   
   return (
@@ -130,10 +122,12 @@ const ProductDetail = ({ productId }) => {
             <div>
               <h3>Seleccione la cantidad</h3>
               <div>
-                <button onClick={() => setQuantity(quantity - 1)}>Decrementar</button>
+                <button onClick={decrementQuantity}>Decrementar</button>
                 <input type="number" value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value, 10))}/>
-                <button onClick={() => setQuantity(quantity + 1)}>Incrementar</button>
+                  onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                  readOnly
+                />
+                <button onClick={incrementQuantity}>Incrementar</button>
               </div>
             </div> : 
             <div>
@@ -146,7 +140,8 @@ const ProductDetail = ({ productId }) => {
                       <button onClick={() => handleDecrement(variation)}>Decrementar</button>
                       <input type="number" 
                         value={variationQuantities[variation.id] || 0} 
-                        onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))} 
+                        onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
+                        readOnly
                       />
                       <button onClick={() => handleIncrement(variation)}>Incrementar</button>
                     </div>
@@ -155,7 +150,8 @@ const ProductDetail = ({ productId }) => {
               }
             </div>
           }
-          <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
+          <p>Total: ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
+          <button className={s.buttonCart}>Agregar al carrito</button>
           <br/>
           <button className={s.buttonWP}>Comprar por Whatsapp</button>
         </div>
