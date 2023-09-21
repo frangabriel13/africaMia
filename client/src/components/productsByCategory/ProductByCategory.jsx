@@ -7,9 +7,10 @@ import s from './ProductsByCategory.module.css'; // Importa el archivo de estilo
 
 const ProductsByCategory = () => {
   const { categoryId } = useParams(); // Obtén el ID de la categoría desde los parámetros de la URL
+ 
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-
+ console.log(products);
   useEffect(() => {
   // Siempre llama a filterProducts cuando el componente se monta
   dispatch(filterProducts(categoryId));
@@ -17,7 +18,7 @@ const ProductsByCategory = () => {
   
   return (
     <div className={s.productsContainer}>
-      <h2 className={s.categoryTitle}>Productos de la Categoría</h2>
+      <h2 className={s.categoryTitle}>Tienda</h2>
       <div className={s.productList}>
         {products.length > 0 ? (
           products.map((product) => (

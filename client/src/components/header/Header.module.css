@@ -10,9 +10,12 @@
   padding: .2rem 5%;
   z-index: 100;
 }
+/* Estilos para el encabezado en modo "scroll" */
+
 
 /* CSS Contenedor principal */
 .container {
+  
   background-color: #f9457f;
   margin-top: 1rem;
   
@@ -37,7 +40,7 @@
   /* position: relative; */
  
   border: none !important;
-  font-size: large;
+  font-size: 2.5rem;
   color: #ffffff;
   background-color: #f9457f;
   
@@ -51,10 +54,10 @@
 }
 
 .resultItem img {
-  width: 50px;
-  height: 50px;
+  width: 8rem;
+  height: 8rem;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 2%;
 }
 
 .seeMore {
@@ -79,28 +82,14 @@
 
 
 /* Agrega estilos para el encabezado fijo */
-.fixedHeader {
-  
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #f9457f; /* Color de fondo cuando está fijo */
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
-  /* Agrega cualquier otro estilo necesario */
-  transition: all 0 ease-in-out; /* Agrega una transición suave */
-}
-.header-narrow {
-  /* Agrega los estilos que deseas para la versión angosta */
-  height: 12rem; /* Establece la altura deseada */
-  padding: 1rem; /* Añade relleno u otros estilos */
-}
+
 .logo {
   width: 15rem; /* Ancho de 100 píxeles */
   height: 6rem; /* Alto de 50 píxeles */
   margin-top: 0rem;
   margin-left: auto;
   margin-right: auto;
+  
   display: block; /* Esto hará que el logo se comporte como un bloque centrado */
 }
 .nameProduct {
@@ -123,7 +112,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem; 
+  margin-right: 5rem;
+  /* padding: 1rem 2rem;  */
   /* Ajusta el relleno según sea necesario */
   /* Agrega otros estilos específicos para el menú en dispositivos más grandes */
 }
@@ -165,7 +155,7 @@ a {
 .icon {
   
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   display: inline-block; 
   /* Muestra los elementos en línea */
   margin-left: 1rem; 
@@ -181,14 +171,15 @@ a {
 /* CSS Contenedor del campo de búsqueda */
 .searchContainer {
   position: relative;
- 
+  font-size: 2rem;
   border: none !important; /* Elimina el borde */
-  font-size: large;
+  
   color: #ffffff;
   background-color: #f9457f;
   
 }
 .searchInput {
+  font-size: 2rem;
   background-color: #f9457f;
   color: white;
 }

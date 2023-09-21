@@ -25,8 +25,10 @@ function Header() {
 
   const [showResults, setShowResults] = useState(false);
   const navbarSearchResults = useSelector((state) => state.product.navbarSearchResults); 
-  const [fixedHeader, setFixedHeader] = useState(false);
+  // const [fixedHeader, setFixedHeader] = useState(false);
   const headerRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
      dispatch(getProducts());
     const handleDocumentClick = (e) => {
@@ -42,22 +44,6 @@ function Header() {
     };
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const headerHeight = headerRef.current.clientHeight;
-  //     if (window.scrollY >= headerHeight) {
-  //       setFixedHeader(true);
-  //     } else {
-  //       setFixedHeader(false);
-  //     }
-  //   };
-  
-  //   window.addEventListener('scroll', handleScroll);
-  
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
 
 
   const handleSearchInputChange = (e) => {
@@ -83,10 +69,36 @@ function Header() {
     setShowResults(false);
   };
 
+ 
+ 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+      console.log('Valor de scrolled:', scrolled); // Agregar un console.log aquí
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const headerClass = scrolled ? `${s.containerGlobal} ${s.containerGlobalScrolled}` : s.containerGlobal;
+
+
+
+
+
+
+ //`${s.containerGlobal}  ${showResults ? s.showResults : ''} ${fixedHeader ? s.fixedHeader : ''} ${fixedHeader ? s.headerNarrow : ''}
   return (
-    <div ref={headerRef}
-      className={`${s.containerGlobal}  ${showResults ? s.showResults : ''} ${fixedHeader ? s.fixedHeader : ''} ${fixedHeader ? s.headerNarrow : ''}`}>
-      
+    <div ref={headerRef} className={headerClass}>
       <div className={s.container}>
         <nav>
           <NavLink to={"/"}>
@@ -190,7 +202,7 @@ function Header() {
 
         <div className={s.loginCart} >
           <Link to="/cart"><i className={`bi bi-cart3 ${s.icon} `}></i></Link>
-          <i className={`bi bi-person ${s.icon}`}></i>
+          {/* <i className={`bi bi-person ${s.icon}`}></i> */}
         </div>
       </div>
     </div>  
