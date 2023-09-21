@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductById, addToCart } from '../../redux/actions/productActions';
+import { getProductById } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
 import { getProductVariations } from '../../redux/actions/variationActions';
 import { calculateTotal } from '../../utils/helpers';
+import { addToCart } from '../../redux/actions/cartActions';
 
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const ProductDetail = ({ productId }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const imagesRef = useRef(null); // !??
 
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
   const [variationQuantities, setVariationQuantities] = useState({});
 
   useEffect(() => {
@@ -61,6 +62,37 @@ const ProductDetail = ({ productId }) => {
         ...variationQuantities,
         [variationId]: newQuantity,
       });
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product.isVariable) {
+      // Es un producto con variaciones, debes encontrar la variación seleccionada
+      const selectedVariations = variations.filter((variation) => {
+        const quantity = variationQuantities[variation.id] || 0;
+        return quantity > 0;
+      });
+  
+      if (selectedVariations.length === 0) {
+        // No se ha seleccionado ninguna variación
+        alert("Por favor, seleccione al menos una variación antes de agregar al carrito.");
+      } else {
+        // Agrega todas las variaciones seleccionadas al carrito
+        selectedVariations.forEach((selectedVariation) => {
+          const quantity = variationQuantities[selectedVariation.id];
+          // console.log(selectedVariation)
+          // console.log(quantity)
+          dispatch(addToCart(product, selectedVariation, quantity));
+        });
+        // Redirige al usuario al carrito
+        // history.push('/carrito');
+      }
+    } else {
+      // console.log(quantity)
+      // Es un producto simple, agrega la cantidad seleccionada al carrito
+      dispatch(addToCart(product, null, quantity));
+      // Redirige al usuario al carrito
+      // history.push('/carrito');
     }
   };
   
@@ -151,7 +183,7 @@ const ProductDetail = ({ productId }) => {
             </div>
           }
           <p>Total: ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
-          <button className={s.buttonCart}>Agregar al carrito</button>
+          <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
           <br/>
           <button className={s.buttonWP}>Comprar por Whatsapp</button>
         </div>
