@@ -1,5 +1,48 @@
+/* Estilos para el contenedor de productos */
+.productsContainer {
+  /* Centrar el contenido horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border: none !important;
+  background-color: #ffffff !important;
+}
+
+/* Estilos para el título de la categoría */
+.categoryTitle {
+  /* Estilos para el título */
+  margin-top: 5rem;
+  font-size: 24px;
+  margin-bottom: 5rem;
+}
+
+/* Estilos para la lista de productos */
 .productList {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Esto crea 4 columnas de igual tamaño */
-  gap: 20px; /* Espacio entre las tarjetas de producto */
+  /* Estilos para la lista de productos */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centrar los elementos horizontalmente */
+  gap: 20px;
+}
+
+/* Estilos para la tarjeta de producto (suponiendo que se utiliza la clase "Card") */
+.Card {
+  /* Estilos para la tarjeta de producto */
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  /* Agregar espacio entre las filas */
+  margin-bottom: 20px; /* Puedes ajustar el valor según la cantidad de espacio que desees */
+}
+
+/* Estilos para el mensaje "No hay productos en esta Categoría" */
+.productList h1 {
+  /* Estilos para el mensaje cuando no hay productos */
+  font-size: 18px;
+  color: #999;
 }

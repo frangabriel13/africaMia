@@ -93,10 +93,12 @@
   flex: 30%;
 }
 
+
 .container h3 {
   font-size: 1.2rem;
   margin-top: 0;
 }
+
 
 .container form {
   display: flex;
