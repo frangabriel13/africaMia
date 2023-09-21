@@ -12,6 +12,18 @@ export const getVariations = () => async (dispatch) => {
   }
 };
 
+export const getProductVariations = (productId) => async (disptath) => {
+  try {
+    const response = await instance.get(`/variations/product/${productId}`);
+    disptath({
+      type: 'GET_PRODUCT_VARIATIONS',
+      payload: response.data
+    })
+  } catch(error) {
+    console.log(error);
+  }
+}
+
 export const addVariation = (variation) => async (dispatch) => {
   try {
     const response = await instance.post("/variations", variation);

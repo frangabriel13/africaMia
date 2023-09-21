@@ -61,6 +61,37 @@ router.get('/variations/:id', async (req, res) => {
   }
 });
 
+router.get('/variations/product/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const variations = await Variation.findAll({
+      where: { productId: id }, // Cambia "id" a "productId"
+      include: [
+        {
+          model: Color,
+          as: 'color',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: Size,
+          as: 'size',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['id', 'name'],
+        }
+      ]
+    });
+    res.status(200).json(variations);
+  } catch(error) {
+    res.status(500).json({ message: 'Error al obtener las variaciones' });
+  }
+});
+
+module.exports = router;
+
 router.post('/variations', async (req, res) => {
   const { colorId, sizeId, productId, stock, price, availability } = req.body;
 
