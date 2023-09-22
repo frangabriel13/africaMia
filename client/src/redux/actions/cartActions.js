@@ -7,27 +7,6 @@ export const addToCart = (product, selectedVariation, quantity) => {
       quantity,
     },
   };
-  // if (product.isVariable) {
-  //   // Producto variable: Puedes mantener selectedVariation como está
-  //   return {
-  //     type: 'ADD_TO_CART',
-  //     payload: {
-  //       product,
-  //       selectedVariation,
-  //       quantity,
-  //     },
-  //   };
-  // } else {
-  //   // Producto simple: selectedVariation debe ser null, y la cantidad debe ser quantity
-  //   return {
-  //     type: 'ADD_TO_CART',
-  //     payload: {
-  //       product,
-  //       selectedVariation: null,
-  //       quantity,
-  //     },
-  //   };
-  // }
 };
 
 export const removeFromCart = (productId) => {
