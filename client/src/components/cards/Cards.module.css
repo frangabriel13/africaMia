@@ -28,16 +28,17 @@
 /* Pagination.css */
 
 .pagination-container {
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
+  background-color: aqua;
+  display: flex !important; /* Centrar horizontalmente con !important */
+  justify-content: center !important;
+  margin-top: 20rem;
 }
 
 .pagination {
-  display: flex;
+  margin-top: 80rem;
   list-style: none;
   padding: 0;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .pagination li {
@@ -58,3 +59,4 @@
   background-color: #f9457f;
   color: #fff;
 }
+
