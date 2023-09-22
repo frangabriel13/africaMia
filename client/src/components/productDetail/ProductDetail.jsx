@@ -84,6 +84,7 @@ const ProductDetail = ({ productId }) => {
           // console.log(quantity)
           dispatch(addToCart(product, selectedVariation, quantity));
         });
+        setVariationQuantities({});
         // Redirige al usuario al carrito
         // history.push('/carrito');
       }
@@ -91,6 +92,7 @@ const ProductDetail = ({ productId }) => {
       // console.log(quantity)
       // Es un producto simple, agrega la cantidad seleccionada al carrito
       dispatch(addToCart(product, null, quantity));
+      setQuantity(1);
       // Redirige al usuario al carrito
       // history.push('/carrito');
     }

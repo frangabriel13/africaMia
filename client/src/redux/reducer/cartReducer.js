@@ -27,9 +27,15 @@ const cartReducer = (state = initialState, action) => {
         const updatedCartItems = [...state.cartItems];
         updatedCartItems[existingItemIndex].quantity += quantity;
 
+        const total = updatedCartItems.reduce((acc, item) => {
+          const itemTotal = (item.selectedVariation ? item.selectedVariation.price : item.product.price) * item.quantity;
+          return acc + itemTotal;
+        }, 0);
+
         return {
           ...state,
           cartItems: updatedCartItems,
+          total: total
         };
       } else {
         // El producto o variante no existe en el carrito, agrégalo
@@ -38,9 +44,18 @@ const cartReducer = (state = initialState, action) => {
           selectedVariation,
           quantity,
         };
+
+        const itemTotal = (selectedVariation ? selectedVariation.price : product.price) * quantity;
+
+        const total = state.cartItems.reduce((acc, item) => {
+          const itemTotal = (item.selectedVariation ? item.selectedVariation.price : item.product.price) * item.quantity;
+          return acc + itemTotal;
+        }, itemTotal); // También suma el nuevo item al total
+
         return {
           ...state,
           cartItems: [...state.cartItems, item],
+          total: total,
         };
       }
     default:

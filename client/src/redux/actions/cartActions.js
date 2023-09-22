@@ -1,4 +1,6 @@
 export const addToCart = (product, selectedVariation, quantity) => {
+  console.log('product: ', product);
+  console.log('variation: ', selectedVariation)
   return {
     type: 'ADD_TO_CART',
     payload: {
