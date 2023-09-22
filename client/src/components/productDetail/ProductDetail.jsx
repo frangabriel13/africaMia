@@ -18,8 +18,12 @@ const ProductDetail = ({ productId }) => {
   const [variationQuantities, setVariationQuantities] = useState({});
 
   useEffect(() => {
+    setLoading(true); // Indica que se está cargando
     dispatch(getProductById(productId))
-      .then(() => setLoading(false)); // !??
+      .then(() => {
+        setLoading(false); // Indica que la carga ha finalizado
+        dispatch(getProductVariations(productId)); // Carga las variaciones
+      });
   }, [dispatch, productId]);
 
   useEffect(() => {
@@ -84,6 +88,7 @@ const ProductDetail = ({ productId }) => {
           // console.log(quantity)
           dispatch(addToCart(product, selectedVariation, quantity));
         });
+        setVariationQuantities({});
         // Redirige al usuario al carrito
         // history.push('/carrito');
       }
@@ -91,6 +96,7 @@ const ProductDetail = ({ productId }) => {
       // console.log(quantity)
       // Es un producto simple, agrega la cantidad seleccionada al carrito
       dispatch(addToCart(product, null, quantity));
+      setQuantity(1);
       // Redirige al usuario al carrito
       // history.push('/carrito');
     }

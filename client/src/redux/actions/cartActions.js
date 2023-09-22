@@ -10,15 +10,23 @@ export const addToCart = (product, selectedVariation, quantity) => {
 };
 
 export const removeFromCart = (productId) => {
+  console.log(productId)
   return {
     type: 'REMOVE_FROM_CART',
     payload: productId,
   };
 }
 
-export const updateQuantity = (productId, quantity) => {
+export const incrementQuantity = (productId) => {
   return {
-    type: 'UPDATE_QUANTITY',
-    payload: { productId, quantity },
+    type: 'INCREMENT_QUANTITY',
+    payload: productId,
+  };
+}
+
+export const decrementQuantity = (productId) => {
+  return {
+    type: 'DECREMENT_QUANTITY',
+    payload: productId,
   };
 }
