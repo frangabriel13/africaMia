@@ -10,7 +10,6 @@ export const addToCart = (product, selectedVariation, quantity) => {
 };
 
 export const removeFromCart = (productId) => {
-  console.log(productId)
   return {
     type: 'REMOVE_FROM_CART',
     payload: productId,

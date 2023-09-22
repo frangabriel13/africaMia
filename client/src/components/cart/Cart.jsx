@@ -100,16 +100,16 @@ const Cart = () => {
                   <li key={item.selectedVariation ? item.selectedVariation.id : item.product.id}>
                     <p>Nombre: {item.product.name}</p>
                     <p>Precio: ${item.selectedVariation ? item.selectedVariation.price : item.product.price}</p>
-                    <p>Cantidad:
+                    <p>Cantidad:</p>
                       <div>
                         <button onClick={() => handleDecrement(item.selectedVariation ? item.selectedVariation.id : item.product.id)}>-</button>
                         <input
                           type="number"
                           value={item.quantity}
+                          readOnly
                         />
                         <button onClick={() => handleIncrement(item.selectedVariation ? item.selectedVariation.id : item.product.id)}>+</button>
                       </div>
-                    </p>
                     <button onClick={() => handleRemoveFromCart(item.selectedVariation ? item.selectedVariation.id : item.product.id)}>Eliminar</button>
                   </li>
                 ))
