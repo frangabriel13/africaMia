@@ -67,7 +67,7 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, incrementQuantity, decrementQuantity } from '../../redux/actions/cartActions';
+import { removeFromCart, incrementQuantity, decrementQuantity, clearCart } from '../../redux/actions/cartActions';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -119,6 +119,7 @@ const Cart = () => {
           </div>
         )
       }
+      <button onClick={() => dispatch(clearCart())}>Limpiar Carrito</button>
     </div>
   );
 };
