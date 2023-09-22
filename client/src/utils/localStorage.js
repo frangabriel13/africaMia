@@ -1,22 +1,20 @@
-// Función para cargar el carrito desde el localStorage
-export const loadCartFromLocalStorage = () => {
+export const loadState = () => {
   try {
-    const serializedCart = localStorage.getItem('cart');
-    if (serializedCart === null) {
-      return undefined; // Si no hay un carrito en el localStorage, devuelve undefined
+    const serializedState = localStorage.getItem('cartState');
+    if (serializedState === null) {
+      return undefined;
     }
-    return JSON.parse(serializedCart);
-  } catch (error) {
+    return JSON.parse(serializedState);
+  } catch (err) {
     return undefined;
   }
 };
 
-// Función para guardar el carrito en el localStorage
-export const saveCartToLocalStorage = (cart) => {
+export const saveState = (state) => {
   try {
-    const serializedCart = JSON.stringify(cart);
-    localStorage.setItem('cart', serializedCart);
-  } catch (error) {
-    // Manejar errores de localStorage si es necesario
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('cartState', serializedState);
+  } catch (err) {
+    // Handle errors here
   }
 };
