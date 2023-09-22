@@ -150,6 +150,13 @@ const cartReducer = (state = initialState, action) => {
         total: totalAfterDecrement,
       };
 
+    case 'CLEAR_CART':
+      return {
+        ...state,
+        cartItems: [],
+        total: 0,
+      };
+
     default:
       return state;
   }
