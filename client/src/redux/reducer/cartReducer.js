@@ -58,6 +58,98 @@ const cartReducer = (state = initialState, action) => {
           total: total,
         };
       }
+
+    case 'REMOVE_FROM_CART':
+      const productIdToRemove = action.payload;
+      const updatedCartItems = state.cartItems.filter((item) => {
+        if (item.product.isVariable) {
+          // Si es un producto variable, verificar por selectedVariation.productId
+          return item.selectedVariation.id !== productIdToRemove;
+        } else {
+          // Si es un producto simple, verificar por product.id
+          return item.product.id !== productIdToRemove;
+        }
+      });
+
+      const totalAfterRemoval = updatedCartItems.reduce((acc, item) => {
+        const itemTotal = (item.selectedVariation ? item.selectedVariation.price : item.product.price) * item.quantity;
+        return acc + itemTotal;
+      }, 0);
+
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+        total: totalAfterRemoval,
+      };
+
+    case 'INCREMENT_QUANTITY':
+      const productIdToIncrement = action.payload;
+      const incrementedCartItems = state.cartItems.map((item) => {
+        if (item.product.isVariable) {
+          // Si es un producto variable, verificar por selectedVariation.id
+          if (item.selectedVariation.id === productIdToIncrement) {
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+            };
+          }
+        } else {
+          // Si es un producto simple, verificar por product.id
+          if (item.product.id === productIdToIncrement) {
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+            };
+          }
+        }
+        return item;
+      });
+      
+      const totalAfterIncrement = incrementedCartItems.reduce((acc, item) => {
+        const itemTotal = (item.selectedVariation ? item.selectedVariation.price : item.product.price) * item.quantity;
+        return acc + itemTotal;
+      }, 0);
+      
+      return {
+        ...state,
+        cartItems: incrementedCartItems,
+        total: totalAfterIncrement,
+      };
+
+    case 'DECREMENT_QUANTITY':
+      const productIdToDecrement = action.payload;
+      const decrementedCartItems = state.cartItems.map((item) => {
+        if (item.product.isVariable) {
+          // Si es un producto variable, verificar por selectedVariation.id
+          if (item.selectedVariation.id === productIdToDecrement && item.quantity > 1) {
+            return {
+              ...item,
+              quantity: item.quantity - 1,
+            };
+          }
+        } else {
+          // Si es un producto simple, verificar por product.id
+          if (item.product.id === productIdToDecrement && item.quantity > 1) {
+            return {
+              ...item,
+              quantity: item.quantity - 1,
+            };
+          }
+        }
+        return item;
+      });
+      
+      const totalAfterDecrement = decrementedCartItems.reduce((acc, item) => {
+        const itemTotal = (item.selectedVariation ? item.selectedVariation.price : item.product.price) * item.quantity;
+        return acc + itemTotal;
+      }, 0);
+      
+      return {
+        ...state,
+        cartItems: decrementedCartItems,
+        total: totalAfterDecrement,
+      };
+
     default:
       return state;
   }

@@ -18,8 +18,12 @@ const ProductDetail = ({ productId }) => {
   const [variationQuantities, setVariationQuantities] = useState({});
 
   useEffect(() => {
+    setLoading(true); // Indica que se está cargando
     dispatch(getProductById(productId))
-      .then(() => setLoading(false)); // !??
+      .then(() => {
+        setLoading(false); // Indica que la carga ha finalizado
+        dispatch(getProductVariations(productId)); // Carga las variaciones
+      });
   }, [dispatch, productId]);
 
   useEffect(() => {
