@@ -169,6 +169,81 @@
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   margin-left: auto;
 }
+
+.divVariant {
+  background-color: #ffffff;
+}
+
+.divVariant h3 {
+  font-size: 1.6rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.divQuantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.divQuantity p {
+  font-size: 1.4rem;
+  color: #333333;
+}
+
+.btnQuantity {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.decrement {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border: solid .1rem #000000;
+  border-radius: .4rem;
+  cursor: pointer;
+}
+
+.increment {
+  background-color: #f9457f;
+  color: #ffffff;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border: solid .1rem #f9457f;
+  border-radius: .4rem;
+  cursor: pointer;
+}
+
+.decrement:hover {
+  background-color: #242424;
+  color: #ffffff;
+  border: solid .1rem #1b1b1b;
+  transition: .3s;
+}
+
+.increment:hover {
+  background-color: #ff588d;
+  color: #ffffff;
+  border: solid .1rem #f9457f;
+  transition: .3s;
+}
+
+.quantity {
+  font-size: 1.4rem;
+  text-align: center;
+  border-radius: .4rem;
+}
+
+.cantTotal {
+  font-size: 1.6rem;
+  color: #000000;
+  margin-top: 1rem;
+}
+
 .relacionados {
   text-align: center;
   font-size: 2.5rem;
