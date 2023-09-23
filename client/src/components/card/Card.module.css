@@ -2,6 +2,7 @@
   font-family: 'PT Sans Narrow', sans-serif;
 }
 .card {
+ 
   background-color: #ffffff;
   border-top: none;
   display: flex;
@@ -10,20 +11,31 @@
   text-align: center;
   gap: 15rem;  font-family: 'PT Sans Narrow', sans-serif;
   border-radius: 0.2rem;
-  width: 35rem;
+  width: 100%; 
   height: 60rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+} 
+/* Estilo para dispositivos móviles (pantallas con un ancho de hasta 480px) */
+@media (max-width: 480px) {
+  .card {
+    width: 100%; /* Ajusta el ancho para que se extienda al ancho de la pantalla */
+    padding: 0.5rem; /* Reduce el espaciado interior de la tarjeta */
+    margin-bottom: 0.5rem; /* Reduce el espaciado entre las tarjetas */
+    font-size: 0.8rem; /* Reduce el tamaño de fuente para el contenido de la tarjeta */
+  }
 }
 
+
 .img {
+  
   position: relative;
-  width: 35rem;
+  width: 100%;
   height: 60rem;
 }
 
 .img img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
@@ -107,7 +119,7 @@ font-weight: 400;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 35rem;
+  width: 100%;
   padding-top: 0rem;
   padding-bottom: 0rem;
   padding-left: 0.5rem;
