@@ -50,17 +50,22 @@ export default function Cards() {
         ))}
       </div>
       
-      <div className={s.paginationContainer}>
-        <ReactPaginate
-          pageCount={Math.ceil(products.length / itemsPerPage)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={1}
-          onPageChange={handlePageChange}
-          containerClassName={s.pagination}
-          activeClassName={s.activePage}
-        />
-      </div>
+    
+      {/* <div className={s.paginationWrapper}>
+      
+        <div className={s.paginationContainer}>
+          <ReactPaginate
+            pageCount={Math.ceil(products.length / itemsPerPage)}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={1}
+            onPageChange={handlePageChange}
+            containerClassName={s.pagination}
+            activeClassName={s.activePage}
+          />
+        </div>
+      </div> */}
     </div>
   );
+  
   
 }

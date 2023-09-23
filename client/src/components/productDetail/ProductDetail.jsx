@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
@@ -6,17 +6,21 @@ import { getProductVariations } from '../../redux/actions/variationActions';
 import { calculateTotal } from '../../utils/helpers';
 import { addToCart } from '../../redux/actions/cartActions';
 
+
+
+
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const product = useSelector((state) => state.product.productById);
   const variations = useSelector((state) => state.variation.variations);
   const [selectedImage, setSelectedImage] = useState(null);
-  const imagesRef = useRef(null); // !??
+  const imagesRef = useRef(null);
 
   const [quantity, setQuantity] = useState(1);
   const [variationQuantities, setVariationQuantities] = useState({});
-
+  
+  
   useEffect(() => {
     setLoading(true); // Indica que se está cargando
     dispatch(getProductById(productId))
@@ -30,6 +34,8 @@ const ProductDetail = ({ productId }) => {
     dispatch(getProductVariations(productId))
   }, []);
 
+
+ 
   if (loading) return <p>Cargando...</p>
 
   const incrementQuantity = () => {
@@ -84,23 +90,32 @@ const ProductDetail = ({ productId }) => {
         // Agrega todas las variaciones seleccionadas al carrito
         selectedVariations.forEach((selectedVariation) => {
           const quantity = variationQuantities[selectedVariation.id];
-          // console.log(selectedVariation)
-          // console.log(quantity)
           dispatch(addToCart(product, selectedVariation, quantity));
         });
         setVariationQuantities({});
         // Redirige al usuario al carrito
-        // history.push('/carrito');
+        // history.push('/carrito'); // Puedes redirigir al usuario a la página del carrito si es necesario
       }
     } else {
-      // console.log(quantity)
       // Es un producto simple, agrega la cantidad seleccionada al carrito
       dispatch(addToCart(product, null, quantity));
       setQuantity(1);
       // Redirige al usuario al carrito
-      // history.push('/carrito');
+      // history.push('/carrito'); // Puedes redirigir al usuario a la página del carrito si es necesario
     }
+  
+    
   };
+  
+  // Define la función animateButton fuera de handleAddToCart
+ 
+  const handleImageClick = (image) => {
+    setSelectedImage(image.url);
+    imagesRef.current.scrollTop = image.index * (image.height + 20); // Ajusta el desplazamiento vertical según la imagen seleccionada
+  };
+
+  
+
   
   return (
     <div className={s.divUni}>
@@ -109,19 +124,18 @@ const ProductDetail = ({ productId }) => {
           <h2 className={s.productoDetailName}>{product && product.name}</h2>
         </div>
         <div className={s.divPhotos}>
-          <div className={s.gallery}>
-            {
-              product.images && product.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.url}
-                  alt={`Image ${index + 1}`}
-                  className={`${s.galleryImage} ${selectedImage === image.url ? s.selected : ''}`}
-                  onClick={() => setSelectedImage(image.url)}
-                />
-              ))
-            }
-          </div>
+        <div className={s.gallery}>
+        {product.images.map((image, index) => (
+          <img
+            key={index}
+            src={image.url}
+            alt={`Image ${index + 1}`}
+            className={`${s.galleryImage} ${selectedImage === image.url ? s.selected : ''}`}
+            onClick={() => handleImageClick(image)}
+          />
+        ))}
+      </div>
+
           <div className={s.divImage} ref={imagesRef}>
             {
               selectedImage ? (
@@ -190,7 +204,7 @@ const ProductDetail = ({ productId }) => {
               }
             </div>
           }
-          <p className={s.cantTotal}>Total: ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
+          <p className={s.cantTotal}>Total:   ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
           <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
           <br/>
           <button className={s.buttonWP}>Comprar por Whatsapp</button>

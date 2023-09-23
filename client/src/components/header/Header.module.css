@@ -332,5 +332,35 @@ a {
 
 
 
+/* Agrega una clase cuando se debe realizar la animación */
+.icon-added {
+  animation: cart-icon-pulse 0.5s alternate ease infinite;
+}
+
+/* Define la animación */
+@keyframes cart-icon-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/* Agrega una clase para mostrar el punto rojo cuando hay elementos en el carrito */
+.cartCounter::after {
+  content: ''; /* Agrega contenido antes o después del icono */
+  background-color: red; /* Color del punto rojo */
+  border-radius: 50%; /* Forma circular */
+  width: 10px; /* Ancho del punto rojo */
+  height: 10px; /* Altura del punto rojo */
+  display: block; /* Muestra el punto como un bloque */
+  position: absolute; /* Coloca el punto en una posición absoluta */
+  top: 0; /* Alinea el punto en la parte superior */
+  right: 0; /* Alinea el punto en la parte derecha */
+  transform: translate(50%, -50%); /* Alinea el punto en la esquina superior derecha */
+}
+
+
 
 
