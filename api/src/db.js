@@ -34,8 +34,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Product, Variation, Category, Image, Size, Color, User } = sequelize.models;
 
-Product.hasMany(Variation, { as: 'variations' });
-Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId' } );
+Product.hasMany(Variation, { as: 'variations', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Variation.belongsTo(Product, { as: 'product', foreignKey: 'productId', onDelete: 'CASCADE', onUpdate: 'CASCADE' } );
 
 Product.belongsTo(Category, { as: 'category', foreignKey: 'categoryId' });
 Category.hasMany(Product, { as: 'products' });

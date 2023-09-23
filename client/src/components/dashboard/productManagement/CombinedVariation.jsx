@@ -102,12 +102,19 @@ function CombinedVariation({
   // Manejar cambios en el input de precio y stock
   const handlePriceChange = (e, index) => {
     const newCombinedVariation = [...combinedVariation];
-    newCombinedVariation[index].price = parseFloat(e.target.value);
+    newCombinedVariation[index].price = e.target.value;
     setCombinedVariation(newCombinedVariation);
     // Actualiza formData con las variaciones
+    // const updatedFormData = {
+    //   ...formData,
+    //   variations: newCombinedVariation,
+    // };
     const updatedFormData = {
       ...formData,
-      variations: newCombinedVariation,
+      variations: newCombinedVariation.map((variation, i) => ({
+        ...variation,
+        sizeId: selectedSizes[i] ? parseInt(selectedSizes[i].id, 10) : null,
+      })),
     };
     setFormData(updatedFormData);
   };

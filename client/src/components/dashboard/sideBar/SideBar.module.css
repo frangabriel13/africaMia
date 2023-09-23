@@ -1,5 +1,6 @@
 
 .sideBar {
+  position: sticky;
   width: 10rem;
   background-color: #31486b;
   top: 0;
