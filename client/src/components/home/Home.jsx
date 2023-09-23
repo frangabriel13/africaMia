@@ -9,7 +9,6 @@ import Categories from "../categories/Categories";
 function Home() {
   return (
     <div className={s.container}>
-    
       <Banner />
       <Info />
       <Categories />

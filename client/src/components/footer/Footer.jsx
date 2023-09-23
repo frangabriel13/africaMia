@@ -5,14 +5,14 @@ function Footer() {
   return (
     <footer className={s.footerContainer}>
       <div className={s.socialMedia}>
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.facebook.com/profile.php?id=100069903794697&locale=es_LA" target="_blank" rel="noopener noreferrer">
           <i className={`bi bi-facebook ${s.icon}`}></i>
         </a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/africamia_jeansoficial/" target="_blank" rel="noopener noreferrer">
           <i className={`bi bi-instagram ${s.icon}`}></i>
         </a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-          <i className={`bi bi-twitter ${s.icon}`}></i>
+        <a href="https://www.tiktok.com/@africa_miajeans?lang=es" target="_blank" rel="noopener noreferrer">
+          <i className={`bi bi-tiktok ${s.icon}`}></i>
         </a>
       </div>
       <div className={s.links}>

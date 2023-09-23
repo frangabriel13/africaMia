@@ -35,30 +35,37 @@ export default function Cards() {
   const productsToDisplay = products.slice(startIndex, endIndex);
 
   return (
-   <div className={s.containerGlobal}> 
-    <div className={s.container}>
-      {productsToDisplay.map((c) => (
-        <Card
-          name={c.name}
-          price={c.price}
-          id={c.id}
-          images={c.images[0]?.url || ''}
-          key={c.id}
-          productId={c.id}
-          onSelectProduct={handleProductSelect}
-        />
-       ))}
+    <div className={s.containerGlobal}>
+      <div className={s.container}>
+        {productsToDisplay.map((product) => (
+          <Card
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            id={product.id}
+            images={product.images[0]?.url || ''}
+            productId={product.id}
+            onSelectProduct={handleProductSelect}
+          />
+        ))}
+      </div>
+      
     
-       <ReactPaginate
-        pageCount={Math.ceil(products.length / itemsPerPage)} // Calcular la cantidad de páginas
-        pageRangeDisplayed={5} // Cantidad de números de página mostrados en la paginación
-        marginPagesDisplayed={1} // Cantidad de páginas en los bordes de la paginación
-        onPageChange={handlePageChange}
-        containerClassName={s.pagination}
-        activeClassName={s.activePage}
-       />
+      {/* <div className={s.paginationWrapper}>
+      
+        <div className={s.paginationContainer}>
+          <ReactPaginate
+            pageCount={Math.ceil(products.length / itemsPerPage)}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={1}
+            onPageChange={handlePageChange}
+            containerClassName={s.pagination}
+            activeClassName={s.activePage}
+          />
+        </div>
+      </div> */}
     </div>
-   </div>
-   
   );
+  
+  
 }

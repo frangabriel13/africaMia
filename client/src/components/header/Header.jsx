@@ -4,74 +4,74 @@ import { useNavigate } from 'react-router-dom';
 import s from "./Header.module.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logoAlargadoAfricaMia.png";
-import { getProducts, searchProductsHeader } from '../../redux/actions/productActions';
+import { getProducts, searchProductsHeader, addToCart } from '../../redux/actions/productActions';
 
 
 function Header() {
   const dispatch = useDispatch();
- 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    console.log("El menú está abierto:", isMenuOpen);
   };
-  
-  
+
   const [searchTerm, setSearchTerm] = useState('');
-  const inputRef = useRef(null); // Referencia al input search para posicionar la ventana emergente
-  const searchResultsRef = useRef(null); // Referencia a la ventana emergente
+  const inputRef = useRef(null);
+  const searchResultsRef = useRef(null);
 
   const [showResults, setShowResults] = useState(false);
-  const navbarSearchResults = useSelector((state) => state.product.navbarSearchResults); 
-  const [fixedHeader, setFixedHeader] = useState(false);
+  const navbarSearchResults = useSelector((state) => state.product.navbarSearchResults);
+
   const headerRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Obtén el estado global del carrito desde Redux
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  // Define una variable para determinar si el carrito está vacío
+  const isCartEmpty = cartItems.length === 0;
+
+  // Agrega una clase de animación condicionalmente en función del estado del carrito
+  const cartIconClass = isCartEmpty ? '' : 'icon-added';
+
   useEffect(() => {
-     dispatch(getProducts());
+    // Agrega o quita la clase de notificación basada en si el carrito está vacío o no
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+      if (isCartEmpty) {
+        cartIcon.classList.remove('icon-added');
+      } else {
+        cartIcon.classList.add('icon-added');
+        setTimeout(() => {
+          cartIcon.classList.remove('icon-added');
+        }, 500); // Elimina la clase después de 0.5 segundos (la misma duración que la animación CSS)
+      }
+    }
+  }, [isCartEmpty]);
+
+  // Obtén el icono del carrito utilizando una referencia de React
+  const cartIconRef = useRef(null);
+
+  useEffect(() => {
+    dispatch(getProducts());
     const handleDocumentClick = (e) => {
-      // Si el clic ocurre fuera de la ventana emergente, cerrarla
       if (searchResultsRef.current && !searchResultsRef.current.contains(e.target)) {
         setShowResults(false);
       }
     };
-  
+
     document.addEventListener('click', handleDocumentClick);
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const headerHeight = headerRef.current.clientHeight;
-      if (window.scrollY >= headerHeight) {
-        setFixedHeader(true);
-      } else {
-        setFixedHeader(false);
-      }
-    };
-  
-    window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
   const handleSearchInputChange = (e) => {
     const term = e.target.value;
-    
     dispatch(searchProductsHeader(term));
     setShowResults(true);
   };
-
-  // const handleSearchInputKeyPress = (e) => {
-  //   if (e.key === 'Enter') {
-  //     handleSearch(searchTerm);
-  //   }
-  // };
 
   const handleSearchResultClick = (productId) => {
     navigate(`/products/${productId}`);
@@ -83,31 +83,53 @@ function Header() {
     setShowResults(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const headerClass = scrolled ? `${s.containerGlobal} ${s.containerGlobalScrolled}` : s.containerGlobal;
+
+  // Asigna la referencia al elemento del DOM con la clase '.bi-cart3' cuando el componente se monta
+  useEffect(() => {
+    cartIconRef.current = document.querySelector('.bi-cart3');
+  }, []);
+
+  
+
+ //`${s.containerGlobal}  ${showResults ? s.showResults : ''} ${fixedHeader ? s.fixedHeader : ''} ${fixedHeader ? s.headerNarrow : ''}
   return (
-    <div ref={headerRef}
-       className={`${s.containerGlobal}  ${showResults ? s.showResults : ''} ${fixedHeader ? s.fixedHeader : ''} ${fixedHeader ? s.headerNarrow : ''}`}>
-      
-         <div className={s.container}>
-             <nav>
-              <NavLink to={"/"}>
-                  <img src={logo} className={s.logo} />
-               </NavLink>
-             </nav>
-     
-        
-        </div> 
+    <div ref={headerRef} className={headerClass}>
+      <div className={s.container}>
+        <nav>
+          <NavLink to={"/"}>
+            <img src={logo} className={s.logo} />
+          </NavLink>
+        </nav>
+      </div> 
       
     
-        <div className={s.navContainer}>
-          <div className={s.searchContainer}>
-           <input
+      <div className={s.navContainer}>
+        <div className={s.searchContainer}>
+          <input
             ref={inputRef}
             onClick={() => setShowResults(true)} 
             className={s.searchInput}
             type="text"
             onChange={handleSearchInputChange}
             placeholder="Buscar" 
-           />
+          />
           {
             showResults && (
               <div ref={searchResultsRef} className={s.searchResults}>
@@ -121,8 +143,7 @@ function Header() {
                     <div
                       key={result.id}
                       className={s.resultItem}
-                      onClick={() => handleSearchResultClick(result.id)}  
-                    >
+                      onClick={() => handleSearchResultClick(result.id)}  >
                       <img src={result.images[0]?.url || ''} alt={result.name} />
                       <span className={s.nameProduct}>{result.name}</span>
                       <span className={s.priceProduct}>${result.price}</span>
@@ -141,67 +162,65 @@ function Header() {
           }
         </div>
         <div className={`${s.menuPc} ${isMenuOpen ? s.menuOpen : ''}`}>
-              <NavLink to={"/"}>
-                 Inicio
-              </NavLink>
-              <NavLink to={"/tienda"}>
-                 Tienda
-              </NavLink>
-              <NavLink to={"/como-comprar"}>
-                 ¿Cómo comprar?
-              </NavLink> 
-                <a href='#'>Categorías</a>
-              <NavLink to={"/contact"}>
-                 Contacto
-              </NavLink>
-          </div>
-         
-          <div className={s.burger}>
-           <i className={`bi bi-list ${s.icon}`} onClick={toggleMenu}></i>
-              {isMenuOpen && (
-                <div className={s.menuHamburguesa}>
-            <ul>
-                <li>
-                  <NavLink to={"/"}>
-                   Inicio
-                 </NavLink>
-                 </li>
-               <li>
+          <NavLink to={"/"}>
+            Inicio
+          </NavLink>
           <NavLink to={"/tienda"}>
             Tienda
           </NavLink>
-        </li>
-        <li>
           <NavLink to={"/como-comprar"}>
             ¿Cómo comprar?
-          </NavLink>
-        </li>
-        <li>
+          </NavLink> 
           <a href='#'>Categorías</a>
-        </li>
-        <li>
           <NavLink to={"/contact"}>
             Contacto
           </NavLink>
-        </li>
-      </ul>
-    </div>
-  )}
-</div>
+        </div>
+         
+        <div className={s.burger}>
+          <i className={`bi bi-list ${s.icon}`} onClick={toggleMenu}></i>
+            {
+              isMenuOpen && (
+                <div className={s.menuHamburguesa}>
+                  <ul>
+                    <li>
+                      <NavLink to={"/"}>
+                        Inicio
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to={"/tienda"}>
+                        Tienda
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to={"/como-comprar"}>
+                        ¿Cómo comprar?
+                      </NavLink>
+                    </li>
+                    <li>
+                      <a href='#'>Categorías</a>
+                    </li>
+                    <li>
+                      <NavLink to={"/contact"}>
+                        Contacto
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              )
+            }
+          </div>
 
-          
-            <div className={s.loginCart} >
-              <Link to="/cart"><i className={`bi bi-cart3 ${s.icon} `}></i></Link>
-              <i className={`bi bi-person ${s.icon}`}></i>
-           </div>
-          
+          <div className={s.loginCart} >
+            <Link to="/cart">
+             <i className={`bi bi-cart3 ${s.icon} ${cartIconClass}`}></i>
+            </Link>
+            <span className={s.cartCounter}>{cartItems.length}</span>
+          </div>
       </div>
-       
-      
-     
-  </div>  
+    </div>  
   );
-  
 }
 
 export default Header;

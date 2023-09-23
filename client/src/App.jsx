@@ -9,6 +9,7 @@ import ProductsByCategory from './components/productsByCategory/ProductByCategor
 import Categories from './components/categories/Categories';
 import Login from './components/login/Login';
 import CreateUser from './components/createUser/CreateUser';
+import Tienda from './components/tienda/Tienda';
 
 function App() {
   const location = useLocation();
@@ -25,7 +26,7 @@ function App() {
         <Route path='/cart' element={<Cart/>} />
         <Route path='/categories' element={<Categories/>} />
         <Route path='/categories/:categoryId' element={<ProductsByCategory/>} />
-
+        <Route path='/tienda' element={<Tienda />} />
         <Route path='/login-admin' element={<Login />} />
         {/* <Route path='/create-admin' element={<CreateUser />} /> */}
       </Routes>
