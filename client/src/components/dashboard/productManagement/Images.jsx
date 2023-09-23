@@ -10,6 +10,12 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
   const [selectedImages, setSelectedImages] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
+  const imagesPerPage = 30;
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * imagesPerPage;
+  const endIndex = startIndex + imagesPerPage;
+  const imagesToDisplay = images.slice(startIndex, endIndex);
+
   const handleSelect = (id) => {
     const image = images.find((el) => el.id === id);
     const isSelected = selectedImages.some((el) => el.id === id);
@@ -33,17 +39,34 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
       <h2>Galería</h2>
       <div className={s.divImages}>
         {
-          images.map((el) => (
+          imagesToDisplay.map((el) => (
             <div className={`${s.images}`} key={el.id}
-            style={{ filter: selectedImages.some(img => img.id === el.id) ? 'grayscale(70%)' : 'none' }}>
-              <img src={el.url} alt={el.name} />
-              <button type="button" onClick={() => handleSelect(el.id)}>Seleccionar</button>
+            style={{
+              filter: selectedImages.some(img => img.id === el.id) ? 'grayscale(80%)' : 'none',
+              border: selectedImages.some(img => img.id === el.id) ? '2px solid #00a65a' : 'none',
+            }}>
+              <img src={el.url} alt={el.name} onClick={() => handleSelect(el.id)} />
+              {/* <button type="button" onClick={() => handleSelect(el.id)}>Seleccionar</button> */}
             </div>
           ))
         }
       </div>
+      <div className={s.pagination}>
+        <button
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        <button
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={endIndex >= images.length}
+        >
+          Siguiente
+        </button>
+      </div>
       <div className={s.divForm}>
-        <button className={s.btn} onClick={() => setShowForm(true)} >Agregar</button>
+        <button className={s.btn} onClick={() => setShowForm(true)} >Subir archivos</button>
         {
           showForm && (
             <ImageForm setShowForm={setShowForm} />
@@ -51,8 +74,8 @@ function Images({ images, setOpenGallery, setImagesData, setFormData, formData }
         }
       </div>
       <div className={s.divBtn}>
-        <button onClick={() => handleSetImages()}>Agregar</button>
-        <button onClick={() => setOpenGallery(false)}>Cancelar</button>
+        <button className={s.btnAdd} onClick={() => handleSetImages()}>Agregar</button>
+        <button className={s.btnCancel} onClick={() => setOpenGallery(false)}>Cancelar</button>
       </div>
     </div>
   )
