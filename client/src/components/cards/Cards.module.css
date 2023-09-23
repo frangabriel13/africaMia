@@ -1,21 +1,36 @@
 .containerGlobal {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .container {
-  width: 90%; /* Ajusta el ancho según tus necesidades */
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
   grid-row-gap: 10rem;
-  margin: 2rem auto; /* Centra el contenedor horizontalmente y agrega margen superior e inferior */
+  margin: 2rem auto;
   background-color: rgb(255, 255, 255);
 }
 
+/* Estilo para tablets (ejemplo: 768px a 1024px) */
+@media (max-width: 1424px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr); /* Cambia el número de columnas para tablets */
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); /* Cambia el número de columnas para tablets */
+  }
+}
+
+/* Estilo para pantallas más pequeñas (ejemplo: menos de 768px) */
 @media (max-width: 768px) {
   .container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr); /* Cambia el número de columnas para pantallas más pequeñas */
   }
 }
 
@@ -25,26 +40,27 @@
   }
 }
 
+
 /* Estilos para la paginación */
-.pagination-wrapper {
+/* .pagination-wrapper {
   display: flex;
-  flex-direction: column; /* Cambia la dirección de flexión para apilar verticalmente */
-  align-items: center; /* Centra el componente de paginación horizontalmente */
-  margin-top: 20px; /* Espacio entre la galería y el componente de paginación */
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 20px; 
 }
 
 .pagination-container {
   background-color: #f9457f;
   display: inline-block;
   justify-content: center;
-  margin-top: 20px; /* Espacio entre la galería y la paginación */
+  margin-top: 20px;
 }
 
 .pagination {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 5rem; /* Espacio entre los elementos de paginación */
+  gap: 5rem; 
 }
 
 .pagination li {
@@ -66,19 +82,19 @@
   color: #fff;
 }
 
-/* Estilos para la página activa */
+
 .pagination .active {
   background-color: #f9457f;
   color: #fff;
 }
 
-/* CSS para pantallas más pequeñas */
+
 @media (max-width: 768px) {
   .products-container {
-    flex-direction: column; /* Cambiar a una dirección de columna en pantallas más pequeñas */
+    flex-direction: column; 
   }
 
   .pagination-container {
-    margin-top: 2rem; /* Ajusta el margen para separar el paginado de la galería */
+    margin-top: 2rem; 
   }
-}
+} */

@@ -1,5 +1,8 @@
 .divGlobal {
   display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  max-width: 90%;
   /* gap: 2rem; */
   /* padding: 5.5rem 5%; */
 }
@@ -10,8 +13,8 @@
 
 .divPhotos {
   display: flex;
-  margin-left: 15rem;
-  margin-top: 15rem;
+  margin-left: 5rem;
+  margin-top: 10rem;
   
 }
 .divImage .gallery {
@@ -24,53 +27,55 @@
 .divImage {
   
   overflow: hidden;
-  width: 60rem;
+
 }
 
 .productoDetail {
   padding-top: 2rem;
-  width: 60rem;
+  width: 80rem;
   background-color: #ffffff;
   padding: 10rem;
-  margin-right: 10rem;
+  margin-right: 1rem;
   /* border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   margin-left: auto;
 }
 
+
 .productoDetailName {
   font-size: 2.4rem;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .productoDetailDescription {
   font-size: 1.2rem;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .productoDetailPrice {
   font-size: 5.6rem;
   font-weight: bold;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .productoDetailDiscount {
   color: #00a65a;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .productoDetailCategory {
   font-style: italic;
   color: #666666;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .productoDetailImages {
   overflow: scroll; 
   max-height: 90rem;
+  max-width: 50rem;
  
 }
 .productoDetailImages::-webkit-scrollbar {
@@ -87,7 +92,7 @@
 }
 
 .productoDetailImage {
-  width: 60rem;
+  width: 50rem;
   height: 90rem;
   object-fit: cover;
   cursor: zoom-in;

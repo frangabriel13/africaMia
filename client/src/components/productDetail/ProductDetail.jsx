@@ -120,9 +120,7 @@ const ProductDetail = ({ productId }) => {
   return (
     <div className={s.divUni}>
       <div className={s.divGlobal}>
-        <div className={s.divLocal}>
-          <h2 className={s.productoDetailName}>{product && product.name}</h2>
-        </div>
+        
         <div className={s.divPhotos}>
         <div className={s.gallery}>
         {product.images.map((image, index) => (
@@ -207,7 +205,17 @@ const ProductDetail = ({ productId }) => {
           <p className={s.cantTotal}>Total:   ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
           <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
           <br/>
-          <button className={s.buttonWP}>Comprar por Whatsapp</button>
+          <button
+            className={s.buttonWP}
+            onClick={() => {
+              const phoneNumber = '+541131514574'; // Número de WhatsApp en formato internacional
+              const message = encodeURIComponent('Hola, les quería hacer una consulta'); // Mensaje que se enviará
+              const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${message}`;
+              window.open(whatsappUrl, '_blank');
+            }}
+          >
+              Consultanos al Whatsapp
+            </button>
         </div>
       </div>
       <div className={s.divDescription}>

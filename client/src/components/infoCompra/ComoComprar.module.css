@@ -1,0 +1,74 @@
+/* Estilos para el componente ComoComprar */
+.comoComprarContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comoComprarTitle {
+  font-size: 2.2rem;
+  color: #f9457f;
+  margin-top: 2rem;
+}
+
+.comoComprarSubtitle {
+  font-size: 1.8rem;
+  color: #333;
+  margin-top: 1.5rem;
+}
+
+.comoComprarText {
+  font-size: 1.6rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.comoComprarList {
+  font-size: 1.6rem;
+  color: #666;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.comoComprarList li {
+  margin: 0.5rem 0;
+}
+
+.comoComprarHighlight {
+  color: #f9457f;
+  font-weight: bold;
+}
+
+.comoComprarLink {
+  color: #f9457f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.comoComprarLink:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para el botón de contacto */
+.contact-button {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f9457f;
+  color: #fff;
+  font-size: 1.6rem;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+  background-color: #ff6b9c;
+}

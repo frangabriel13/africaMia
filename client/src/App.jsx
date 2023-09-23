@@ -10,11 +10,23 @@ import Categories from './components/categories/Categories';
 import Login from './components/login/Login';
 import CreateUser from './components/createUser/CreateUser';
 import Tienda from './components/tienda/Tienda';
+import ComoComprar from './components/infoCompra/ComoComprar';
+import Contact from './components/contact/Contact';
+import Footer from './components/footer/Footer';
+import { useEffect } from 'react';
+
 
 function App() {
   const location = useLocation();
 
+  useEffect(() => {
+    // Esta función se ejecutará cada vez que cambie la ubicación (la URL)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]); // Vuelve a ejecutar el efecto cuando cambie la ubicación (la URL) 
+
   const isDashboard = location.pathname.includes('dashboard');
+
+ 
 
   return (
     <>
@@ -28,8 +40,12 @@ function App() {
         <Route path='/categories/:categoryId' element={<ProductsByCategory/>} />
         <Route path='/tienda' element={<Tienda />} />
         <Route path='/login-admin' element={<Login />} />
-        {/* <Route path='/create-admin' element={<CreateUser />} /> */}
+        <Route path='/create-admin' element={<CreateUser />} />
+        <Route path='/como-comprar' element={<ComoComprar />} />
+        <Route path='/contact' element={<Contact/>} />
       </Routes>
+      
+      <Footer />
     </>
   )
 }
