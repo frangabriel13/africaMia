@@ -120,9 +120,7 @@ const ProductDetail = ({ productId }) => {
   return (
     <div className={s.divUni}>
       <div className={s.divGlobal}>
-        <div className={s.divLocal}>
-          <h2 className={s.productoDetailName}>{product && product.name}</h2>
-        </div>
+        
         <div className={s.divPhotos}>
         <div className={s.gallery}>
         {product.images.map((image, index) => (
