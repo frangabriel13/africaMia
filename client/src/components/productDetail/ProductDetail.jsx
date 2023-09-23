@@ -157,38 +157,40 @@ const ProductDetail = ({ productId }) => {
           <p className={s.productoDetailPrice}>${product.price}</p>
           {
             product.isVariable === false ? 
-            <div>
-              <h3>Seleccione la cantidad</h3>
-              <div>
-                <button onClick={decrementQuantity}>Decrementar</button>
+            <div className={s.divVariant}>
+              <h3>Seleccione la cantidad:</h3>
+              <div className={s.btnQuantity}>
+                <button className={s.decrement} onClick={decrementQuantity}>-</button>
                 <input type="number" value={quantity}
+                  className={s.quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                   readOnly
                 />
-                <button onClick={incrementQuantity}>Incrementar</button>
+                <button className={s.increment} onClick={incrementQuantity}>+</button>
               </div>
             </div> : 
-            <div>
+            <div className={s.divVariant}>
               <h3>Seleccione la cantidad por talle:</h3>
               {
                 variations.map((variation) => (
-                  <div key={variation.id}>
-                    <p>Talle: {variation.size.name}</p>
-                    <div>
-                      <button onClick={() => handleDecrement(variation)}>Decrementar</button>
-                      <input type="number" 
+                  <div className={s.divQuantity} key={variation.id}>
+                    <p>{variation.size.name}</p>
+                    <div className={s.btnQuantity}>
+                      <button className={s.decrement} onClick={() => handleDecrement(variation)}>-</button>
+                      <input type="number"
+                        className={s.quantity}
                         value={variationQuantities[variation.id] || 0} 
                         onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
                         readOnly
                       />
-                      <button onClick={() => handleIncrement(variation)}>Incrementar</button>
+                      <button className={s.increment} onClick={() => handleIncrement(variation)}>+</button>
                     </div>
                   </div>
                 ))
               }
             </div>
           }
-          <p>Total: ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
+          <p className={s.cantTotal}>Total: ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
           <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
           <br/>
           <button className={s.buttonWP}>Comprar por Whatsapp</button>
