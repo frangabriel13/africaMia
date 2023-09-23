@@ -100,7 +100,7 @@ const Cart = () => {
   }).join('\n');
 
     // Generar el enlace de WhatsApp
-    const phoneNumber = '+541158742482'; // Reemplaza con el número de WhatsApp al que deseas enviar el mensaje
+    const phoneNumber = '+541131514574'; // Reemplaza con el número de WhatsApp al que deseas enviar el mensaje
     const whatsappMessage = encodeURIComponent(`¡Hola! Me gustaría realizar el siguiente pedido:\n\n${message}\n\nTotal: $${total}`);
     const whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${whatsappMessage}`;
 
