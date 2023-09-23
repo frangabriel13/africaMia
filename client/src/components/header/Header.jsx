@@ -171,7 +171,7 @@ function Header() {
           <NavLink to={"/como-comprar"}>
             ¿Cómo comprar?
           </NavLink> 
-          <a href='#'>Categorías</a>
+          {/* <a href='#'>Categorías</a> */}
           <NavLink to={"/contact"}>
             Contacto
           </NavLink>
@@ -198,9 +198,9 @@ function Header() {
                         ¿Cómo comprar?
                       </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                       <a href='#'>Categorías</a>
-                    </li>
+                    </li> */}
                     <li>
                       <NavLink to={"/contact"}>
                         Contacto
