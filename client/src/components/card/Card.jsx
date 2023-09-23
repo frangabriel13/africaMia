@@ -12,6 +12,14 @@ const Card = ({ name, price, id, images, onSelectProduct, productId }) => {
 
   // const imageUrl = images && images.length > 0 ? images[0] : '';
 
+  const handleScrollToTop = () => {
+    console.log('Productito seleccionado');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Desplazamiento suave
+    });
+  };
+
   return (
     <div className={s.card}>
      <div className={s.img}>
@@ -26,7 +34,7 @@ const Card = ({ name, price, id, images, onSelectProduct, productId }) => {
       </div>
     </div>
          <Link to={`/products/${id}`} className= {s.detail }>
-            <span>Ver más</span>
+            <span onClick={handleScrollToTop}>Ver más</span>
          </Link>
      
     </div>

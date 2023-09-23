@@ -1,5 +1,8 @@
 .divGlobal {
   display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  max-width: 90%;
   /* gap: 2rem; */
   /* padding: 5.5rem 5%; */
 }
@@ -72,20 +75,21 @@
 .productoDetailImages {
   overflow: scroll; 
   max-height: 90rem;
+  max-width: 50rem;
  
 }
 .productoDetailImages::-webkit-scrollbar {
   display: none;
 }
 
-/* .productoDetailImageContainer {
+.productoDetailImageContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   max-width: 40rem;
   max-height: 80rem;
   overflow: hidden;
-} */
+}
 
 .productoDetailImage {
   width: 50rem;
