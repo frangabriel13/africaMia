@@ -73,7 +73,7 @@ import s from './Cart.module.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(cartItems); 
+
   
   const total = useSelector((state) => state.cart.total);
 
