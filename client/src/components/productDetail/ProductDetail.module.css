@@ -373,7 +373,7 @@
 
   .buttonCart,
   .buttonWP {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
+    width: 25rem; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
   }
 
   .divDescription {
