@@ -332,6 +332,7 @@
 /* Estilos para dispositivos móviles (ancho máximo de 768px) */
 @media (max-width: 768px) {
   .divGlobal {
+    margin-top: 10rem;
     flex-direction: column; /* Cambia la dirección de flex a columna */
     align-items: center; /* Centra los elementos verticalmente */
   }
@@ -357,10 +358,13 @@
   }
 
   .productoDetail {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    margin-right: 0; /* Elimina el margen derecho */
-    padding: 2rem; /* Añade un relleno uniforme */
+    padding: 2rem 1rem; /* Relleno superior e inferior de 2rem, relleno izquierdo y derecho de 1rem */
   }
+
+  .divVariant {
+    margin-bottom: 2rem; /* Margen inferior de 2rem para separar los elementos */
+  }
+  
 
   .productoDetailImage {
     width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
