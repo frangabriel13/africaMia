@@ -7,6 +7,21 @@
   /* padding: 5.5rem 5%; */
 }
 
+.minimo {
+  text-align: center;
+  padding-top: 1rem;
+  color: #ffffff;
+  min-height: 5rem;
+  background-color: black;
+  margin-bottom: -5rem;
+  
+} 
+
+.continent {
+  padding-bottom: 30rem;
+ 
+}
+
 .divLocal {
   padding: 2.5rem;
 }
@@ -32,9 +47,9 @@
 
 .productoDetail {
   padding-top: 2rem;
-  width: 80rem;
+  width: 70rem;
   background-color: #ffffff;
-  padding: 10rem;
+  padding-left: 1rem;
   margin-right: 1rem;
   /* border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
@@ -147,7 +162,7 @@
 
 
 .buttonCart {
-  width: 100%;
+  width: 27rem;
   height: 4rem;
   background-color: #000000;
   color: #ffffff;
@@ -183,7 +198,7 @@
 
 
 .buttonWP {
-  width: 100%;
+  width: 27rem;
   height: 4rem;
   background-color: #00a65a;
   color: #ffffff;
@@ -208,6 +223,14 @@
 
 .divVariant {
   background-color: #ffffff;
+  
+  padding-right: 15rem;
+}
+.divVariant p {
+  font-size: 1.6rem;
+  color: #000000;
+  
+  margin-left: 0rem; 
 }
 
 .divVariant h3 {
@@ -219,7 +242,7 @@
 .divQuantity {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: .5rem;
 }
 
@@ -309,6 +332,7 @@
 /* Estilos para dispositivos móviles (ancho máximo de 768px) */
 @media (max-width: 768px) {
   .divGlobal {
+    margin-top: 10rem;
     flex-direction: column; /* Cambia la dirección de flex a columna */
     align-items: center; /* Centra los elementos verticalmente */
   }
@@ -334,10 +358,13 @@
   }
 
   .productoDetail {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    margin-right: 0; /* Elimina el margen derecho */
-    padding: 2rem; /* Añade un relleno uniforme */
+    padding: 2rem 1rem; /* Relleno superior e inferior de 2rem, relleno izquierdo y derecho de 1rem */
   }
+
+  .divVariant {
+    margin-bottom: 2rem; /* Margen inferior de 2rem para separar los elementos */
+  }
+  
 
   .productoDetailImage {
     width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
@@ -346,7 +373,7 @@
 
   .buttonCart,
   .buttonWP {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
+    width: 25rem; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
   }
 
   .divDescription {

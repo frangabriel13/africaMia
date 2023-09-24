@@ -16,6 +16,8 @@ function ProductManagement() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previewProduct, setPreviewProduct] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [editingVariation, setEditingVariation] = useState(null);
+  const [newVariationPrice, setNewVariationPrice] = useState("");
   
   useEffect(() => {
     dispatch(getProducts());
@@ -52,6 +54,46 @@ function ProductManagement() {
       // Después de la eliminación, obtén la lista de productos actualizada
       dispatch(getProducts());
     });
+  };
+
+  const handleEditVariation = (variationId) => {
+    // Encuentra la variación que se va a editar en función del ID
+    const variationToEdit = variations.find((el) => el.id === variationId);
+  
+    if (variationToEdit) {
+      // Al hacer clic en "Editar", establece la variación que se está editando en el estado
+      setEditingVariation(variationToEdit);
+      // También establece el precio actual de la variación en el estado newVariationPrice
+      setNewVariationPrice(variationToEdit.price.toString()); // Convierte el precio a una cadena
+    } else {
+      console.error(`No se pudo encontrar la variación con ID ${variationId}`);
+    }
+  };
+
+  const handleUpdateVariation = (e) => {
+    e.preventDefault();
+  
+    // Verifica que la variación que se está editando esté definida
+    if (editingVariation) {
+      // Crea un objeto con la nueva información de la variación, incluido el nuevo precio
+      const updatedVariation = {
+        ...editingVariation,
+        price: parseFloat(newVariationPrice), // Convierte el nuevo precio a un número flotante
+      };
+  
+      // Llama a la acción para actualizar la variación en el estado global
+      dispatch(updateVariation(updatedVariation));
+      // dispatch(updateVariation(updatedVariation))
+      // .then(() => {
+      //   // Después de actualizar la variación, limpia el estado de edición.
+      //   setNewVariationPrice("");
+      //   setEditingVariation(null);
+      // });
+  
+      // Limpia el estado de newVariationPrice y cancela la edición
+      setNewVariationPrice("");
+      setEditingVariation(null);
+    }
   };
 
   return (
@@ -108,6 +150,7 @@ function ProductManagement() {
                       // value={selectedProduct || ""}
                       onChange={(e) => handleFilterVariations(e.target.value)}
                     >
+                      <option>Seleccionar</option>
                       {
                         allProducts.filter((el) => el.isVariable).map((el) => (
                           <option key={el.id} value={el.id}>{el.name}</option>
@@ -120,6 +163,7 @@ function ProductManagement() {
                           <th>ID</th>
                           <th>Talle</th>
                           <th>Color</th>
+                          <th>Precio</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -129,8 +173,9 @@ function ProductManagement() {
                               <td>{el.id}</td>
                               <td>{el.size ? el.size.name : 'Sin tamaño'}</td>
                               <td>{el.color ? el.color.name : 'Sin color'}</td>
+                              <td>{el.price}</td>
                               <td>
-                                <button>Editar</button>
+                                <button onClick={() => handleEditVariation(el.id)}>Editar</button>
                                 <button>Eliminar</button>
                               </td>
                             </tr>
@@ -140,6 +185,27 @@ function ProductManagement() {
                     </table>
                   </div>
                 )
+              }
+              {
+                editingVariation &&
+              <div className={s.editVariationForm}>
+                <h3>Editar Variación</h3>
+                <form onSubmit={handleUpdateVariation}>
+                  <div>
+                    <label htmlFor="newVariationPrice">Nuevo Precio:</label>
+                    <input
+                      type="text"
+                      id="newVariationPrice"
+                      value={newVariationPrice}
+                      onChange={(e) => setNewVariationPrice(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <button type="submit">Guardar</button>
+                    <button onClick={() => setEditingVariation(null)}>Cancelar</button>
+                  </div>
+                </form>
+              </div>
               }
             </div>
           </div>

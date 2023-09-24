@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3.5rem 20%;
+  padding: 2rem 20%;
   
 }
 
@@ -31,13 +31,22 @@
   color: #333;
 }
 
+
+
 .instagramer {
+ 
+  height: 22rem;
+  margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: #ffffff;
+  background-image: url('../../assets/floreaAmarillas.png'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta de tu imagen de fondo */
+  background-size: cover; /* Esto ajustará la imagen al tamaño del contenedor */
+  background-position: center; /* Esto centrará la imagen en el contenedor */
+  background-repeat: no-repeat; /* Esto evitará que la imagen se repita */
 }
 
 /* Estilos para el botón de Instagram */
@@ -88,5 +97,71 @@
     font-size: 3rem;
     margin-right: 0;
     margin-bottom: 1rem;
+  }
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  /* .container {
+    flex-direction: column;
+    padding: 2rem;
+  } */
+
+  .separator {
+    display: none;
+  }
+
+  .icon {
+    font-size: 3rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  /* Estilos para la zona de Instagram en pantallas más pequeñas */
+  .instagramer {
+    height: auto; /* Cambiar la altura a automático para adaptarse al contenido */
+    padding: 2rem; /* Agregar un poco de espacio alrededor del contenido */
+    background-image: none; /* Eliminar la imagen de fondo */
+  }
+
+  /* Estilos para el botón de Instagram en pantallas más pequeñas */
+  .buttonIg {
+    margin-top: 2rem; /* Ajustar el margen superior */
+    margin-bottom: 2rem; /* Ajustar el margen inferior */
+  }
+
+  /* Estilos para el texto del botón de Instagram en pantallas más pequeñas */
+  .tittle {
+    margin-left: 0; /* Eliminar el margen izquierdo */
+    margin-right: 0; /* Eliminar el margen derecho */
+  }
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row; /* Mantener los elementos en una sola fila */
+    align-items: center; /* Centrar verticalmente los elementos */
+    justify-content: space-around; /* Distribuir el espacio horizontalmente */
+    font-size: 0.8rem; /* Reducir el tamaño de fuente */
+  }
+
+  .iconContainer {
+    display: flex;
+    flex-direction: column; /* Apilar los íconos y textos verticalmente */
+    align-items: center; /* Centrar los elementos verticalmente */
+  }
+
+  .separator {
+    display: none; /* Ocultar los separadores en pantallas más pequeñas */
+  }
+
+  .icon {
+    font-size: 2rem; /* Reducir el tamaño de fuente de los íconos */
+    margin-right: 0; /* Eliminar el margen derecho */
+  }
+
+  .text {
+    font-size: 0.8rem; /* Reducir el tamaño de fuente del texto */
   }
 }

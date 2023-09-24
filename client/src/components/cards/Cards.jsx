@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
-import ReactPaginate from 'react-paginate';
 import Card from '../card/Card';
 import s from './Cards.module.css';
 
 export default function Cards() {
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleProductSelect = (product) => {
-    setSelectedProduct(product);
-  };
-
-  // Configuración de paginación
-  const itemsPerPage = 16; // Cantidad de productos por página
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 24;
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  // Función para manejar el cambio de página
-  const handlePageChange = (selected) => {
-    setCurrentPage(selected.selected);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
   };
 
-  // Calcular los índices de inicio y fin de la página actual
-  const startIndex = currentPage * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-  // Filtrar los productos para mostrar solo los de la página actual
-  const productsToDisplay = products.slice(startIndex, endIndex);
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className={s.containerGlobal}>
       <div className={s.container}>
-        {productsToDisplay.map((product) => (
+        {currentProducts.map((product) => (
           <Card
             key={product.id}
             name={product.name}
@@ -45,27 +48,28 @@ export default function Cards() {
             id={product.id}
             images={product.images[0]?.url || ''}
             productId={product.id}
-            onSelectProduct={handleProductSelect}
           />
         ))}
       </div>
-      
-    
-      {/* <div className={s.paginationWrapper}>
-      
-        <div className={s.paginationContainer}>
-          <ReactPaginate
-            pageCount={Math.ceil(products.length / itemsPerPage)}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={1}
-            onPageChange={handlePageChange}
-            containerClassName={s.pagination}
-            activeClassName={s.activePage}
-          />
-        </div>
-      </div> */}
+      <div className={s.pagination}>
+        <button onClick={goToPrevPage} className={s.page}>
+          {'<'}
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={currentPage === index + 1 ? s.activePage : s.page}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={goToNextPage} className={s.page}>
+          {'>'}
+        </button>
+      </div>
     </div>
   );
-  
-  
 }
+
+

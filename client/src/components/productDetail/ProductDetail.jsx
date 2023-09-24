@@ -119,6 +119,7 @@ const ProductDetail = ({ productId }) => {
   
   return (
     <div className={s.divUni}>
+      <h1 className={s.minimo}>Es necesario alcanzar un mínimo de $50,000 en tu carrito, Podes elegir diferentes modelos y talles</h1>
       <div className={s.divGlobal}>
         
         <div className={s.divPhotos}>
@@ -165,6 +166,7 @@ const ProductDetail = ({ productId }) => {
           </div>
         </div>
         <div className={s.productoDetail}>
+          <div className={s.continent}>
           <h2 className={s.productoDetailName}>{product && product.name}</h2>
           <p className={s.productoDetailPrice}>${product.price}</p>
           {
@@ -218,6 +220,7 @@ const ProductDetail = ({ productId }) => {
             </button>
         </div>
       </div>
+    </div>
       <div className={s.divDescription}>
         <p className={s.productoDetailDescription}>
           Description: {product.description && product.description.text}
