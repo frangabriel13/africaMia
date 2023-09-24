@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Info.module.css';
+import imagen from "../../assets/vais.png";
 
 const Info = () => {
   return (
@@ -19,6 +20,9 @@ const Info = () => {
         <i className={`bi bi-geo-alt ${s.icon}`}></i>
         <span className={s.text}>Bogotá 3412, CABA, Zona Flores</span>
       </div>
+    </div>
+    <div>
+      <img src={imagen} alt="Descripción de la imagen" style={{ width: '100%', height: 'auto' }} />
     </div>
     <div className={s.instagramer} >
     <i className={`bi bi-instagram ${s.icon}`}> Seguinos en Redes Sociales</i>

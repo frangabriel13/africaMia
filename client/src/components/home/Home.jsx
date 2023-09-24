@@ -3,7 +3,7 @@ import s from "./Home.module.css";
 import Cards from "../cards/Cards";
 import Banner from "../banner/Banner";
 import Info from "../info/Info";
-import Categories from "../categories/categories";
+import Categories from "../categories/Categories";
 
 function Home() {
   return (
