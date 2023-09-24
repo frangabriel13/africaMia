@@ -124,6 +124,7 @@ const Cart = () => {
                     <div className={s.content} >
                       <div className={s.nombPrice}>
                         <p>Nombre: {item.product.name}</p>
+                        <p>Talle: {item.selectedVariation ? item.selectedVariation.size.name : item.product.size.name}</p>
                         <p>Precio: ${item.selectedVariation ? item.selectedVariation.price : item.product.price}</p>
                       </div>
                       <div className={s.canti}>

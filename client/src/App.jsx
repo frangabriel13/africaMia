@@ -6,7 +6,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Detail from './components/details/detail';
 import Cart from './components/cart/Cart';
 import ProductsByCategory from './components/productsByCategory/ProductByCategory';
-import Categories from './components/categories/categories';
+import Categories from './components/categories/Categories';
 import Login from './components/login/Login';
 import CreateUser from './components/createUser/CreateUser';
 import Tienda from './components/tienda/Tienda';

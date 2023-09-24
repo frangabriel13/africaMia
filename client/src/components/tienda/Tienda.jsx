@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Cards from '../cards/Cards';
 import s from './Tienda.module.css';
-import Categories from '../categories/categories';
+import Categories from '../categories/Categories';
 
 function Tienda() {
   // Define el estado para la lista de productos
