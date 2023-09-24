@@ -76,6 +76,10 @@ function ProductForm({getProducts}) {
       newErrors.images = "Debes seleccionar al menos una imagen";
     }
 
+    if (formData.isVariable && formData.variations.length === 0) {
+      newErrors.variations = "Si es variable, debe tener al menos una variación";
+    }
+
     // Agrega más validaciones según tus requisitos
 
     setErrors(newErrors);
@@ -86,6 +90,9 @@ function ProductForm({getProducts}) {
     e.preventDefault();
     
     validateForm();
+    if (!formValid) {
+      return;
+    }
     // Envía el formulario
     await dispatch(addProduct(formData));
   
@@ -333,6 +340,7 @@ function ProductForm({getProducts}) {
               </div>
             )
           }
+          { errors.variations && <p className={s.error}>{errors.variations}</p> }
         </div>     
         <div>
           <button type="submit">Añadir</button>
