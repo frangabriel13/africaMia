@@ -73,6 +73,7 @@ import s from './Cart.module.css';
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems); 
   
   const total = useSelector((state) => state.cart.total);
 
@@ -92,6 +93,7 @@ const Cart = () => {
   const handleWhatsAppClick = () => {
     // Crear un mensaje detallado con los elementos del carrito
     const message = cartItems.map((item) => {
+       
       const itemName = item.product.name;
       const itemPrice = item.selectedVariation ? item.selectedVariation.price : item.product.price;
       const itemQuantity = item.quantity;
@@ -123,6 +125,7 @@ const Cart = () => {
                   <li key={item.selectedVariation ? item.selectedVariation.id : item.product.id} className={s['cart-item']}>
                     <div className={s.content} >
                       <div className={s.nombPrice}>
+                        <img src={item.product.images[0].url} alt={item.product.name} />
                         <p>Nombre: {item.product.name}</p>
                         <p>Talle: {item.selectedVariation ? item.selectedVariation.size.name : item.product.size.name}</p>
                         <p>Precio: ${item.selectedVariation ? item.selectedVariation.price : item.product.price}</p>
