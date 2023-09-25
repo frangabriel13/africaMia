@@ -16,6 +16,10 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   const [searchTerm, setSearchTerm] = useState('');
   const inputRef = useRef(null);
   const searchResultsRef = useRef(null);
@@ -162,17 +166,17 @@ function Header() {
           }
         </div>
         <div className={`${s.menuPc} ${isMenuOpen ? s.menuOpen : ''}`}>
-          <NavLink to={"/"}>
+          <NavLink to={"/"} onClick={closeMenu}>
             Inicio
           </NavLink>
-          <NavLink to={"/tienda"}>
+          <NavLink to={"/tienda"} onClick={closeMenu}>
             Tienda
           </NavLink>
-          <NavLink to={"/como-comprar"}>
+          <NavLink to={"/como-comprar"} onClick={closeMenu}>
             ¿Cómo comprar?
           </NavLink> 
           {/* <a href='#'>Categorías</a> */}
-          <NavLink to={"/contact"}>
+          <NavLink to={"/contact"} onClick={closeMenu}>
             Contacto
           </NavLink>
         </div>
@@ -184,17 +188,17 @@ function Header() {
                 <div className={s.menuHamburguesa}>
                   <ul>
                     <li>
-                      <NavLink to={"/"}>
+                      <NavLink to={"/"} onClick={closeMenu}>
                         Inicio
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to={"/tienda"}>
+                      <NavLink to={"/tienda"} onClick={closeMenu}>
                         Tienda
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to={"/como-comprar"}>
+                      <NavLink to={"/como-comprar"} onClick={closeMenu}>
                         ¿Cómo comprar?
                       </NavLink>
                     </li>
@@ -202,7 +206,7 @@ function Header() {
                       <a href='#'>Categorías</a>
                     </li> */}
                     <li>
-                      <NavLink to={"/contact"}>
+                      <NavLink to={"/contact"} onClick={closeMenu}>
                         Contacto
                       </NavLink>
                     </li>
