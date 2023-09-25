@@ -123,17 +123,17 @@ const ProductDetail = ({ productId }) => {
       <div className={s.divGlobal}>
         
         <div className={s.divPhotos}>
-        <div className={s.gallery}>
-        {product.images.map((image, index) => (
-          <img
-            key={index}
-            src={image.url}
-            alt={`Image ${index + 1}`}
-            className={`${s.galleryImage} ${selectedImage === image.url ? s.selected : ''}`}
-            onClick={() => handleImageClick(image)}
-          />
-        ))}
-      </div>
+          <div className={s.gallery}>
+            {product.images.map((image, index) => (
+              <img
+                key={index}
+                src={image.url}
+                alt={`Image ${index + 1}`}
+                className={`${s.galleryImage} ${selectedImage === image.url ? s.selected : ''}`}
+                onClick={() => handleImageClick(image)}
+              />
+            ))}
+          </div>
 
           <div className={s.divImage} ref={imagesRef}>
             {
@@ -167,60 +167,60 @@ const ProductDetail = ({ productId }) => {
         </div>
         <div className={s.productoDetail}>
           <div className={s.continent}>
-          <h2 className={s.productoDetailName}>{product && product.name}</h2>
-          <p className={s.productoDetailPrice}>${product.price}</p>
-          {
-            product.isVariable === false ? 
-            <div className={s.divVariant}>
-              <h3>Seleccione la cantidad:</h3>
-              <div className={s.btnQuantity}>
-                <button className={s.decrement} onClick={decrementQuantity}>-</button>
-                <input type="number" value={quantity}
-                  className={s.quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-                  readOnly
-                />
-                <button className={s.increment} onClick={incrementQuantity}>+</button>
-              </div>
-            </div> : 
-            <div className={s.divVariant}>
-              <h3>Seleccione la cantidad por talle:</h3>
-              {
-                variations.map((variation) => (
-                  <div className={s.divQuantity} key={variation.id}>
-                    <p>{variation.size.name}</p>
-                    <div className={s.btnQuantity}>
-                      <button className={s.decrement} onClick={() => handleDecrement(variation)}>-</button>
-                      <input type="number"
-                        className={s.quantity}
-                        value={variationQuantities[variation.id] || 0} 
-                        onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
-                        readOnly
-                      />
-                      <button className={s.increment} onClick={() => handleIncrement(variation)}>+</button>
+            <h2 className={s.productoDetailName}>{product && product.name}</h2>
+            <p className={s.productoDetailPrice}>${product.price}</p>
+            {
+              product.isVariable === false ? 
+              <div className={s.divVariant}>
+                <h3>Seleccione la cantidad:</h3>
+                <div className={s.btnQuantity}>
+                  <button className={s.decrement} onClick={decrementQuantity}>-</button>
+                  <input type="number" value={quantity}
+                    className={s.quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                    readOnly
+                  />
+                  <button className={s.increment} onClick={incrementQuantity}>+</button>
+                </div>
+              </div> : 
+              <div className={s.divVariant}>
+                <h3>Seleccione la cantidad por talle:</h3>
+                {
+                  variations.map((variation) => (
+                    <div className={s.divQuantity} key={variation.id}>
+                      <p>{variation.size.name}</p>
+                      <div className={s.btnQuantity}>
+                        <button className={s.decrement} onClick={() => handleDecrement(variation)}>-</button>
+                        <input type="number"
+                          className={s.quantity}
+                          value={variationQuantities[variation.id] || 0} 
+                          onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
+                          readOnly
+                        />
+                        <button className={s.increment} onClick={() => handleIncrement(variation)}>+</button>
+                      </div>
                     </div>
-                  </div>
-                ))
-              }
-            </div>
-          }
-          <p className={s.cantTotal}>Total:   ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
-          <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
-          <br/>
-          <button
-            className={s.buttonWP}
-            onClick={() => {
-              const phoneNumber = '+541131514574'; // Número de WhatsApp en formato internacional
-              const message = encodeURIComponent('Hola, les quería hacer una consulta'); // Mensaje que se enviará
-              const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${message}`;
-              window.open(whatsappUrl, '_blank');
-            }}
-          >
+                  ))
+                }
+              </div>
+            }
+            <p className={s.cantTotal}>Total:   ${calculateTotal(product, quantity, variations, variationQuantities)}</p>
+            <button className={s.buttonCart} onClick={handleAddToCart}>Agregar al carrito</button>
+            <br/>
+            <button
+              className={s.buttonWP}
+              onClick={() => {
+                const phoneNumber = '+541131514574'; // Número de WhatsApp en formato internacional
+                const message = encodeURIComponent('Hola, les quería hacer una consulta'); // Mensaje que se enviará
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${message}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
               Consultanos al Whatsapp
             </button>
+          </div>
         </div>
       </div>
-    </div>
       <div className={s.divDescription}>
         <p className={s.productoDetailDescription}>
           Description: {product.description && product.description.text}
