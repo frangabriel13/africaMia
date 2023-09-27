@@ -44,8 +44,7 @@ function App() {
         <Route path='/como-comprar' element={<ComoComprar />} />
         <Route path='/contact' element={<Contact/>} />
       </Routes>
-      
-      <Footer />
+      {!isDashboard && <Footer />}
     </>
   )
 }

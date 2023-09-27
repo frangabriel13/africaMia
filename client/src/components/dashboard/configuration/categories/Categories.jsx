@@ -21,9 +21,27 @@ function Categories() {
   const [category, setCategory] = useState({});
   const [parentSelect, setParentSelect] = useState('');
 
+  // useEffect(() => {
+  //   if (selectedTab === 'categories') {
+  //     dispatch(getCategories());
+  //   } else if (selectedTab === 'subcategories') {
+  //     dispatch(filterCategories(parentSelect)); // Usar selectedParentCategory en lugar de parentCategory
+  //   }
+  // }, [dispatch, selectedTab, parentSelect]);
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+    if (selectedTab === 'categories') {
+      dispatch(getCategories());
+    } else if (selectedTab === 'subcategories') {
+      // Verifica si selectedParentCategory está vacío y selecciona la primera categoría padre si lo está
+      if (!parentSelect) {
+        const firstCategory = allCategories.find((el) => el.parentId === null);
+        if (firstCategory) {
+          setParentSelect(firstCategory.id);
+        }
+      }
+      dispatch(filterCategories(parentSelect)); // Usar selectedParentCategory en lugar de parentCategory
+    }
+  }, [dispatch, selectedTab, parentSelect, allCategories]);
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
@@ -44,17 +62,13 @@ function Categories() {
     } else if(categoryExists) {
       setError("La categoría ya existe");
     } else {
-      await dispatch(addCategory({ name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory }));
-      setCategoryName("");
+      const newCategoryData = { name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory };
+      await dispatch(addCategory(newCategoryData));
       setParentCategory("");
       setError("");
       await dispatch(getCategories());
-      if(selectedTab === "subcategories") {
-        const firstCategory = allCategories.find((el) => el.parentId === null);
-        if(firstCategory) {
-          setParentCategory(firstCategory.id);
-          dispatch(filterCategories(firstCategory.id));
-        }
+      if (selectedTab === "subcategories") {
+        dispatch(filterCategories(newCategoryData.parentId));
       }
     }
   };
@@ -65,14 +79,22 @@ function Categories() {
   };
 
   const handleDeleteCategory = async (id) => {
+    // await dispatch(deleteCategory(id));
+    // await dispatch(getCategories());
+    // if(selectedTab === "subcategories") {
+    //   const firstCategory = allCategories.find((el) => el.parentId === null);
+    //   if(firstCategory) {
+    //     setParentCategory(firstCategory.id);
+    //     dispatch(filterCategories(firstCategory.id));
+    //   }
+    // }
+    const categoryToDelete = allCategories.find((el) => el.id === id);
     await dispatch(deleteCategory(id));
     await dispatch(getCategories());
-    if(selectedTab === "subcategories") {
-      const firstCategory = allCategories.find((el) => el.parentId === null);
-      if(firstCategory) {
-        setParentCategory(firstCategory.id);
-        dispatch(filterCategories(firstCategory.id));
-      }
+  
+    // Filtrar las subcategorías de la categoría padre si está seleccionada la pestaña "subcategories"
+    if(selectedTab === "subcategories" && categoryToDelete) {
+      dispatch(filterCategories(categoryToDelete.parentId));
     }
   };
 
@@ -94,20 +116,17 @@ function Categories() {
     } else if(categoryExists && categoryExists.name.toLowerCase() !== category.name.toLowerCase()) {
       setError("La categoría ya existe");
     } else {
-      await dispatch(updateCategory({ id: category.id, name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory }));
+      // await dispatch(updateCategory({ id: category.id, name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory }));
+      const updatedCategoryData = { id: category.id, name: categoryName.trim(), parentId: parentCategory === '' ? null : parentCategory };
+      await dispatch(updateCategory(updatedCategoryData));
       setCategoryName("");
       setParentCategory("");
       setError("");
       setEditMode(false);
       await dispatch(getCategories());
-      if(selectedTab === 'subcategories') {
-        const firstCategory = allCategories.find((el) => el.parentId === null);
-        if(firstCategory) {
-          setParentSelect(firstCategory.id);
-          // setParentCategory(firstCategory.id);
-          dispatch(filterCategories(firstCategory.id));
-        }
-      }
+      if (selectedTab === 'subcategories') {
+        dispatch(filterCategories(updatedCategoryData.parentId));
+      }  
     }
   };
 
@@ -132,10 +151,6 @@ function Categories() {
               className={selectedTab === "subcategories" ? s.active : ""}
               onClick={() => handleTabChange("subcategories")}
             >Subcategorías</li>
-            <li
-              className={selectedTab === "subsubcategories" ? s.active : ""}
-              onClick={() => handleTabChange("subsubcategories")}
-            >Sub-subcategorías</li>
           </ul>
           {
             selectedTab === "categories" && (
@@ -168,6 +183,7 @@ function Categories() {
             ) || selectedTab === "subcategories" && (
               <div>
                 <select onChange={(e) => handleFilterCategories(e.target.value)}>
+                  <option value="">Seleccionar</option>
                   {
                     allCategories.filter((category) => category.parentId === null).map((category) => (
                       <option key={category.id} value={category.id}>{category.name}</option>
