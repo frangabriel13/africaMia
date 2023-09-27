@@ -111,6 +111,7 @@ function ProductForm({getProducts}) {
     });
     setSelectedSizes([]);
     setSelectedColors([]);
+    setCombinedActive(false);
     // Después de la creación, obtén la lista de productos actualizada
     dispatch(getProducts());
   };
