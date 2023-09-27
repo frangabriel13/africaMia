@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../redux/actions/productActions';
 import s from './ProductDetail.module.css';
 import { getProductVariations } from '../../redux/actions/variationActions';
-import { calculateTotal } from '../../utils/helpers';
+import { calculateTotal, randomPhoneNumber } from '../../utils/helpers';
 import { addToCart } from '../../redux/actions/cartActions';
 
 
@@ -113,8 +113,13 @@ const ProductDetail = ({ productId }) => {
     setSelectedImage(image.url);
     imagesRef.current.scrollTop = image.index * (image.height + 20); // Ajusta el desplazamiento vertical según la imagen seleccionada
   };
-
   
+  const handleConsultWhatsapp = () => {
+    const phoneNumber = randomPhoneNumber();
+    const message = encodeURIComponent('Hola, les quería hacer una consulta');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   
   return (
@@ -209,12 +214,7 @@ const ProductDetail = ({ productId }) => {
             <br/>
             <button
               className={s.buttonWP}
-              onClick={() => {
-                const phoneNumber = '+541131514574'; // Número de WhatsApp en formato internacional
-                const message = encodeURIComponent('Hola, les quería hacer una consulta'); // Mensaje que se enviará
-                const whatsappUrl = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneNumber)}&text=${message}`;
-                window.open(whatsappUrl, '_blank');
-              }}
+              onClick={handleConsultWhatsapp}
             >
               Consultanos al Whatsapp
             </button>

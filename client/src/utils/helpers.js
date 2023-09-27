@@ -16,3 +16,13 @@ export const calculateTotal = (product, quantity, variations, variationQuantitie
 
   return total;
 };
+
+export const randomPhoneNumber = () => {
+  const phoneNumbers = [
+    '+541131514574',
+    '+541158742482',
+    '+541165051078',
+  ];
+  const randomNumber = Math.floor(Math.random() * phoneNumbers.length);
+  return phoneNumbers[randomNumber];
+};
