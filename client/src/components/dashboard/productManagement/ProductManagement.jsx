@@ -233,17 +233,17 @@ function ProductManagement() {
               }
             </div>
           </div>
-          <div className={s.preview}>
+          {/* <div className={s.preview}>
             <h3>Vista previa</h3>
             {
               previewProduct && (
-                <div key={previewProduct.id}>
+                <div className={s.previewProduct} key={previewProduct.id}>
                   <h4>{previewProduct.name}</h4>
-                  <img src={previewProduct.imgMain} alt={previewProduct.name} />
+                  <img className={s.previewImg} src={previewProduct.imgMain} alt={previewProduct.name} />
                 </div>
               )
             }
-          </div>
+          </div> */}
         </div>
       </div>
       <ProductForm getProducts={getProducts} />
