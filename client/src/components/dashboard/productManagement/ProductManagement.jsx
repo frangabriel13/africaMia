@@ -83,17 +83,18 @@ function ProductManagement() {
   
       // Llama a la acción para actualizar la variación en el estado global
       dispatch(updateVariation(updatedVariation));
-      // dispatch(updateVariation(updatedVariation))
-      // .then(() => {
-      //   // Después de actualizar la variación, limpia el estado de edición.
-      //   setNewVariationPrice("");
-      //   setEditingVariation(null);
-      // });
-  
+
       // Limpia el estado de newVariationPrice y cancela la edición
       setNewVariationPrice("");
       setEditingVariation(null);
     }
+  };
+
+  const compareVariationsBySize = (a, b) => {
+    const sizeA = a.size.name;
+    const sizeB = b.size.name;
+  
+    return sizeA - sizeB;
   };
 
   return (
@@ -168,7 +169,7 @@ function ProductManagement() {
                       </thead>
                       <tbody>
                         {
-                          variations.map((el) => (
+                          variations.slice().sort(compareVariationsBySize).map((el) => (
                             <tr key={el.id}>
                               <td>{el.id}</td>
                               <td>{el.size ? el.size.name : 'Sin tamaño'}</td>
