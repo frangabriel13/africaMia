@@ -168,7 +168,7 @@ function ProductForm({getProducts}) {
           />
           { errors.price && <p className={s.error}>{errors.price}</p> }
         </div>
-        <div className={s.input}>
+        {/* <div className={s.input}>
           <label htmlFor="stock">Stock:</label>
           <input 
             type="number" 
@@ -176,7 +176,7 @@ function ProductForm({getProducts}) {
             value={formData.stock} 
             onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
           />
-        </div>
+        </div> */}
         <div className={s.input}>
           <label htmlFor="category">Categoría:</label>
           <select 
@@ -234,6 +234,15 @@ function ProductForm({getProducts}) {
               }
             </div>
           </div>
+        </div>
+        <div className={s.input}>
+          <label htmlFor="availability">Habilitado:</label>
+          <input 
+            type="checkbox" 
+            name="availability" 
+            checked={formData.availability} 
+            onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
+          />
         </div>
         <div className={s.variationCOntainer}>
           <h3>Añadir variaciones:</h3>

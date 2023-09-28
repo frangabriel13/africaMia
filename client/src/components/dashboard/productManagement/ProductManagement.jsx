@@ -115,11 +115,11 @@ function ProductManagement() {
                       <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Imágen</th>
+                        {/* <th>Imágen</th> */}
                         <th>Variable</th>
                         <th>Categoría</th>
                         <th>Precio</th>
-                        <th>Stock</th>
+                        <th>Habilitado</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -128,11 +128,11 @@ function ProductManagement() {
                           <tr key={el.id}>
                             <td>{el.id}</td>
                             <td>{el.name}</td>
-                            <td>{el.imgMain}</td>
+                            {/* <td>{el.imgMain}</td> */}
                             <td>{el.isVariable ? 'Sí' : 'No'}</td>
                             <td>{el.category ? el.category.name : 'No'}</td>
                             <td>{el.price}</td>
-                            <td>{el.stock}</td>
+                            <td>{el.availability ? 'Sí' : 'No'}</td>
                             <td>
                               <button onClick={() => {setSelectedProduct(el.id)}}>Ver</button>
                             </td>
