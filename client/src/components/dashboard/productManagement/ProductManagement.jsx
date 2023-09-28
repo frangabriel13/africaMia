@@ -25,7 +25,7 @@ function ProductManagement() {
 
   useEffect(() => {
     dispatch(getVariations());
-  }, [products]);
+  }, [variations]);
 
   useEffect(() => {
     // Actualiza la vista previa cuando se selecciona un producto
@@ -79,6 +79,7 @@ function ProductManagement() {
       const updatedVariation = {
         ...editingVariation,
         price: parseFloat(newVariationPrice), // Convierte el nuevo precio a un número flotante
+        availability: editingVariation.availability,
       };
   
       // Llama a la acción para actualizar la variación en el estado global
@@ -163,25 +164,32 @@ function ProductManagement() {
                         <tr>
                           <th>ID</th>
                           <th>Talle</th>
-                          <th>Color</th>
+                          {/* <th>Color</th> */}
                           <th>Precio</th>
+                          <th>Habilitado</th>
                         </tr>
                       </thead>
                       <tbody>
                         {
-                          variations.slice().sort(compareVariationsBySize).map((el) => (
-                            <tr key={el.id}>
-                              <td>{el.id}</td>
-                              <td>{el.size ? el.size.name : 'Sin tamaño'}</td>
-                              <td>{el.color ? el.color.name : 'Sin color'}</td>
-                              <td>{el.price}</td>
-                              <td>
-                                <button onClick={() => handleEditVariation(el.id)}>Editar</button>
-                                <button>Eliminar</button>
-                              </td>
-                            </tr>
-                          ))
-                        }
+                          variations
+                            .filter((el) => el.productId === selectedProduct) // Filtra las variaciones por el producto seleccionado
+                            .slice()
+                            .sort(compareVariationsBySize)
+                            .map((el) => (
+                              // Resto de tu código para mostrar las variaciones
+                              <tr key={el.id}>
+                                <td>{el.id}</td>
+                                <td>{el.size ? el.size.name : 'Sin tamaño'}</td>
+                                {/* <td>{el.color ? el.color.name : 'Sin color'}</td> */}
+                                <td>{el.price}</td>
+                                <td>{el.availability ? 'Sí' : 'No'}</td>
+                                <td>
+                                  <button onClick={() => handleEditVariation(el.id)}>Editar</button>
+                                  <button>Eliminar</button>
+                                </td>
+                              </tr>
+                            ))
+                        }                   
                       </tbody>
                     </table>
                   </div>
@@ -199,6 +207,21 @@ function ProductManagement() {
                       id="newVariationPrice"
                       value={newVariationPrice}
                       onChange={(e) => setNewVariationPrice(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="availability">Habilitado</label>
+                    <input
+                      type="checkbox"
+                      id="availability"
+                      checked={editingVariation.availability}
+                      onChange={(e) => {
+                        const updatedVariation = {
+                          ...editingVariation,
+                          availability: e.target.checked,
+                        };
+                        setEditingVariation(updatedVariation);
+                      }}
                     />
                   </div>
                   <div>

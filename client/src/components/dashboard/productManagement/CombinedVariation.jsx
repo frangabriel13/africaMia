@@ -154,17 +154,16 @@ function CombinedVariation({
                   value={variation.stock || 0}
                   onChange={(e) => handleStockChange(e, index)}
                 />
-                <input 
-                  type="text"
+                 {/* Falta configurar
+                <input type="checkbox" 
                   name="availability"
-                  placeholder="Habilitado"
-                  value={variation.availability || ""}
+                  checked={variation.availability}
                   onChange={(e) => {
                     const newCombinedVariation = [...combinedVariation];
-                    newCombinedVariation[index].availability = e.target.value;
+                    newCombinedVariation[index].availability = e.target.checked;
                     setCombinedVariation(newCombinedVariation);
                   }}
-                />
+                /> */}
               </div>
             )
           })
