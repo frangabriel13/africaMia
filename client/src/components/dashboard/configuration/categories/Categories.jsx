@@ -204,8 +204,8 @@ function Categories() {
                           <td>{category.id}</td>
                           <td>{category.name}</td>
                           <td>
-                            <button onClick={() => handleEditCategory(category.id)}>Editar</button>
-                            <button onClick={() => handleDeleteCategory(category.id)}>Eliminar</button>
+                            <button className={s.btnActions} onClick={() => handleEditCategory(category.id)}>Editar</button>
+                            <button className={s.btnActions} onClick={() => handleDeleteCategory(category.id)}>Eliminar</button>
                           </td>
                         </tr>
                       ))
@@ -271,7 +271,7 @@ function Categories() {
                     </select>
                   </label>
                 </div>
-                <input type="button" value="Agregar" onClick={() => handleAddCategory()} />
+                <input type="button" value="Agregar" className={s.btnAdd} onClick={() => handleAddCategory()} />
               </form>
             </div>
           )
