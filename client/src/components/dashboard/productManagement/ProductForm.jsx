@@ -79,6 +79,13 @@ function ProductForm({getProducts}) {
     if (formData.isVariable && formData.variations.length === 0) {
       newErrors.variations = "Si es variable, debe tener al menos una variación";
     }
+    if (formData.isVariable && formData.variations.length > 0) {
+      formData.variations.forEach((variation) => {
+        if (!variation.sizeId) {
+          newErrors.variations = "Si es variable, debe tener al menos una variación";
+        }
+      });
+    }
 
     // Agrega más validaciones según tus requisitos
 
