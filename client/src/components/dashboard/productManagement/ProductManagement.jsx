@@ -185,7 +185,7 @@ function ProductManagement() {
                                 <td>{el.availability ? 'Sí' : 'No'}</td>
                                 <td>
                                   <button onClick={() => handleEditVariation(el.id)}>Editar</button>
-                                  <button>Eliminar</button>
+                                  {/* <button>Eliminar</button> */}
                                 </td>
                               </tr>
                             ))
