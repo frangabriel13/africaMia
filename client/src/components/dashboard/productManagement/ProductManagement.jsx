@@ -21,11 +21,11 @@ function ProductManagement() {
   
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [selectedTab]);
 
   useEffect(() => {
     dispatch(getVariations());
-  }, [variations]);
+  }, [selectedTab]);
 
   useEffect(() => {
     // Actualiza la vista previa cuando se selecciona un producto
@@ -83,7 +83,11 @@ function ProductManagement() {
       };
   
       // Llama a la acción para actualizar la variación en el estado global
-      dispatch(updateVariation(updatedVariation));
+      dispatch(updateVariation(updatedVariation))
+        .then(() => {
+          // Luego de la actualización exitosa, obtén la lista de variaciones actualizada
+          dispatch(getVariations());
+        });
 
       // Limpia el estado de newVariationPrice y cancela la edición
       setNewVariationPrice("");
