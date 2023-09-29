@@ -74,7 +74,7 @@ router.get('/products/:id', async (req, res) => {
 });
 
 router.post('/products', async (req, res) => {
-  const { name, description, availability, isVariable, price, stock, categoryId, variations, images } = req.body;
+  const { name, description, availability, isVariable, price, stock, categoryId, variations, images, imgMain } = req.body;
 
   try {
     const product = await Product.create({
@@ -85,6 +85,7 @@ router.post('/products', async (req, res) => {
       price,
       stock,
       categoryId,
+      imgMain,
     });
 
     if(isVariable) {

@@ -140,6 +140,7 @@ function CombinedVariation({
             return(
               <div key={index} className={s.variation}>
                 <h3>{variation.size ? variation.size.name : ''} - {variation.color ? variation.color.name : ''}</h3>
+                <label htmlFor="price">Precio:</label>
                 <input 
                   type="number" 
                   name="price"
@@ -147,24 +148,23 @@ function CombinedVariation({
                   value={variation.price || 0}
                   onChange={(e) => handlePriceChange(e, index)}
                 />
-                <input 
+                {/* <input 
                   type="number"
                   name="stock"
                   placeholder="Stock"
                   value={variation.stock || 0}
                   onChange={(e) => handleStockChange(e, index)}
-                />
-                <input 
-                  type="text"
+                /> */}
+                 {/* Falta configurar
+                <input type="checkbox" 
                   name="availability"
-                  placeholder="Habilitado"
-                  value={variation.availability || ""}
+                  checked={variation.availability}
                   onChange={(e) => {
                     const newCombinedVariation = [...combinedVariation];
-                    newCombinedVariation[index].availability = e.target.value;
+                    newCombinedVariation[index].availability = e.target.checked;
                     setCombinedVariation(newCombinedVariation);
                   }}
-                />
+                /> */}
               </div>
             )
           })

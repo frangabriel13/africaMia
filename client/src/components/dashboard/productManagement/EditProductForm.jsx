@@ -18,8 +18,8 @@ function EditProductForm({ product, onCancelEdit }) {
     categoryId: product.categoryId,
     imgMain: product.imgMain,
     isVariable: product.isVariable,
-    availability: product.isVariable,
-    variations: product.variations,
+    availability: product.availability,
+    variations: []
   });
 
   useEffect(() => {
@@ -66,15 +66,6 @@ function EditProductForm({ product, onCancelEdit }) {
           />
         </div>
         <div className={s.divInput}>
-          <label htmlFor="stock">Stock:</label>
-          <input 
-            type="number" 
-            name="stock" 
-            value={formData.stock} 
-            onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-          />
-        </div>
-        <div className={s.divInput}>
           <label htmlFor="category">Categoría:</label>
           <select 
             name="category" 
@@ -88,33 +79,25 @@ function EditProductForm({ product, onCancelEdit }) {
             }
           </select>
         </div>
-        <div className={s.divInputImg}>
+        {/* <div className={s.divInputImg}>
           <label htmlFor="image">Imágenes:</label>
           {
-            formData.images.map((image, index) => (
-              <div className={s.imgDiv} key={index}>
-                <img src={image.url} alt={`Imagen ${index + 1}`} />
+            formData.images.map((el, i) => (
+              <div key={i} className={s.imgDiv}>
+                <img src={el.url} alt="Imagen de producto" />
+                <button type="button" onClick={() => setFormData({ ...formData, images: formData.images.filter((img) => img !== el) })}>X</button>
               </div>
             ))
           }
-        </div>
-        <div className={s.divInput}>
-          <label htmlFor="variations">Variaciones:</label>
-          {
-            formData.variations.map(el => {
-              const variation = variations.find((v) => v.id === el.id);
-              console.log(variation)
-              if(variation) {
-                return(
-                  <li key={variation.id}>
-                    <p>ID: {variation.id}</p>
-                    <p>Precio: {variation.price}</p>
-                    <p>Stock: {variation.stock}</p>
-                  </li>
-                )
-              }
-            })
-          }
+        </div> */}
+        <div>
+          <label htmlFor="availability">Habilidado:</label>
+          <input 
+            type="checkbox" 
+            name="availability" 
+            checked={formData.availability} 
+            onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
+          />
         </div>
         <div className={s.divButton}>
           <button type="button" onClick={onCancelEdit}>Cancelar</button>

@@ -1,37 +1,6 @@
-/* .container {
-  background-color: azure;
-}
-
-.container h3 {
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-  font-size: 2rem;
-}
-
-.divCategory {
-  display: flex;
-  background-color: gainsboro;
-}
-
-.divTable {
-  flex: 70%;
-}
-
-.divForm {
-  flex: 30%;
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-} */
-
-
-
-/* Categories.module.css */
-
 .container {
   font-family: Arial, sans-serif;
-  margin: 2rem;
+  margin: 2rem 0;
 }
 
 .divCategory {
@@ -81,9 +50,9 @@
 }
 
 .table td button {
-  background-color: #f5f5f5;
+  background-color: transparent;
   border: none;
-  padding: .5rem 1rem;
+  color: #007bff;
   cursor: pointer;
 }
 
@@ -142,4 +111,14 @@ select {
   color: red;
   margin-top: 1rem;
   font-size: 1.4rem;
+}
+
+.btnAdd {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: .6rem 1.2rem;
+  border-radius: .4rem;
+  cursor: pointer;
+  margin-top: 1rem;
 }

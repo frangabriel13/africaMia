@@ -79,6 +79,13 @@ function ProductForm({getProducts}) {
     if (formData.isVariable && formData.variations.length === 0) {
       newErrors.variations = "Si es variable, debe tener al menos una variación";
     }
+    if (formData.isVariable && formData.variations.length > 0) {
+      formData.variations.forEach((variation) => {
+        if (!variation.sizeId) {
+          newErrors.variations = "Si es variable, debe tener al menos una variación";
+        }
+      });
+    }
 
     // Agrega más validaciones según tus requisitos
 
@@ -126,14 +133,19 @@ function ProductForm({getProducts}) {
     }
   };
 
-  const handleSelectColor = (e) => {
-    const colorId = e.target.value;
-    const colorName = e.target.options[e.target.selectedIndex].getAttribute("name");
+  // const handleSelectColor = (e) => {
+  //   const colorId = e.target.value;
+  //   const colorName = e.target.options[e.target.selectedIndex].getAttribute("name");
   
-    if (colorId && !selectedColors.some((color) => color.id === colorId)) {
-      const color = { id: colorId, name: colorName };
-      setSelectedColors([...selectedColors, color]);
-    }
+  //   if (colorId && !selectedColors.some((color) => color.id === colorId)) {
+  //     const color = { id: colorId, name: colorName };
+  //     setSelectedColors([...selectedColors, color]);
+  //   }
+  // };
+
+  const handleRemoveSize = (sizeId) => {
+    const newSelectedSizes = selectedSizes.filter((size) => size.id !== sizeId);
+    setSelectedSizes(newSelectedSizes);
   };
 
   return (
@@ -168,7 +180,7 @@ function ProductForm({getProducts}) {
           />
           { errors.price && <p className={s.error}>{errors.price}</p> }
         </div>
-        <div className={s.input}>
+        {/* <div className={s.input}>
           <label htmlFor="stock">Stock:</label>
           <input 
             type="number" 
@@ -176,7 +188,7 @@ function ProductForm({getProducts}) {
             value={formData.stock} 
             onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
           />
-        </div>
+        </div> */}
         <div className={s.input}>
           <label htmlFor="category">Categoría:</label>
           <select 
@@ -235,6 +247,15 @@ function ProductForm({getProducts}) {
             </div>
           </div>
         </div>
+        <div className={s.input}>
+          <label htmlFor="availability">Habilitado:</label>
+          <input 
+            type="checkbox" 
+            name="availability" 
+            checked={formData.availability} 
+            onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
+          />
+        </div>
         <div className={s.variationCOntainer}>
           <h3>Añadir variaciones:</h3>
           <div className={s.input}>
@@ -249,7 +270,7 @@ function ProductForm({getProducts}) {
           {
             formData.isVariable && (
               <div className={s.formData}>
-                <div className={s.input}>
+                {/* <div className={s.input}>
                   <label htmlFor="availability">Disponibilidad:</label>
                   <input 
                     type="checkbox" 
@@ -257,7 +278,7 @@ function ProductForm({getProducts}) {
                     checked={formData.availability} 
                     onChange={(e) => setFormData({ ...formData, availability: e.target.checked })}
                   />
-                </div>
+                </div> */}
                 <div className={s.input}>
                   <label htmlFor="size">Talle:</label>
                   <select
@@ -280,17 +301,20 @@ function ProductForm({getProducts}) {
                     }
                   </select>
                   <div className={s.input}>
-                    <h5>Talles seleccionados:</h5>
-                    <ul>
+                    <h5 className={s.sizesSelected}>Talles seleccionados:</h5>
+                    <ul className={s.sizesSelectedList}>
                       {
                         selectedSizes.map((el) => (
-                          <li key={el.id}>{el.name}</li>
+                          <div className={s.divSize}>
+                            <li key={el.id}>{el.name}</li>
+                            <button type="button" onClick={() => handleRemoveSize(el.id)}>X</button>
+                          </div>
                         ))
                       }
                     </ul>
                   </div>
                 </div>
-                <div className={s.input}>
+                {/* <div className={s.input}>
                   <label htmlFor="color">Color:</label>
                   <select
                     name="color"
@@ -321,7 +345,7 @@ function ProductForm({getProducts}) {
                       }
                     </ul>
                   </div>
-                </div>
+                </div> */}
                 <button
                   type="button"
                   onClick={() => setCombinedActive(true)}
