@@ -6,9 +6,6 @@ import { getProductVariations } from '../../redux/actions/variationActions';
 import { calculateTotal, randomPhoneNumber } from '../../utils/helpers';
 import { addToCart } from '../../redux/actions/cartActions';
 
-
-
-
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -19,7 +16,6 @@ const ProductDetail = ({ productId }) => {
 
   const [quantity, setQuantity] = useState(1);
   const [variationQuantities, setVariationQuantities] = useState({});
-  
   
   useEffect(() => {
     setLoading(true); // Indica que se está cargando
@@ -34,8 +30,6 @@ const ProductDetail = ({ productId }) => {
     dispatch(getProductVariations(productId))
   }, []);
 
-
- 
   if (loading) return <p>Cargando...</p>
 
   const incrementQuantity = () => {
@@ -121,6 +115,16 @@ const ProductDetail = ({ productId }) => {
     window.open(whatsappUrl, '_blank');
   };
 
+  const sortVariations = (variations) => {
+    // Utiliza el método sort para ordenar las variaciones por tamaño.
+    return variations.sort((a, b) => {
+      const sizeA = a.size.name.toLowerCase();
+      const sizeB = b.size.name.toLowerCase();
+      if (sizeA < sizeB) return -1;
+      if (sizeA > sizeB) return 1;
+      return 0;
+    });
+  };
   
   return (
     <div className={s.divUni}>
@@ -191,19 +195,23 @@ const ProductDetail = ({ productId }) => {
               <div className={s.divVariant}>
                 <h3>Seleccione la cantidad por talle:</h3>
                 {
-                  variations.map((variation) => (
+                  sortVariations(variations).map((variation) => (
                     <div className={s.divQuantity} key={variation.id}>
                       <p>{variation.size.name}</p>
-                      <div className={s.btnQuantity}>
-                        <button className={s.decrement} onClick={() => handleDecrement(variation)}>-</button>
-                        <input type="number"
-                          className={s.quantity}
-                          value={variationQuantities[variation.id] || 0} 
-                          onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
-                          readOnly
-                        />
-                        <button className={s.increment} onClick={() => handleIncrement(variation)}>+</button>
-                      </div>
+                      {
+                        variation.availability === true ?
+                          <div className={s.btnQuantity}>
+                            <button className={s.decrement} onClick={() => handleDecrement(variation)}>-</button>
+                            <input type="number"
+                              className={s.quantity}
+                              value={variationQuantities[variation.id] || 0} 
+                              onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
+                              readOnly
+                            />
+                            <button className={s.increment} onClick={() => handleIncrement(variation)}>+</button>
+                          </div> :
+                          <p className={s.cant}>Sin Stock</p>
+                      }
                     </div>
                   ))
                 }
