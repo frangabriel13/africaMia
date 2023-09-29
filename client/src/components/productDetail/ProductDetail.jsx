@@ -115,11 +115,21 @@ const ProductDetail = ({ productId }) => {
     window.open(whatsappUrl, '_blank');
   };
 
+  // const sortVariations = (variations) => {
+  //   // Utiliza el método sort para ordenar las variaciones por tamaño.
+  //   return variations.sort((a, b) => {
+  //     const sizeA = a.size.name.toLowerCase();
+  //     const sizeB = b.size.name.toLowerCase();
+  //     if (sizeA < sizeB) return -1;
+  //     if (sizeA > sizeB) return 1;
+  //     return 0;
+  //   });
+  // };
   const sortVariations = (variations) => {
     // Utiliza el método sort para ordenar las variaciones por tamaño.
     return variations.sort((a, b) => {
-      const sizeA = a.size.name.toLowerCase();
-      const sizeB = b.size.name.toLowerCase();
+      const sizeA = a.size ? a.size.name.toLowerCase() : ''; // Verifica si 'size' es nulo antes de acceder a 'name'
+      const sizeB = b.size ? b.size.name.toLowerCase() : ''; // Verifica si 'size' es nulo antes de acceder a 'name'
       if (sizeA < sizeB) return -1;
       if (sizeA > sizeB) return 1;
       return 0;
