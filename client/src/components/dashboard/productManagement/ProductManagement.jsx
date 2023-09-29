@@ -96,10 +96,11 @@ function ProductManagement() {
   };
 
   const compareVariationsBySize = (a, b) => {
-    const sizeA = a.size.name;
-    const sizeB = b.size.name;
+    const sizeA = a.size ? a.size.name : ''; // Verifica si 'size' es nulo antes de acceder a 'name'
+    const sizeB = b.size ? b.size.name : ''; // Verifica si 'size' es nulo antes de acceder a 'name'
   
-    return sizeA - sizeB;
+    // Realiza la comparación de las cadenas de tamaño (si son cadenas)
+    return sizeA.localeCompare(sizeB);
   };
 
   return (
