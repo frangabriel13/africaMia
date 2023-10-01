@@ -116,10 +116,9 @@ const ProductDetail = ({ productId }) => {
   };
 
   const sortVariations = (variations) => {
-    // Utiliza el método sort para ordenar las variaciones por tamaño.
     return variations.sort((a, b) => {
-      const sizeA = a.size.name.toLowerCase();
-      const sizeB = b.size.name.toLowerCase();
+      const sizeA = a.size ? a.size.name.toLowerCase() : '';
+      const sizeB = b.size ? b.size.name.toLowerCase() : '';
       if (sizeA < sizeB) return -1;
       if (sizeA > sizeB) return 1;
       return 0;
@@ -197,7 +196,7 @@ const ProductDetail = ({ productId }) => {
                 {
                   sortVariations(variations).map((variation) => (
                     <div className={s.divQuantity} key={variation.id}>
-                      <p>{variation.size.name}</p>
+                      <p>{variation && variation.size.name}</p>
                       {
                         variation.availability === true ?
                           <div className={s.btnQuantity}>
