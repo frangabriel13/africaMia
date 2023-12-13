@@ -1,0 +1,29 @@
+/* SubMenu.module.css */
+/* .subMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  position: absolute;
+  background-color: #f80202; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.subMenu li {
+  padding: 10px;
+}
+
+.subMenuLink {
+  text-decoration: none;
+  color: #333; 
+}
+
+
+.subMenuContainer:hover .subMenu {
+  display: block;
+} */
+
+.subMenuLink {
+  text-decoration: none;
+  color: #333; 
+}

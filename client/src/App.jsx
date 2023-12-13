@@ -14,6 +14,8 @@ import ComoComprar from './components/infoCompra/ComoComprar';
 import Contact from './components/contact/Contact';
 import Footer from './components/footer/Footer';
 import { useEffect } from 'react';
+import Navbar from './components/navbar/Navbar';
+import SubMenu from './components/subMenu/SubMenu';
 
 
 function App() {
@@ -30,7 +32,7 @@ function App() {
 
   return (
     <>
-      {!isDashboard && <Header />}
+      {!isDashboard && <Navbar />}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/dashboard/*' element={<Dashboard />} />
@@ -43,6 +45,7 @@ function App() {
         <Route path='/create-admin' element={<CreateUser />} />
         <Route path='/como-comprar' element={<ComoComprar />} />
         <Route path='/contact' element={<Contact/>} />
+        <Route path='/submenu' element={<SubMenu/>} />
       </Routes>
       {!isDashboard && <Footer />}
     </>
