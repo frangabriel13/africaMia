@@ -7,7 +7,7 @@ function Contacto() {
       <div className={s.contactoInfo}>
         <h2 className={s.contactoTitle}>SUCURSAL</h2>
         <p className={s.contactoText}>Bogotá 3412, Flores, CABA</p>
-        <p className={s.contactoText}>Cel: 1131514574</p>
+        <p className={s.contactoText}>Cel: 11 4042 8668</p>
         <a className={s.contactoLink} href="mailto:tienda@africamia-jeans.online">tienda@africamia-jeans.online</a>
       </div>
 
