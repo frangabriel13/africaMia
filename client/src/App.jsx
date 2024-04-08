@@ -31,10 +31,10 @@ function App() {
 
   return (
     <>
-      {/* {!isDashboard && <Header />} */}
+      {!isDashboard && <Header />}
       <Routes>
-        {/* <Route path='/' element={<Home />} /> */}
-        <Route path='/' element={<MaintenanceNotice />} />
+        <Route path='/' element={<Home />} />
+        {/* <Route path='/' element={<MaintenanceNotice />} /> */}
         <Route path='/dashboard/*' element={<Dashboard />} />
         <Route path='/products/:id' element={<Detail />} /> 
         <Route path='/cart' element={<Cart/>} />
@@ -46,7 +46,7 @@ function App() {
         <Route path='/como-comprar' element={<ComoComprar />} />
         <Route path='/contact' element={<Contact/>} />
       </Routes>
-      {/* {!isDashboard && <Footer />} */}
+      {!isDashboard && <Footer />}
     </>
   )
 }
