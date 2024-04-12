@@ -1,15 +1,13 @@
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/') // Define la carpeta donde se guardarán los archivos temporales
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: (req, file, cb) => {
+    // Agrega aquí cualquier filtro de archivo que necesites
+    cb(null, true);
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname) // Genera un nombre de archivo único
-  }
-});
-
-const upload = multer({ storage: storage });
+// }).array('images');
+}).any();
 
 
 module.exports = upload;
