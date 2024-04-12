@@ -20,6 +20,8 @@ import MaintenanceNotice from './components/home/HomeService';
 function App() {
   const location = useLocation();
 
+  
+
   useEffect(() => {
     // Esta función se ejecutará cada vez que cambie la ubicación (la URL)
     window.scrollTo({ top: 0, behavior: 'smooth' });
