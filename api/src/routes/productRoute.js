@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { Product, Variation, Category, Image } = require('../db');
 const cloudinary = require('../utils/cloudinary');
+const { uploadFiles } = require('../middlewares/uploadFiles');
 
 const router = Router();
 
