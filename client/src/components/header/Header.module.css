@@ -173,12 +173,13 @@ a {
   position: relative;
   font-size: 2rem;
   border: none !important; /* Elimina el borde */
-  
+  /* width: 10rem; */
   color: #ffffff;
   background-color: #f9457f;
   
 }
 .searchInput {
+  width: 15rem;
   font-size: 2rem;
   background-color: #f9457f;
   color: white;

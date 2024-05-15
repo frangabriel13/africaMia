@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import s from "./Banner.module.css";
-import imgOne from "../../assets/2.png";
-import imgTwo from "../../assets/3.png";
-import imgThree from "../../assets/1.png";
+import imgOne from "../../assets/imgOne.png";
+import imgTwo from "../../assets/imgTwo.png";
+import imgThree from "../../assets/imgThree.png";
+import img1 from "../../assets/img1.png";
+import img2 from "../../assets/img2.png";
+import img3 from "../../assets/img3.png";
 
 function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const images = [imgOne, imgTwo, imgThree];
+  const isMobile = window.innerWidth <= 768; // Consideramos un ancho menor o igual a 768px como un dispositivo móvil
+  const images = isMobile ? [img1, img2, img3] : [imgOne, imgTwo, imgThree];
 
   const handlePrevSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide === 0 ? images.length - 1 : prevSlide - 1));
@@ -17,12 +21,10 @@ function Banner() {
   };
 
   useEffect(() => {
-    // Esta función cambiará automáticamente la imagen cada 5 segundos
     const interval = setInterval(() => {
       handleNextSlide();
-    }, 5000); // Cambia la duración en milisegundos según tus preferencias
+    }, 5000);
 
-    // Limpia el intervalo cuando el componente se desmonta
     return () => {
       clearInterval(interval);
     };
