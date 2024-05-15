@@ -319,6 +319,46 @@ function Header() {
       </div>
 
       <div className={s.navContainer}>
+      <div className={s.searchContainer}>
+          <input
+            ref={inputRef}
+            onClick={() => setShowResults(true)} 
+            className={s.searchInput}
+            type="text"
+            onChange={handleSearchInputChange}
+            placeholder="Buscar" 
+          />
+          {
+            showResults && (
+              <div ref={searchResultsRef} className={s.searchResults}>
+                {
+                  navbarSearchResults.length === 0 && (
+                    <div>no andaaaaaaaaa</div>
+                  )
+                }
+                {
+                  navbarSearchResults.map((result) => (
+                    <div
+                      key={result.id}
+                      className={s.resultItem}
+                      onClick={() => handleSearchResultClick(result.id)}  >
+                      <img src={result.images[0]?.url || ''} alt={result.name} />
+                      <span className={s.nameProduct}>{result.name}</span>
+                      <span className={s.priceProduct}>${result.price}</span>
+                    </div>
+                  ))
+                }
+                {
+                  navbarSearchResults.length > 5 && (
+                    <div className={s.seeMore} onClick={handleSeeMoreClick}>
+                      Ver más resultados
+                    </div>
+                  )
+                }
+              </div>
+            )
+          }
+        </div>
         <div className={s.menuPc}>
           <NavLink to={'/'}>Inicio</NavLink>
           <NavLink to={'/tienda'}>Tienda</NavLink>
