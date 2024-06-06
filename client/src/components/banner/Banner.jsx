@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import s from "./Banner.module.css";
-import imgOne from "../../assets/arregloPc.png";
+import imgOne from "../../assets/limiteeeeed.png";
 import imgTwo from "../../assets/imgTwo.png";
 import imgThree from "../../assets/imgThree.png";
-import img2 from "../../assets/img1.png";
+import img2 from "../../assets/limited timee.png";
 import img1 from "../../assets/arregloMovil.png";
 import img3 from "../../assets/img3.png";
 
