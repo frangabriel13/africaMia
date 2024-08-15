@@ -10,7 +10,7 @@ export default function Cards() {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 5;
+  const productsPerPage = 10;
 
   useEffect(() => {
     dispatch(getProducts());
@@ -39,8 +39,8 @@ export default function Cards() {
   };
 
   return (
-    <div className={s.containerGlobal}>
-      <div className={s.container}>
+    <div className={s.container}>
+      <div className={s.cardsContainer}>
         {currentProducts.map((product) => (
           <Card
             key={product.id}
@@ -52,13 +52,15 @@ export default function Cards() {
           />
         ))}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-        goToPrevPage={goToPrevPage}
-        goToNextPage={goToNextPage}
-      />
+      <div className={s.divPagination}>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          goToPrevPage={goToPrevPage}
+          goToNextPage={goToNextPage}
+        />
+      </div>
     </div>
   );
 }
