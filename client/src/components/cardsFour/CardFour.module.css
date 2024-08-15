@@ -11,14 +11,25 @@
   gap: 3rem 1.5rem;
 }
 
+/* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
+  .containerGlobal {
+    margin: 0 2rem;
+  }
+
   .container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .containerGlobal {
+    margin: 0 1rem;
+  }
+
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 0.75rem;
   }
 }
