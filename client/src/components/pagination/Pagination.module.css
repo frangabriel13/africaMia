@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 10rem;
+}
+
+.page {
+  background-color: #f0f0f0;
+  border: none;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.pageInfo {
+  font-size: 3rem;
+  /* font-weight: bold; */
+}
+
+.page:hover {
+  background-color: #e0e0e0;
+}
+
+.page:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
