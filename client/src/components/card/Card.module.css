@@ -1,4 +1,6 @@
-* {
+
+
+/* * {
   font-family: 'PT Sans Narrow', sans-serif;
 }
 .card {
@@ -16,13 +18,12 @@
   margin-right: auto;
   margin-left: auto;
 } 
-/* Estilo para dispositivos móviles (pantallas con un ancho de hasta 480px) */
 @media (max-width: 480px) {
   .card {
-    width: 100%; /* Ajusta el ancho para que se extienda al ancho de la pantalla */
-    padding: 0.5rem; /* Reduce el espaciado interior de la tarjeta */
-    margin-bottom: 0.5rem; /* Reduce el espaciado entre las tarjetas */
-    font-size: 0.8rem; /* Reduce el tamaño de fuente para el contenido de la tarjeta */
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -48,8 +49,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.76); /* Fondo semi-transparente */
-  opacity: 0; /* Inicialmente oculto */
+  background-color: rgba(255, 255, 255, 0.76);
+  opacity: 0;
   transition: opacity 0.3s;
   height: 8rem;
 }
@@ -63,11 +64,11 @@
 }
 
 .img:hover .overlay {
-  opacity: 1; /* Mostrar el fondo al hacer hover sobre la imagen */
+  opacity: 1;
 }
 
 .detail {
-  background-color: transparent; /* Cambiamos el color de fondo a transparente */
+  background-color: transparent;
   
   color: #000000 !important;
   padding: 1rem 2rem;
@@ -75,7 +76,7 @@
   font-size: 2.7rem;
   font-weight: 700;
   transition: background-color 0.3s, transform 0.3s;
-  opacity: 0; /* Ocultamos el botón */
+  opacity: 0;
 }
 :visited .detail {
   color: black !important;
@@ -83,7 +84,7 @@
 
 
 .img:hover .detail {
-  opacity: 1; /* Mostramos el botón al hacer hover sobre la imagen */
+  opacity: 1;
   background-color: transparent;
 }
 
@@ -125,4 +126,4 @@ font-weight: 400;
   padding-bottom: 0rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
+} */
