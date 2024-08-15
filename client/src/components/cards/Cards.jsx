@@ -38,6 +38,9 @@ export default function Cards() {
     }
   };
 
+  console.log('products', products);
+  // console.log('imgMain', products[0].imgMain);
+
   return (
     <div className={s.container}>
       <div className={s.cardsContainer}>
@@ -47,7 +50,9 @@ export default function Cards() {
             name={product.name}
             price={product.price}
             id={product.id}
-            images={product.images[0]?.url || ''}
+            imgMain={product.images[2]?.url || ''}
+            images={product.images}
+            // images={product.images[0]?.url || ''}
             productId={product.id}
           />
         ))}
