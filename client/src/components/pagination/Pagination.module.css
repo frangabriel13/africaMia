@@ -7,11 +7,11 @@
 }
 
 .page {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   border: none;
-  padding: .5rem 1rem;
+  /* padding: .5rem 1rem; */
   cursor: pointer;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 
 .pageInfo {
@@ -19,11 +19,13 @@
   /* font-weight: bold; */
 }
 
-.page:hover {
-  background-color: #e0e0e0;
-}
-
 .page:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+.icon {
+  font-size: 5rem;
+  cursor: pointer;
+  color: var(--second-bg-color);
 }

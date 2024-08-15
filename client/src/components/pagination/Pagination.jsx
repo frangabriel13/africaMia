@@ -30,18 +30,20 @@
 
 import React from "react";
 import s from "./Pagination.module.css";
+import { PiArrowLeftLight } from "react-icons/pi";
+import { PiArrowRightLight } from "react-icons/pi";
 
 const Pagination = ({ currentPage, totalPages, handlePageChange, goToPrevPage, goToNextPage }) => {
   return (
     <div className={s.pagination}>
       <button onClick={goToPrevPage} className={s.page}>
-        {"<"}
+        <PiArrowLeftLight className={s.icon} />
       </button>
       <span className={s.pageInfo}>
         {currentPage}/{totalPages}
       </span>
       <button onClick={goToNextPage} className={s.page}>
-        {">"}
+        <PiArrowRightLight className={s.icon} />
       </button>
     </div>
   );
