@@ -18,11 +18,11 @@ const ProductDetail = ({ productId }) => {
   const [variationQuantities, setVariationQuantities] = useState({});
   
   useEffect(() => {
-    setLoading(true); // Indica que se está cargando
+    setLoading(true);
     dispatch(getProductById(productId))
       .then(() => {
-        setLoading(false); // Indica que la carga ha finalizado
-        dispatch(getProductVariations(productId)); // Carga las variaciones
+        setLoading(false);
+        dispatch(getProductVariations(productId));
       });
   }, [dispatch, productId]);
 
@@ -71,37 +71,27 @@ const ProductDetail = ({ productId }) => {
 
   const handleAddToCart = () => {
     if (product.isVariable) {
-      // Es un producto con variaciones, debes encontrar la variación seleccionada
       const selectedVariations = variations.filter((variation) => {
         const quantity = variationQuantities[variation.id] || 0;
         return quantity > 0;
       });
   
       if (selectedVariations.length === 0) {
-        // No se ha seleccionado ninguna variación
         alert("Por favor, seleccione al menos una variación antes de agregar al carrito.");
       } else {
-        // Agrega todas las variaciones seleccionadas al carrito
         selectedVariations.forEach((selectedVariation) => {
           const quantity = variationQuantities[selectedVariation.id];
           dispatch(addToCart(product, selectedVariation, quantity));
         });
         setVariationQuantities({});
-        // Redirige al usuario al carrito
-        // history.push('/carrito'); // Puedes redirigir al usuario a la página del carrito si es necesario
       }
     } else {
-      // Es un producto simple, agrega la cantidad seleccionada al carrito
       dispatch(addToCart(product, null, quantity));
       setQuantity(1);
-      // Redirige al usuario al carrito
-      // history.push('/carrito'); // Puedes redirigir al usuario a la página del carrito si es necesario
     }
   
     
   };
-  
-  // Define la función animateButton fuera de handleAddToCart
  
   const handleImageClick = (image) => {
     setSelectedImage(image.url);
@@ -115,16 +105,6 @@ const ProductDetail = ({ productId }) => {
     window.open(whatsappUrl, '_blank');
   };
 
-  // const sortVariations = (variations) => {
-  //   // Utiliza el método sort para ordenar las variaciones por tamaño.
-  //   return variations.sort((a, b) => {
-  //     const sizeA = a.size.name.toLowerCase();
-  //     const sizeB = b.size.name.toLowerCase();
-  //     if (sizeA < sizeB) return -1;
-  //     if (sizeA > sizeB) return 1;
-  //     return 0;
-  //   });
-  // };
   const sortVariations = (variations) => {
     return variations.sort((a, b) => {
       const sizeA = a.size ? a.size.name.toLowerCase() : '';
