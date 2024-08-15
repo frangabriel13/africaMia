@@ -2,22 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import s from "./Card.module.css";
 
-const Card = ({ name, price, id, images, onSelectProduct, productId }) => {
+const Card = ({ name, price, id, images, imgMain, productId }) => {
   const handleCardClick = () => {
     const product = { name, price, id, images };
-    onSelectProduct(product);
+    handleScrollToTop();
   };
 
+  const handleScrollToTop = () => {
+    console.log('Productito seleccionado');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Desplazamiento suave
+    });
+  };
+
+  console.log('images', images);
+
   return (
-    <div onClick={handleCardClick} className={s.container}>
-      <div className={s.divImage}>
-        <img src={images} alt={name} />
+    <Link to={`/products/${productId}`}>
+      <div onClick={handleCardClick} className={s.container}>
+        <div className={s.divImage}>
+          <img src={imgMain} alt={name} />
+        </div>
+        <div className={s.divContent}>
+          <h3>{name}</h3>
+          <p>${price}</p>
+        </div>
       </div>
-      <div className={s.divContent}>
-        <h3>{name}</h3>
-        <p>${price}</p>
-      </div>
-    </div>
+    </Link>
   );
 };
 
