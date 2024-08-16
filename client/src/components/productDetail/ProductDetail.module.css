@@ -33,6 +33,62 @@
   color: var(--second-bg-color);
 }
 
+.divVariations {}
+
+.divVariations h4 {
+  font-size: 2rem;
+  color: black;
+  font-weight: 300;
+}
+
+.divQuantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+
+.btnDecrement {
+  background-color: black;
+  color: white;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border: solid .1rem black;
+  border-radius: .3rem;
+  cursor: pointer;
+}
+
+.btnIncrement {
+  background-color: var(--second-bg-color);
+  color: white;
+  font-size: 1.4rem;
+  padding: 0.5rem 1rem;
+  border: solid .1rem var(--second-bg-color);
+  border-radius: .3rem;
+  cursor: pointer;
+}
+
+.btnDecrement:hover {
+  background-color: #242424;
+  color: white;
+  border: solid .1rem #1b1b1b;
+  transition: .3s;
+}
+
+.btnIncrement:hover {
+  background-color: #ff588d;
+  color: white;
+  border: solid .1rem var(--second-bg-color);
+  transition: .3s;
+}
+
+.inputQuantity {
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: .3rem;
+}
+
 /* .divGlobal {
   display: flex;
   justify-content: center;
