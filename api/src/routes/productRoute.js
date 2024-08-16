@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product, Variation, Category, Image } = require('../db');
+const { Product, Variation, Category, Image, Size, Color } = require('../db');
 const cloudinary = require('../utils/cloudinary');
 const { uploadFiles } = require('../middlewares/uploadFiles');
 
@@ -50,6 +50,18 @@ router.get('/products/:id', async (req, res) => {
           model: Variation,
           as: 'variations',
           attributes: ['id', 'sizeId', 'colorId', 'stock', 'price'],
+          include: [
+            {
+              model: Size,
+              as: 'size',
+              attributes: ['id', 'name']
+            },
+            {
+              model: Color,
+              as: 'color',
+              attributes: ['id', 'name']
+            }
+          ]
         },
         {
           model: Category,

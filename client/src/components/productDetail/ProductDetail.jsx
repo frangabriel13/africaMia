@@ -12,6 +12,8 @@ const ProductDetail = ({ productId }) => {
     dispatch(getProductById(productId));
   }, [productId, dispatch]);
 
+  console.log('produc', product)
+
   return (
     <div className={s.container}>
       <h2>Es necesario alcanzar un mínimo de $50,000 en tu carrito, Podes elegir diferentes modelos y talles</h2>
@@ -24,7 +26,20 @@ const ProductDetail = ({ productId }) => {
             <h3>{product.name}</h3>
             <p>${product.price}</p>
           </div>
-          <div className={s.divVariations}></div>
+          <div className={s.divVariations}>
+            {
+              product.isVariable === false ?
+              <div>
+                <h4>Seleccione la cantidad:</h4>
+                <div>
+                  <button>-</button>
+                </div>
+              </div> :
+              <div>
+                Es un producto Variable
+              </div>
+            }
+          </div>
           <div className={s.divBtns}></div>
         </div>
       </div>
