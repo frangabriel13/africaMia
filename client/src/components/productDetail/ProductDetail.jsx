@@ -3,16 +3,77 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../redux/actions/productActions";
 import s from "./ProductDetail.module.css";
 import GalleryProduct from "./galleryProduct/GalleryProduct";
+import { calculateTotal, randomPhoneNumber } from '../../utils/helpers';
+import { addToCart } from '../../redux/actions/cartActions';
 
 const ProductDetail = ({ productId }) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.productById);
+  const [quantity, setQuantity] = useState(1);
+  const [variationQuantities, setVariationQuantities] = useState({});
 
   useEffect(() => {
     dispatch(getProductById(productId));
   }, [productId, dispatch]);
 
-  console.log('produc', product)
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleDecrement = (variation) => {
+    const currentQuantity = variationQuantities[variation.id] || 0;
+    if (currentQuantity > 0) {
+      setVariationQuantities({
+        ...variationQuantities,
+        [variation.id]: currentQuantity - 1,
+      });
+    }
+  };
+
+  const handleIncrement = (variation) => {
+    const currentQuantity = variationQuantities[variation.id] || 0;
+    setVariationQuantities({
+      ...variationQuantities,
+      [variation.id]: currentQuantity + 1,
+    });
+  };
+
+  const handleQuantityChange = (variationId, newQuantity) => {
+    if (!isNaN(newQuantity) && newQuantity >= 0) {
+      setVariationQuantities({
+        ...variationQuantities,
+        [variationId]: newQuantity,
+      });
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product.isVariable) {
+      const selectedVariations = variations.filter((variation) => {
+        const quantity = variationQuantities[variation.id] || 0;
+        return quantity > 0;
+      });
+
+      if (selectedVariations.length === 0) {
+        alert("Por favor, seleccione al menos una variación antes de agregar al carrito.");
+      } else {
+        selectedVariations.forEach((selectedVariation) => {
+          const quantity = variationQuantities[selectedVariation.id];
+          dispatch(addToCart(product, selectedVariation, quantity));
+        });
+        setVariationQuantities({});
+      }
+    } else {
+      dispatch(addToCart(product, null, quantity));
+      setQuantity(1);
+    }
+  };
 
   return (
     <div className={s.container}>
@@ -29,16 +90,48 @@ const ProductDetail = ({ productId }) => {
           <div className={s.divVariations}>
             {
               product.isVariable === false ?
-              <div>
+              <div className={s.variation}>
                 <h4>Seleccione la cantidad:</h4>
-                <div>
-                  <button>-</button>
-                </div>
+                {
+                  product.availability === true ?
+                  <div className={s.divQuantity}>
+                    <button className={s.btnDecrement} onClick={decrementQuantity}>-</button>
+                    <input type="number"
+                      value={quantity}
+                      onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                      readOnly
+                      className={s.inputQuantity}
+                    />
+                    <button className={s.btnIncrement} onClick={incrementQuantity}>+</button>
+                  </div> :
+                  <p className={s.stock}>Sin Stock</p>
+                }
               </div> :
               <div>
-                Es un producto Variable
+                <h4>Seleccione la cantidad por talle:</h4>
+                {
+                  product.variations.map((variation) => (
+                    <div key={variation.id}>
+                      <p>{variation.size.name}</p>
+                      {
+                        variation.availability === true ?
+                        <div>
+                          <button onClick={() => handleDecrement(variation)}>-</button>
+                          <input type="number" 
+                            value={variationQuantities[variation.id] || 0}
+                            onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
+                            readOnly
+                          />
+                          <button onClick={() => handleIncrement(variation)}>+</button>
+                        </div> :
+                        <p>Sin Stock</p>
+                      }
+                    </div>
+                  ))
+                }
               </div>
             }
+            <p className={s.cantTotal}>Total: ${calculateTotal(product, quantity, product.variations, variationQuantities)}</p>
           </div>
           <div className={s.divBtns}></div>
         </div>

@@ -49,7 +49,7 @@ router.get('/products/:id', async (req, res) => {
         {
           model: Variation,
           as: 'variations',
-          attributes: ['id', 'sizeId', 'colorId', 'stock', 'price'],
+          attributes: ['id', 'sizeId', 'colorId', 'stock', 'price', 'availability'],
           include: [
             {
               model: Size,
