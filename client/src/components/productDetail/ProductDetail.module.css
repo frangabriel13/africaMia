@@ -1,10 +1,30 @@
-.divGlobal {
+.container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
+  flex-direction: column;
+}
+
+.container h2 {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.divProduct {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  padding: 0 20rem;
+  gap: 5rem;
+}
+
+/* .divGlobal {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
   max-width: 90%;
   gap: 5rem;
-  /* padding: 5.5rem 5%; */
 }
 
 .minimo {
@@ -13,7 +33,6 @@
   color: #ffffff;
   min-height: 5rem;
   background-color: black;
-  /* margin-bottom: -5rem; */
   
 } 
 
@@ -45,17 +64,8 @@
 
 }
 
-/* .productoDetail {
-  padding-top: 2rem;
-  width: 70rem;
-  background-color: #ffffff;
-  padding-left: 1rem;
-  margin-right: 1rem;
-  margin-left: auto;
-} */
 .productoDetail {
   padding-top: 2rem;
-  /* width: 100%; */
   background-color: #ffffff;
   padding: 0 1rem;
 }
@@ -152,7 +162,6 @@
 
 .galleryImage {
   width: 9rem;
-  /* width: 100%; */
   height: 15rem;
   margin: .5rem;
   cursor: pointer;
@@ -176,27 +185,27 @@
   border-radius: 4px;
   cursor: pointer;
   margin-top: 2rem;
-  transition: transform 0.3s ease-in-out; /* Transición para volver a su tamaño original */
+  transition: transform 0.3s ease-in-out;
 }
 
 .buttonCart:hover {
-  background-color: #f9457f; /* Cambia el color de fondo cuando el mouse está encima */
+  background-color: #f9457f;
 }
 
 .buttonCart:active {
-  animation: clickAnimation 0.5s ease-in-out; /* Duración de la animación y easing */
-  transform: scale(0.95); /* Reducimos el tamaño del botón cuando se hace clic */
+  animation: clickAnimation 0.5s ease-in-out; 
+  transform: scale(0.95);
 }
 
 @keyframes clickAnimation {
   0% {
-    transform: scale(1); /* Escala inicial */
+    transform: scale(1);
   }
   50% {
-    transform: scale(0.92); /* Escala a la mitad de la animación */
+    transform: scale(0.92);
   }
   100% {
-    transform: scale(0.95); /* Escala final */
+    transform: scale(0.95); 
   }
 }
 
@@ -256,7 +265,6 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   font-size: 1.6rem;
-  /* font-weight: 700; */
   color: #ffffff;
 }
 
@@ -318,72 +326,70 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333; /* Cambia el color a tu preferencia */
+  color: #333;
   margin-top: 2rem;
   margin-bottom: 2rem;
   text-transform: uppercase;
 }
 
-/* Opcional: Agregar una línea decorativa debajo del título */
 .relacionados::after {
   content: "";
   display: block;
-  width: 100px; /* Ancho de la línea */
-  height: 4px; /* Grosor de la línea */
-  background-color: #007bff; /* Cambia el color a tu preferencia */
+  width: 100px; 
+  height: 4px;
+  background-color: #007bff;
   margin: 0.5rem auto;
 }
 
-/* Estilos para dispositivos móviles (ancho máximo de 768px) */
 @media (max-width: 768px) {
   .divGlobal {
     margin-top: 10rem;
-    flex-direction: column; /* Cambia la dirección de flex a columna */
-    align-items: center; /* Centra los elementos verticalmente */
+    flex-direction: column;
+    align-items: center;
   }
 
   .divLocal {
-    padding: 1rem; /* Reduce el relleno */
+    padding: 1rem;
   }
   .gallery {
-    max-width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    margin: 0 auto; /* Centra el elemento horizontalmente */
-    padding: 1rem; /* Agrega un poco de relleno */
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
   }
 
   .divPhotos {
-    margin-left: 0; /* Elimina el margen izquierdo */
-    margin-top: 0; /* Elimina el margen superior */
+    margin-left: 0;
+    margin-top: 0;
   }
 
   .divImage {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    overflow: hidden; /* Oculta el desbordamiento horizontal */
-    margin: 0 auto; /* Centra el elemento horizontalmente */
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
   }
 
   .productoDetail {
-    padding: 2rem 1rem; /* Relleno superior e inferior de 2rem, relleno izquierdo y derecho de 1rem */
+    padding: 2rem 1rem;
   }
 
   .divVariant {
-    margin-bottom: 2rem; /* Margen inferior de 2rem para separar los elementos */
+    margin-bottom: 2rem;
   }
   
 
   .productoDetailImage {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    height: auto; /* Altura automática para mantener la relación de aspecto */
+    width: 100%;
+    height: auto;
   }
 
   .buttonCart,
   .buttonWP {
-    width: 25rem; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
+    width: 25rem;
   }
 
   .divDescription {
-    width: 100%; /* Ancho del 100% para adaptarse al tamaño de la pantalla */
-    margin-left: 0; /* Elimina el margen izquierdo */
-    padding: 1rem; /* Reduce el relleno */
+    width: 100%;
+    margin-left: 0;
+    padding: 1rem;
   }
-}
+} */
