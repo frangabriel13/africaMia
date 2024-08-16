@@ -61,7 +61,12 @@ const Cart = () => {
                       <div className={s.nombPrice}>
                         <img src={item.product.images[0].url} alt={item.product.name} />
                         <p>Nombre: {item.product.name}</p>
-                        <p>Talle: {item.selectedVariation ? item.selectedVariation.size.name : item.product.size.name}</p>
+                        {
+                          item.selectedVariation && (
+                            <p>Talle: {item.selectedVariation ? item.selectedVariation.size.name : item.product.size.name}</p>
+                          )
+                        }
+                        {/* <p>Talle: {item.selectedVariation ? item.selectedVariation.size.name : item.product.size.name}</p> */}
                         <p>Precio: ${item.selectedVariation ? item.selectedVariation.price : item.product.price}</p>
                       </div>
                       <div className={s.canti}>

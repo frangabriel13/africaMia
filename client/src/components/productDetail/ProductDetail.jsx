@@ -11,10 +11,22 @@ const ProductDetail = ({ productId }) => {
   const product = useSelector((state) => state.product.productById);
   const [quantity, setQuantity] = useState(1);
   const [variationQuantities, setVariationQuantities] = useState({});
+  const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   dispatch(getProductById(productId));
+  // }, [productId, dispatch]);
   useEffect(() => {
-    dispatch(getProductById(productId));
+    const fetchProduct = async () => {
+      await dispatch(getProductById(productId));
+      setLoading(false);
+    };
+    fetchProduct();
   }, [productId, dispatch]);
+
+  if (loading) {
+    return <div className={s.loading}>Cargando...</div>;
+  }
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
