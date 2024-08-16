@@ -5,6 +5,11 @@
 .imageList {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+
+.imageList::-webkit-scrollbar {
+  display: none;
 }
 
 .imageList img {
