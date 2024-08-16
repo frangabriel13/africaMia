@@ -20,6 +20,7 @@ const GalleryProduct = ({ images }) => {
               src={image.url}
               alt={`Thumbnail ${index}`}
               onClick={() => handleClick(image.url, index)}
+              className={selectedImage === image.url ? s.selected : ''}
             />
           ))
         }

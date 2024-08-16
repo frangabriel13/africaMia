@@ -1,11 +1,14 @@
 .container {
   display: flex;
+  gap: 2rem;
+  padding: 5rem 0;
 }
 
 .imageList {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  gap: .5rem;
 }
 
 .imageList::-webkit-scrollbar {
@@ -17,6 +20,10 @@
   max-width: 100%;
   height: 20rem;
   object-fit: contain;
+}
+
+.selected {
+  border: .2rem solid var(--second-bg-color); /* Ejemplo de estilo para la imagen seleccionada */
 }
 
 .images {
