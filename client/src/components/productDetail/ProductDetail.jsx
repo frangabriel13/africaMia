@@ -55,7 +55,7 @@ const ProductDetail = ({ productId }) => {
 
   const handleAddToCart = () => {
     if (product.isVariable) {
-      const selectedVariations = variations.filter((variation) => {
+      const selectedVariations = product.variations.filter((variation) => {
         const quantity = variationQuantities[variation.id] || 0;
         return quantity > 0;
       });
@@ -133,7 +133,10 @@ const ProductDetail = ({ productId }) => {
             }
             <p className={s.cantTotal}>Total: ${calculateTotal(product, quantity, product.variations, variationQuantities)}</p>
           </div>
-          <div className={s.divBtns}></div>
+          <div className={s.divBtns}>
+            <button className={s.btnAddToCart} onClick={handleAddToCart}>Agregar al carrito</button>
+            <button className={s.btnConsult} onClick={() => alert('Consultanos al Whatsapp')}>Consultanos al Whatsapp</button>
+          </div>
         </div>
       </div>
     </div>
