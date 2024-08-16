@@ -119,24 +119,25 @@ const ProductDetail = ({ productId }) => {
                   <p className={s.stock}>Sin Stock</p>
                 }
               </div> :
-              <div>
+              <div className={s.variation}>
                 <h4>Seleccione la cantidad por talle:</h4>
                 {
                   product.variations.map((variation) => (
-                    <div key={variation.id}>
+                    <div className={s.divVar} key={variation.id}>
                       <p>{variation.size.name}</p>
                       {
                         variation.availability === true ?
-                        <div>
-                          <button onClick={() => handleDecrement(variation)}>-</button>
+                        <div className={s.divQuantity}>
+                          <button className={s.btnDecrement} onClick={() => handleDecrement(variation)}>-</button>
                           <input type="number" 
                             value={variationQuantities[variation.id] || 0}
                             onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
                             readOnly
+                            className={s.inputQuantity}
                           />
-                          <button onClick={() => handleIncrement(variation)}>+</button>
+                          <button className={s.btnIncrement} onClick={() => handleIncrement(variation)}>+</button>
                         </div> :
-                        <p>Sin Stock</p>
+                        <p className={s.stock}>Sin Stock</p>
                       }
                     </div>
                   ))
@@ -151,6 +152,7 @@ const ProductDetail = ({ productId }) => {
           </div>
         </div>
       </div>
+      <h3 className={s.relacionados}>PRODUCTOS RELACIONADOS</h3>
     </div>
   )
 };
