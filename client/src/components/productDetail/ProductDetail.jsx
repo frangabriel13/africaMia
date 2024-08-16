@@ -20,7 +20,7 @@ const ProductDetail = ({ productId }) => {
           <GalleryProduct images={product.images} />
         </div>
         <div className={s.divData}>
-          <div>
+          <div className={s.divName}>
             <h3>{product.name}</h3>
             <p>${product.price}</p>
           </div>
