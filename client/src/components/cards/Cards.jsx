@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../redux/actions/productActions';
 import Card from '../card/Card';
 import s from './Cards.module.css';
+import Pagination from '../pagination/Pagination';
 
 export default function Cards() {
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 24;
+  const productsPerPage = 25;
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,39 +38,34 @@ export default function Cards() {
     }
   };
 
+  console.log('products', products);
+  // console.log('imgMain', products[0].imgMain);
+
   return (
-    <div className={s.containerGlobal}>
-      <div className={s.container}>
+    <div className={s.container}>
+      <div className={s.cardsContainer}>
         {currentProducts.map((product) => (
           <Card
             key={product.id}
             name={product.name}
             price={product.price}
             id={product.id}
-            images={product.images[0]?.url || ''}
+            imgMain={product.imgMain}
+            images={product.images}
+            // images={product.images[0]?.url || ''}
             productId={product.id}
           />
         ))}
       </div>
-      <div className={s.pagination}>
-        <button onClick={goToPrevPage} className={s.page}>
-          {'<'}
-        </button>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? s.activePage : s.page}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button onClick={goToNextPage} className={s.page}>
-          {'>'}
-        </button>
+      <div className={s.divPagination}>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          goToPrevPage={goToPrevPage}
+          goToNextPage={goToNextPage}
+        />
       </div>
     </div>
   );
 }
-
-

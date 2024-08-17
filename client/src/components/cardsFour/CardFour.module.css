@@ -1,25 +1,35 @@
 .containerGlobal{
-  display: flex; /* Asegúrate de que el contenedor principal tenga "display: flex;" */
-  justify-content: center; /* Esto centrará el contenido horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 30rem;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
-  grid-row-gap: 10rem; 
-  margin: 2rem;
-  background-color: rgb(255, 255, 255);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3rem 1.5rem;
 }
 
+/* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
+  .containerGlobal {
+    margin: 0 2rem;
+  }
+
   .container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .containerGlobal {
+    margin: 0 1rem;
+  }
+
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 0.75rem;
   }
 }

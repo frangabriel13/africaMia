@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 10rem;
+}
+
+.page {
+  background-color: #ffffff;
+  border: none;
+  /* padding: .5rem 1rem; */
+  cursor: pointer;
+  /* font-size: 1.6rem; */
+}
+
+.pageInfo {
+  font-size: 3rem;
+  /* font-weight: bold; */
+}
+
+.page:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.icon {
+  font-size: 5rem;
+  cursor: pointer;
+  color: var(--second-bg-color);
+}

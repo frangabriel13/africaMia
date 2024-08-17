@@ -65,6 +65,25 @@ router.post('/images', async (req, res) => {
   }  
 });
 
+router.post('/images/url', async (req, res) => {
+  try {
+    const { url } = req.body;
+
+    if (!url) {
+      return res.status(400).json({ message: 'La URL de la imagen es requerida' });
+    }
+
+    const createdImage = await Image.create({
+      url: url,
+    });
+
+    res.status(200).json(createdImage);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al crear la imagen' });
+  }
+});
+
 router.put('/images/:id', async (req, res) => {
   const { id } = req.params;
   const { colorId } = req.body;

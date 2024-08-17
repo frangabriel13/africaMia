@@ -23,7 +23,7 @@ export default function CardFour() {
     return shuffledProducts.slice(0, count); // Toma los primeros 3 productos
   };
 
-  const randomProducts = getRandomProducts(4); // Obtén 4 productos al azar
+  const randomProducts = getRandomProducts(5); // Obtén 4 productos al azar
 
   return (
     <div className={s.containerGlobal}>
@@ -33,7 +33,8 @@ export default function CardFour() {
             name={c.name}
             price={c.price}
             id={c.id}
-            images={c.images[0].url}
+            imgMain={c.imgMain}
+            images={c.images}
             key={c.id}
             productId={c.id}
             onSelectProduct={handleProductSelect}
