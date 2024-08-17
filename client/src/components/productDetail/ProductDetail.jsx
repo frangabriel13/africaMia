@@ -87,6 +87,9 @@ const ProductDetail = ({ productId }) => {
     }
   };
 
+  console.log('product', product);
+  console.log('variations', product.variations);
+
   return (
     <div className={s.container}>
       <h2>Es necesario alcanzar un mínimo de $50,000 en tu carrito, Podes elegir diferentes modelos y talles</h2>
