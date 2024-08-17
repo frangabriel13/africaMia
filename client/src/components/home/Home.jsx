@@ -12,8 +12,7 @@ function Home() {
       <Info />
       <Categories />
       <Cards />
-     
-     </div>
+    </div>
   );
 }
 
