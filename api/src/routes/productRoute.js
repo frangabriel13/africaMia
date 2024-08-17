@@ -79,6 +79,8 @@ router.get('/products/:id', async (req, res) => {
     });
     product.setDataValue('images', images);
 
+    console.log('Producto encontrado:', JSON.stringify(product, null, 2));
+
     res.status(200).json(product);
   } catch(error) {
     console.log(error);
