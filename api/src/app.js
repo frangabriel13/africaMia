@@ -22,7 +22,7 @@ app.use(morgan("dev"));
 
 // Configura CORS
 const corsOptions = {
-  // origin: "https://africamia-jeans.online/", // Reemplaza con el origen de tu aplicación React
+  origin: "https://africamia-jeans.online/", // Reemplaza con el origen de tu aplicación React
   credentials: true, // Habilita el envío de cookies y credenciales
 };
 app.use(cors(corsOptions))
