@@ -23,13 +23,13 @@
 }
 
 .selected {
-  border: .2rem solid var(--second-bg-color); /* Ejemplo de estilo para la imagen seleccionada */
+  border: .2rem solid var(--second-bg-color);
 }
 
 .images {
   display: flex;
   flex-direction: column;
-  height: 70rem;
+  max-height: 70rem;
   overflow-y: scroll;
 }
 
@@ -42,30 +42,21 @@
   max-height: 70vh;
   object-fit: contain;
 }
-/* .galleryContainer {
-  display: flex;
-}
 
-.imageList {
-  width: 20%;
-  overflow-y: auto;
-}
+@media screen and (min-width: 768px) {
+  .container {
+  }
 
-.thumbnail {
-  width: 100%;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
+  .imageList {
+    gap: 1rem;
+  }
 
-.largeImageContainer {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto;
-}
+  .imageList img {
+    height: 10rem;
+  }
 
-.largeImage {
-  max-width: 100%;
-  max-height: 100vh;
-} */
+  .images {
+    /* max-height: 40rem; */
+    /* No se por que achica tambien en pantalla grande */
+  }
+}
