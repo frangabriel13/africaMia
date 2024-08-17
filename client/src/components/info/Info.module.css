@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 20%;
-  background-color: #202020;
+  background-color: #fff;
 }
 
 .iconContainer {
@@ -23,18 +23,28 @@
 .icon {
   font-size: 4rem;
   margin-right: 2rem;
-  color: #ebebeb;
+  color: #202020;
+}
+
+.iconIg {
+  font-size: 4rem;
+  margin-right: 2rem;
+  color: #202020;
 }
 
 .text {
   font-size: 2rem;
-  color: #ebebeb;
+  color: #202020;
+}
+
+.divIg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-
 .instagramer {
- 
   height: 22rem;
   margin-top: 5rem;
   display: flex;
@@ -42,7 +52,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #202020;
+  background-color: #ffffff;
   /* background-image: url('../../assets/floreaAmarillas.png');  */
   background-size: cover; /* Esto ajustará la imagen al tamaño del contenedor */
   background-position: center; /* Esto centrará la imagen en el contenedor */
@@ -157,11 +167,24 @@
   }
 
   .icon {
-    font-size: 2rem; /* Reducir el tamaño de fuente de los íconos */
-    margin-right: 0; /* Eliminar el margen derecho */
+    font-size: 2rem;
+    margin-right: 0;
+  }
+
+  .iconIg {
+    font-size: 2rem;
+    margin-right: 0;
   }
 
   .text {
-    font-size: 0.8rem; /* Reducir el tamaño de fuente del texto */
+    font-size: 1rem;
+
+  }
+
+  .divIg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
   }
 }

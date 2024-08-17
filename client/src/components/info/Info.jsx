@@ -1,24 +1,27 @@
 import React from 'react';
 import s from './Info.module.css';
 import imagen from "../../assets/temporaInvienoAfricaMia.png";
-
+import { BsTruck } from "react-icons/bs";
+import { BsCreditCard } from "react-icons/bs";
+import { BsGeoAlt } from "react-icons/bs";
+import { BsInstagram } from "react-icons/bs";
 
 const Info = () => {
   return (
     <div>
     <div className={s.container}>
       <div className={s.iconContainer}>
-        <i className={`bi bi-truck ${s.icon}`}></i>
+        <BsTruck className={s.icon} />
         <span className={s.text}>Envíos a todo el país</span>
       </div>
       <div className={s.separator}></div>
       <div className={s.iconContainer}>
-        <i className={`bi bi-credit-card ${s.icon}`}></i>
+        <BsCreditCard className={s.icon} />
         <span className={s.text}>Varios métodos de pago</span>
       </div>
       <div className={s.separator}></div>
       <div className={s.iconContainer}>
-        <i className={`bi bi-geo-alt ${s.icon}`}></i>
+        <BsGeoAlt className={s.icon} />
         <span className={s.text}>Bogotá 3412, CABA, Zona Flores</span>
       </div>
     </div>
@@ -26,7 +29,10 @@ const Info = () => {
       <img className={s.imgBan} src={imagen} alt="Descripción de la imagen" style={{ width: '100%', height: 'auto' }} />
     </div>
     <div className={s.instagramer} >
-    <i className={`bi bi-instagram ${s.icon}`}> Seguinos en Redes Sociales</i>
+      <div className={s.divIg}>
+        <BsInstagram className={s.iconIg} />
+        <span className={s.text}>Seguinos en Instagram y TikTok</span>
+      </div>
     <h1 className={s.tittle}>
           <a
               className={`${s.buttonIg} ${s.tittle}`}
