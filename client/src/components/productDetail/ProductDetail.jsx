@@ -100,7 +100,7 @@ const ProductDetail = ({ productId }) => {
             <p>${product.price}</p>
           </div>
           <div className={s.divVariations}>
-            {
+            {/* {
               product.isVariable === false ?
               <div className={s.variation}>
                 <h4>Seleccione la cantidad:</h4>
@@ -121,7 +121,7 @@ const ProductDetail = ({ productId }) => {
               </div> :
               <div className={s.variation}>
                 <h4>Seleccione la cantidad por talle:</h4>
-                {/* {
+                {
                   product.variations.map((variation) => (
                     <div className={s.divVar} key={variation.id}>
                       <p>{variation.size.name}</p>
@@ -141,29 +141,58 @@ const ProductDetail = ({ productId }) => {
                       }
                     </div>
                   ))
-                } */}
-                {
-                  product.variations.map((variation) => (
-                    <div className={s.divVar} key={variation.id}>
-                      <p>{variation.size ? variation.size.name : 'Tamaño no disponible'}</p>
-                      {
-                        variation.availability === true ?
-                        <div className={s.divQuantity}>
-                          <button className={s.btnDecrement} onClick={() => handleDecrement(variation)}>-</button>
-                          <input type="number" 
-                            value={variationQuantities[variation.id] || 0}
-                            onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
-                            readOnly
-                            className={s.inputQuantity}
-                          />
-                          <button className={s.btnIncrement} onClick={() => handleIncrement(variation)}>+</button>
-                        </div> :
-                        <p className={s.stock}>Sin Stock</p>
-                      }
-                    </div>
-                  ))
                 }
               </div>
+            } */}
+            {
+              product.isVariable === false ? (
+                <div className={s.variation}>
+                  <h4>Seleccione la cantidad:</h4>
+                  {
+                    product.availability === true ? (
+                      <div className={s.divQuantity}>
+                        <button className={s.btnDecrement} onClick={decrementQuantity}>-</button>
+                        <input type="number"
+                          value={quantity}
+                          onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+                          readOnly
+                          className={s.inputQuantity}
+                        />
+                        <button className={s.btnIncrement} onClick={incrementQuantity}>+</button>
+                      </div>
+                    ) : (
+                      <p className={s.stock}>Sin Stock</p>
+                    )
+                  }
+                </div>
+              ) : (
+                <div className={s.variation}>
+                  <h4>Seleccione la cantidad por talle:</h4>
+                  {
+                    product.variations.map((variation) => (
+                      <div className={s.divVar} key={variation.id}>
+                        <p>{variation.size.name}</p>
+                        {
+                          variation.availability === true ? (
+                            <div className={s.divQuantity}>
+                              <button className={s.btnDecrement} onClick={() => handleDecrement(variation)}>-</button>
+                              <input type="number" 
+                                value={variationQuantities[variation.id] || 0}
+                                onChange={(e) => handleQuantityChange(variation.id, parseInt(e.target.value, 10))}
+                                readOnly
+                                className={s.inputQuantity}
+                              />
+                              <button className={s.btnIncrement} onClick={() => handleIncrement(variation)}>+</button>
+                            </div>
+                          ) : (
+                            <p className={s.stock}>Sin Stock</p>
+                          )
+                        }
+                      </div>
+                    ))
+                  }
+                </div>
+              )
             }
             <p className={s.cantTotal}>Total: ${calculateTotal(product, quantity, product.variations, variationQuantities)}</p>
           </div>
