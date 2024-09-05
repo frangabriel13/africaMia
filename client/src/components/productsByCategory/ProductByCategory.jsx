@@ -29,6 +29,7 @@ const ProductsByCategory = () => {
               id={product.id}
               images={product.images[0]?.url || ''}
               productId={product.id}
+              imgMain={product.imgMain}
             />
           ))
         ) : (
